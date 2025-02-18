@@ -1,0 +1,88 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\\u5434\u5B87\\Desktop\\cks\\DISK_C\\cks\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\\u5434\u5B87\\Desktop\\cks\\DISK_C\\cks\\source\\welcome.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:source\\welcome.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\\u5434\u5B87\\Desktop\\cks\\DISK_C\\cks\\source\\main.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:source\\main.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\\u5434\u5B87\\Desktop\\cks\\DISK_C\\cks\\include\\welcome.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:include\\welcome.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\\u5434\u5B87\\Desktop\\cks\\DISK_C\\cks\\include\\allfunc.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:include\\allfunc.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "allfunc.h",
+              "DocumentMoniker": "C:\\Users\\\u5434\u5B87\\Desktop\\cks\\DISK_C\\cks\\include\\allfunc.h",
+              "RelativeDocumentMoniker": "include\\allfunc.h",
+              "ToolTip": "C:\\Users\\\u5434\u5B87\\Desktop\\cks\\DISK_C\\cks\\include\\allfunc.h",
+              "RelativeToolTip": "include\\allfunc.h",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABsAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-02-10T12:21:30.443Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "welcome.h",
+              "DocumentMoniker": "C:\\Users\\\u5434\u5B87\\Desktop\\cks\\DISK_C\\cks\\include\\welcome.h",
+              "RelativeDocumentMoniker": "include\\welcome.h",
+              "ToolTip": "C:\\Users\\\u5434\u5B87\\Desktop\\cks\\DISK_C\\cks\\include\\welcome.h",
+              "RelativeToolTip": "include\\welcome.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-02-10T12:21:21.179Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "welcome.c",
+              "DocumentMoniker": "C:\\Users\\\u5434\u5B87\\Desktop\\cks\\DISK_C\\cks\\source\\welcome.c",
+              "RelativeDocumentMoniker": "source\\welcome.c",
+              "ToolTip": "C:\\Users\\\u5434\u5B87\\Desktop\\cks\\DISK_C\\cks\\source\\welcome.c",
+              "RelativeToolTip": "source\\welcome.c",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "OverriddenGroupName": "source",
+              "WhenOpened": "2025-02-10T10:33:10.819Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "main.c",
+              "DocumentMoniker": "C:\\Users\\\u5434\u5B87\\Desktop\\cks\\DISK_C\\cks\\source\\main.c",
+              "RelativeDocumentMoniker": "source\\main.c",
+              "ToolTip": "source/main.c",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "OverriddenGroupName": "source",
+              "OverriddenToolTip": "source/main.c",
+              "WhenOpened": "2025-02-10T09:44:45.054Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
