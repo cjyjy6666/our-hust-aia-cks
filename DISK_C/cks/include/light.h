@@ -17,7 +17,7 @@ struct car_light {
 
 
 void light(int *puge);
-void draw_light_page();
-
+void draw_light_page(void);
+void show_light(struct car_light light_status);
 
 #endif

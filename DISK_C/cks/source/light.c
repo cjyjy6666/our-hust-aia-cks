@@ -1,7 +1,6 @@
 #include"allfunc.h"
 
-void draw_light_page();
-void show_light(struct car_light light_status);
+
 
 void light(int *puge)
 {
@@ -87,5 +86,5 @@ void draw_light_page()
 
 void show_light(struct car_light light_status)
 {
-
+	
 }
