@@ -57,6 +57,9 @@ void light(int *puge)
 双闪按钮的detect写的的矩形范围，可以改进成三角形区域
 */
 
+/*另外，如果后面还做了时间戳，可以加入自动大灯
+*/
+
 void draw_light_page()
 {
     bar1(0,0,633,630,0x000000);
@@ -65,7 +68,7 @@ void draw_light_page()
 	draw_botton(266,440,366,510,0x00FF,0x0000);
 	draw_botton(433,190,533,260,0x00FF,0x0000);
 	draw_botton(433,290,533,360,0x00FF,0x0000);
-	//双闪
+	//双闪  哎我没看见BMP.H里画三角形的函数，先就这样用几个直线凑合一下
 	Line2(316,63,266,150,0xF800);
 	Line2(316,63,366,150,0xF800);
 	Line2(266,150,366,150,0xF800);
@@ -86,5 +89,41 @@ void draw_light_page()
 
 void show_light(struct car_light light_status)
 {
+	if(light_status.right==1)
+	show_right();
+	if(light_status.left==1)
+	show_left();
+	if(light_status.fog==1)
+	show_fog();
+	if(light_status.near_light==1)
+	show_near();
+	if(light_status.far_light==1)
+	show_far();
+
+}
+
+void show_right()
+{
+
+}
+
+void show_left()
+{
+
+}
+
+void show_fog()
+{
+
+}
+
+void show_near()
+{
 	
 }
+
+void show_far()
+{
+
+}
+

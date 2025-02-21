@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "SVGA.C": "cpp"
+        "SVGA.C": "cpp",
+        "BMP.C": "cpp"
     }
 }
