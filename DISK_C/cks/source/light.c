@@ -18,6 +18,28 @@ void light(int *puge)
 	{
 		show_light(light_status);
 		mouse_show(&mouse);
+        
+        // 修改鼠标检测逻辑：增加释放检测防抖
+        if (mouse_press(433,190,533,260) == 1) {
+            // 等待左键释放
+            do {
+                MouseGet(&mouse);      // 持续获取最新状态
+                mouse_show(&mouse);   // 保持鼠标显示更新
+            } while ((mouse.key & 1) == 1);  // 检查左键状态位
+            
+            light_status.near_light ^= 1;
+        }
+
+        if (mouse_press(433,290,533,360) == 1) {
+            // 等待左键释放
+            do {
+                MouseGet(&mouse);
+                mouse_show(&mouse);
+            } while ((mouse.key & 1) == 1);
+            
+            light_status.far_light ^= 1;    
+        }
+
 		if (mouse_press(100,190,200,260) == 1)
 		{
 			light_status.right=light_status.right?0:1;
@@ -89,41 +111,19 @@ void draw_light_page()
 
 void show_light(struct car_light light_status)
 {
-	if(light_status.right==1)
-	show_right();
-	if(light_status.left==1)
-	show_left();
-	if(light_status.fog==1)
-	show_fog();
-	if(light_status.near_light==1)
-	show_near();
-	if(light_status.far_light==1)
-	show_far();
-
-}
-
-void show_right()
-{
-
-}
-
-void show_left()
-{
-
-}
-
-void show_fog()
-{
-
-}
-
-void show_near()
-{
+	mouse_off(&mouse);
 	
+    if(light_status.far_light)
+        Readbmp64k(670,500,"bmp\\far.bmp");
+    else
+        bar1(670,500,704,522,0x0000);
+        
+    if(light_status.near_light)
+        Readbmp64k(670,532,"bmp\\near.bmp");
+    else
+        bar1(670,532,704,556,0x0000);
+        
+    mouse_on(mouse);
 }
 
-void show_far()
-{
-
-}
 
