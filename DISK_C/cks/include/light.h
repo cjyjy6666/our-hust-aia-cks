@@ -11,6 +11,8 @@ struct car_light {
     int fog;
     int near_light;
     int far_light;
+    int left_blink_state;
+    int right_blink_state;
 };
 
 #endif
