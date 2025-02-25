@@ -175,9 +175,9 @@ void show_light(struct car_light light_status)
 	else
 		bar1(670,452,704,494,0x0000);
 	if(light_status.right_blink_state)
-		Readbmp64k(972,452,"bmp\\right.bmp");
+		Readbmp64k(956,452,"bmp\\right.bmp");
 	else
-		bar1(972,452,990,474,0x0000);
+		bar1(956,452,990,493,0x0000);
 }
 
 
