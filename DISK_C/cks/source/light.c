@@ -6,6 +6,7 @@ void light(int *puge)
 {
 	struct car_light light_status={0,0,0,0,0,0,0};/*结构体在light.h中定义*/
 	clock_t last_blink=0,last_blink1=0;//定义时间戳变量，用于灯的闪烁
+	uint8_t new_state;
 	mouse_off(&mouse);
 
 	draw_light_page();
@@ -110,12 +111,15 @@ void light(int *puge)
                 MouseGet(&mouse);
                 mouse_show(&mouse);
             } while ((mouse.key & 1) == 1);
-			light_status.right^=1;
-			light_status.right_blink_state=light_status.right;
-			last_blink1=clock();//重置计时器
-			light_status.left^=1;
-			light_status.left_blink_state=light_status.left;
-			last_blink=clock();//重置计时器
+            
+            // 切换双闪状态
+            new_state = !(light_status.right && light_status.left);
+            light_status.right = new_state;
+            light_status.left = new_state;
+            light_status.right_blink_state = new_state;
+            light_status.left_blink_state = new_state;
+            last_blink = clock();
+            last_blink1 = clock();
 		}
 		if (mouse_press(603,600,633,630) == 1)
 		{
