@@ -68,6 +68,12 @@ void light(int *puge)
                 mouse_show(&mouse);
             } while ((mouse.key & 1) == 1);
             
+			if(light_status.left) {
+                light_status.left = 0;
+                light_status.left_blink_state = 0;
+                last_blink = clock();
+            }
+
             light_status.right^=1;
 			light_status.right_blink_state=light_status.right;
 			last_blink1=clock();//重置计时器
@@ -79,6 +85,12 @@ void light(int *puge)
                 mouse_show(&mouse);
             } while ((mouse.key & 1) == 1);
             
+			if(light_status.right) {
+                light_status.right = 0;
+                light_status.right_blink_state = 0;
+                last_blink1 = clock();
+            }
+			
             light_status.left^=1;
 			light_status.left_blink_state=light_status.left;
 			last_blink=clock();//重置计时器
