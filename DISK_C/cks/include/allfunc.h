@@ -21,6 +21,7 @@
 #include"mainpage.h"
 #include"welcome.h"
 #include"light.h"
+#include"ac.h"
 
 
 #define NUM0 0x5230

@@ -22,6 +22,9 @@ void main()
 		case 3:
 			light(&puge);
 			break;
+		case 4:
+			ac(&puge);
+			break;
 		default:
 			break;
 		}

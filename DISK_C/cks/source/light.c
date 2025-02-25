@@ -140,7 +140,7 @@ void light(int *puge)
 
 void draw_light_page()
 {
-    bar1(0,0,633,630,0x000000);
+    bar1(0,0,633,630,0xFFFFFF);
 	draw_botton(100,190,200,260,0x00FF,0x0000);
 	draw_botton(100,290,200,360,0x00FF,0x0000);
 	draw_botton(266,440,366,510,0x00FF,0x0000);
