@@ -4,7 +4,8 @@ void main()
 {      
 
 	int puge = 0;
-
+	//init_car_status();
+	//初始化车辆状态
 	SetSVGA64k();
 	
 	mouse_init();
@@ -32,6 +33,7 @@ void main()
 	}
 	CloseSVGA();
 }
+
 
 //�����ʿ���
 //ʯ����ѧ����qq��1092957376

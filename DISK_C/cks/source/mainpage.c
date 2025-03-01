@@ -13,6 +13,7 @@ void mainpage(int *puge)
 
 	while (1)
 	{
+		show_all();
 		mouse_show(&mouse);
 		if (mouse_press(80, 70, 220, 200) == 1)
 		{

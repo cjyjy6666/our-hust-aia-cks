@@ -22,6 +22,8 @@
 #include"welcome.h"
 #include"light.h"
 #include"ac.h"
+#include"show.h"
+#include"car.h"
 
 
 #define NUM0 0x5230
