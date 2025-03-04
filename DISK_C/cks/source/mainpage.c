@@ -20,6 +20,11 @@ void mainpage(int *puge)
 			*puge = 3;
 			break;
 		}
+		if (mouse_press(380, 70, 520, 200) == 1)
+		{
+			*puge = 4;
+			break;
+		}
 	}
 
 }
@@ -45,13 +50,14 @@ void draw_mainpage()
 	bar1(640, 400, 1024,768, 0xFFFFFF);
 	Line_Thick(649, 400, 1009, 400, 1, 0x000000);
 	bar1(660, 450, 1000, 748, 0x000000);
-	draw_botton(80, 70, 220, 200, 0x00FF, 0xDDDD);
+	draw_botton(80, 70, 220, 200,MAGENTA,MAGENTA);
 	draw_botton(80, 250, 220, 380, 0x00FF, 0xDDDD);
 	draw_botton(80, 440, 220, 570, 0x00FF, 0xDDDD);
 	draw_botton(380, 70, 520, 200, 0x00FF, 0xDDDD);
 	draw_botton(380, 250, 520, 380, 0x00FF, 0xDDDD);
 	draw_botton(380, 440, 520, 570, 0x00FF, 0xDDDD);
 	puthz(110,119,"µÆ¹â",32,40,0xFFFFFF);
+	puthz(410,119,"¿Õµ÷",32,40,0xFFFFFF);
 }
 
 

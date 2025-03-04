@@ -1,6 +1,6 @@
 #include"allfunc.h"
 //Chinese in UTF-8 in this file.
-static CarStatus global_status = {0};  // 保持静态初始化为零
+CarStatus global_status = {0};  // 保持静态初始化为零
 
 // 初始化函数
 /*void init_car_status() 
