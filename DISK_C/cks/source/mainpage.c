@@ -15,12 +15,12 @@ void mainpage(int *puge)
 	{
 		show_all();
 		mouse_show(&mouse);
-		if (mouse_press(80, 70, 220, 200) == 1)
+		if (mouse_press(10,450,90,490) == 1)
 		{
 			*puge = 3;
 			break;
 		}
-		if (mouse_press(380, 70, 520, 200) == 1)
+		if (mouse_press(10,500,90,540) == 1)
 		{
 			*puge = 4;
 			break;
@@ -60,6 +60,18 @@ void draw_mainpage()
 	draw_botton(380, 440, 520, 570, 0x00FF, 0xDDDD);
 	puthz(110,119,"灯光",32,40,0xFFFFFF);
 	puthz(410,119,"空调",32,40,0xFFFFFF);*/
+	bar2(10,450,90,490,0xFFFFFF);
+	bar2(10,500,90,540,0xFFFFFF);
+	bar2(10,550,90,590,0xFFFFFF);//左边栏三个按钮
+	puthz(25,458,"灯光",24,26,0XFFFFFF);
+	puthz(25,508,"空调",24,26,0XFFFFFF);
+	puthz(25,558,"雨刷",24,26,0XFFFFFF);
+	bar2(543,450,623,490,0xFFFFFF);
+	bar2(543,500,623,540,0xFFFFFF);
+	bar2(543,550,623,590,0xFFFFFF);//右边栏三个按钮
+
+	bar2(280,420,360,460,0xFFFFFF);//中间的空调按钮
+	puthz(295,428,"导航",24,26,0XFFFFFF);
 }
 
 
