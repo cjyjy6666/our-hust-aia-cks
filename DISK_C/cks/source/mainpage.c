@@ -72,6 +72,14 @@ void draw_mainpage()
 
 	bar2(280,420,360,460,0xFFFFFF);//中间的空调按钮
 	puthz(295,428,"导航",24,26,0XFFFFFF);
+	//下方状态栏
+	puthz(5,635,"车内温度",32,33,0x7FFF);
+	puthz(5,703,"预设温度",32,33,0x7FFF);
+	bar2(140,703,172,735,0xFFFFFF);
+	bar2(180,703,212,735,0xFFFFFF);
+	Put_Asc16_Size(145,703,2,2,'+',0xFFFFFF);
+	Put_Asc16_Size(185,703,2,2,'-',0xFFFFFF);
+	prt_hz24_asc32(143,643, "16到35℃可调", 0xFFFFFF, "HZK\\Hzk24f");
 }
 
 

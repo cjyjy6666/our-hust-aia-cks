@@ -11,6 +11,7 @@ typedef struct
 typedef struct
 {
     struct car_light light_status;
+    struct car_ac ac_status;
     Car_Timer timer;
 }CarStatus;
 
