@@ -25,6 +25,11 @@ void mainpage(int *puge)
 			*puge = 4;
 			break;
 		}
+		if (mouse_press(280,420,360,460) == 1)
+		{
+			*puge = 5;
+			break;
+		}
 	}
 
 }

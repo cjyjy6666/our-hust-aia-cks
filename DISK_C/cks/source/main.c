@@ -26,6 +26,9 @@ void main()
 		case 4:
 			ac(&puge);
 			break;
+		case 5:
+			autoguide(&puge);
+			break;
 		default:
 			break;
 		}

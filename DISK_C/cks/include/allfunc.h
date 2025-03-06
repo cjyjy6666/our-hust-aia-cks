@@ -24,6 +24,7 @@
 #include"ac.h"
 #include"show.h"
 #include"car.h"
+#include"autoguide.h"
 
 
 #define NUM0 0x5230
