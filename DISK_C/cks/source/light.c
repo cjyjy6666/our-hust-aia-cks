@@ -76,7 +76,7 @@ void light(int *puge)
 			status->light_status.left_blink_state=status->light_status.left;
 			
 		}
-		if (mouse_press(266,440,366,510) == 1)
+		if (mouse_press(266,290,366,360) == 1)
 		{
 			do {
                 MouseGet(&mouse);
@@ -120,13 +120,16 @@ void light(int *puge)
 
 void draw_light_page()
 {
-    bar1(0,0,633,630,0xFFFFFF);
-	draw_botton(100,190,200,260,0x00FF,0x0000);
+	/*draw_botton(100,190,200,260,0x00FF,0x0000);
 	draw_botton(100,290,200,360,0x00FF,0x0000);
 	draw_botton(266,440,366,510,0x00FF,0x0000);
 	draw_botton(433,190,533,260,0x00FF,0x0000);
-	draw_botton(433,290,533,360,0x00FF,0x0000);
-	//双闪  哎我没看见BMP.H里画三角形的函数，先就这样用几个直线凑合一下
+	draw_botton(433,290,533,360,0x00FF,0x0000);*/
+	bar2(100,190,200,260,0xFFFFFF);
+	bar2(100,290,200,360,0xFFFFFF);
+	bar2(266,290,366,360,0xFFFFFF);
+	bar2(433,190,533,260,0xFFFFFF);
+	bar2(433,290,533,360,0xFFFFFF);
 	Line2(316,63,266,150,0xF800);
 	Line2(316,63,366,150,0xF800);
 	Line2(266,150,366,150,0xF800);
@@ -136,13 +139,13 @@ void draw_light_page()
 	Put_Asc16_Size(308, 100, 2, 2, '!', 0xF800);
 	puthz(130, 215, "右转",24,30,0xFFFFFF);
     puthz(130, 315, "左转",24,30,0xFFFFFF);
-    puthz(296, 465, "雾灯",24,30,0xFFFFFF);
+    puthz(296, 315, "雾灯",24,30,0xFFFFFF);
     puthz(463, 215, "近光",24,30,0xFFFFFF); 
     puthz(463, 315, "远光",24,30,0xFFFFFF); 
-	Line2(603,600,633,600,0x000000);
-	Line2(603,600,603,630,0x000000);
-	Line2(603,600,633,630,0x000000);
-	Line2(633,600,603,630,0x000000);
+	Line2(603,600,633,600,0xFFFFFF);
+	Line2(603,600,603,630,0xFFFFFF);
+	Line2(603,600,633,630,0xFFFFFF);
+	Line2(633,600,603,630,0xFFFFFF);
 }
 
 

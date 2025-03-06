@@ -15,12 +15,12 @@ void mainpage(int *puge)
 	{
 		show_all();
 		mouse_show(&mouse);
-		if (mouse_press(80, 70, 220, 200) == 1)
+		if (mouse_press(10,450,90,490) == 1)
 		{
 			*puge = 3;
 			break;
 		}
-		if (mouse_press(380, 70, 520, 200) == 1)
+		if (mouse_press(10,500,90,540) == 1)
 		{
 			*puge = 4;
 			break;
@@ -32,32 +32,54 @@ void mainpage(int *puge)
 //然后从main函数开始做的
 void draw_mainpage()
 {
-	bar1(0, 0, 1024, 768,0xFFFFFF);
-	Line_Thick(633, 0, 633, 768, 1, 0x000000);
-	Line_Thick(0, 630, 633, 630, 1, 0x000000);
-	Circle(829, 194, 180, 0x000000);
-	Circle(829, 194, 179, 0x000000);
-	Circle(829, 194, 178, 0x000000);
-	Circle(829, 194, 177, 0x000000);
-	Circle(829, 194, 176, 0x000000);
-	bar1(640, 195, 1024, 768, 0xFFFFFF);
-	Line_Thick(649, 194, 1009, 194, 1, 0x000000);
-	Circle(829, 400, 180, 0x000000);
-	Circle(829, 400, 179, 0x000000);
-	Circle(829, 400, 178, 0x000000);
-	Circle(829, 400, 177, 0x000000);
-	Circle(829, 400, 176, 0x000000);
-	bar1(640, 400, 1024,768, 0xFFFFFF);
-	Line_Thick(649, 400, 1009, 400, 1, 0x000000);
+	bar1(0, 0, 1024, 768,0x0085);//和背景图中一样的深蓝色
+	//Readbmp64k(0,0,"bmp\\background.bmp");
+	Line_Thick(633, 0, 633, 768, 1, 0x7FFF);//和背景图中一样的亮浅绿色
+	Line_Thick(0, 630, 633, 630, 1, 0x7FFF);
+	Circle(829, 194, 180, 0x7FFF);
+	Circle(829, 194, 179, 0x7FFF);
+	Circle(829, 194, 178, 0x7FFF);
+	Circle(829, 194, 177, 0x7FFF);
+	Circle(829, 194, 176, 0x7FFF);
+	bar1(640, 195, 1024, 768, 0x0085);
+	Line_Thick(649, 194, 1009, 194, 1, 0x7FFF);
+	Circle(829, 400, 180, 0x7FFF);
+	Circle(829, 400, 179, 0x7FFF);
+	Circle(829, 400, 178, 0x7FFF);
+	Circle(829, 400, 177, 0x7FFF);
+	Circle(829, 400, 176, 0x7FFF);
+	bar1(640, 400, 1024,768, 0x0085);
+	Line_Thick(649, 400, 1009, 400, 1, 0x7FFF);
 	bar1(660, 450, 1000, 748, 0x000000);
-	draw_botton(80, 70, 220, 200,MAGENTA,MAGENTA);
+	Readbmp64k(0,0,"bmp\\222.bmp");
+	/*draw_botton(80, 70, 220, 200,MAGENTA,MAGENTA);
 	draw_botton(80, 250, 220, 380, 0x00FF, 0xDDDD);
 	draw_botton(80, 440, 220, 570, 0x00FF, 0xDDDD);
 	draw_botton(380, 70, 520, 200, 0x00FF, 0xDDDD);
 	draw_botton(380, 250, 520, 380, 0x00FF, 0xDDDD);
 	draw_botton(380, 440, 520, 570, 0x00FF, 0xDDDD);
 	puthz(110,119,"灯光",32,40,0xFFFFFF);
-	puthz(410,119,"空调",32,40,0xFFFFFF);
+	puthz(410,119,"空调",32,40,0xFFFFFF);*/
+	bar2(10,450,90,490,0xFFFFFF);
+	bar2(10,500,90,540,0xFFFFFF);
+	bar2(10,550,90,590,0xFFFFFF);//左边栏三个按钮
+	puthz(25,458,"灯光",24,26,0XFFFFFF);
+	puthz(25,508,"空调",24,26,0XFFFFFF);
+	puthz(25,558,"雨刷",24,26,0XFFFFFF);
+	bar2(543,450,623,490,0xFFFFFF);
+	bar2(543,500,623,540,0xFFFFFF);
+	bar2(543,550,623,590,0xFFFFFF);//右边栏三个按钮
+
+	bar2(280,420,360,460,0xFFFFFF);//中间的空调按钮
+	puthz(295,428,"导航",24,26,0XFFFFFF);
+	//下方状态栏
+	puthz(5,635,"车内温度",32,33,0x7FFF);
+	puthz(5,703,"预设温度",32,33,0x7FFF);
+	bar2(140,703,172,735,0xFFFFFF);
+	bar2(180,703,212,735,0xFFFFFF);
+	Put_Asc16_Size(145,703,2,2,'+',0xFFFFFF);
+	Put_Asc16_Size(185,703,2,2,'-',0xFFFFFF);
+	prt_hz24_asc32(143,643, "16到35℃可调", 0xFFFFFF, "HZK\\Hzk24f");
 }
 
 
