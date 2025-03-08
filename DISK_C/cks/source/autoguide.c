@@ -3,6 +3,11 @@
 
 void autoguide(int *puge)
 {
+
+    TABLE T[Max];
+    int map[Max][Max]={'0'};
+
+
     mouse_off(&mouse);
 
 	draw_autoguide();
@@ -29,10 +34,9 @@ void autoguide(int *puge)
 void draw_autoguide()
 {
     bar1(0, 0, 1024, 768,0x7FFE);
-    bar1(965,0,1024,53,0x74C2);
+    bar1(965,0,1024,53,0xF800);
     Line_Thick(965,0,1024,53, 1,0x000000);
     Line_Thick(965,53,1024,0, 1,0x000000);
-
     Line_Thick(0,250,1024,250, 1,0x000000);
 	Line_Thick(320,0,320,250,1, 0x000000);
 	bar1(64,295,173,359, 0x7BEF);//1栋
@@ -90,4 +94,125 @@ void draw_autoguide()
 
 
 }
+
+
+
+
+
+
+void InitializeTable(int start,TABLE T[])//初始化表格	
+{
+	int i;
+	for(i=0;i<Max;i++)
+	{
+		T[i]=malloc(sizeof(Node));
+		T[i]->visited=0;
+		T[i]->path=Nopath;
+		T[i]->distance=X;
+		T[i]->name=65+i;
+	}
+	T[start]->distance=0;
+	
+}
+
+QUEUE InitializeQueue(int capacity)//初始化队列
+{
+    int i;
+	QUEUE Q;
+	Q=malloc(sizeof(Queue));
+	Q->capacity=capacity;
+	Q->size=0;
+	
+	for(i=1;i<Max;i++)
+	{
+		Q->element[i]=NULL;
+	}
+	Q->element[0]=malloc(sizeof(Node));
+	Q->element[0]->distance=0;
+	
+	return Q;
+	
+}
+
+void enqueue(QUEUE Q, TABLE K)//入队
+{
+	int i,hole;
+	
+	if(K->path==Nopath)
+	{
+		Q->size++;
+		hole=Q->size;
+	}
+	else
+	{
+		i=1;
+		while(K->name!=Q->element[i]->name&&Q->element[i]!=NULL)
+		{
+			i++;
+		} 
+		hole=i;	
+	}
+	i=hole/2;
+	
+	while(K->distance < Q->element[i]->distance)
+	{
+		Q->element[hole]=Q->element[i];
+		hole=i;
+		i=i/2;
+	}
+	Q->element[hole]=K;
+}
+
+int dequeue(QUEUE Q)//出队
+{	TABLE OUT;
+	int hole=1,child=2,last=Q->size;
+	OUT=Q->element[1];
+	Q->size--;
+	while(child <= Q->size && Q->element[child]->distance < Q->element[last]->distance  )
+	{	
+		
+		if(Q->element[child]->distance > Q->element[child+1]->distance )	
+			child++;			
+		Q->element[hole]=Q->element[child];
+		hole=child;
+		child=hole*2;	
+	}
+	
+	Q->element[hole]=Q->element[last];
+	Q->element[last]=NULL;
+	
+	return OUT->name-65;
+	
+}
+
+void Dijkstra(int map[Max][Max],int start,TABLE T[])
+{
+	int i;
+	int current;
+    QUEUE Q;
+	InitializeTable(start,T);
+	Q=InitializeQueue(Max);
+	enqueue(Q,T[start]);
+	while(Q->size!=0)
+	{
+		current=dequeue(Q);
+	
+		for(i=0;i<Max;i++)
+		{
+			int EdgeLength = map[current][i];
+			
+			if(EdgeLength!=0 && EdgeLength!=X && T[i]->visited==0)
+			{
+				if(T[i]->distance > EdgeLength + T[current]->distance)
+				{
+					T[i]->distance = EdgeLength + T[current]->distance;
+					enqueue(Q,T[i]);
+					T[i]->path=current;
+				}	
+			}
+		}
+		T[current]->visited=1;
+	}
+}
+
 
