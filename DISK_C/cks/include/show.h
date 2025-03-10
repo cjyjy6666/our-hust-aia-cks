@@ -3,8 +3,8 @@
 #ifndef __SHOW_H__
 #define __SHOW_H__
 
-void show_all();
-void show_light(struct car_light light_status);
-void light_blink();
+void show_all(CarStatus *state);
+void show_light(CarStatus *state);
+void light_blink(CarStatus *state);
 
 #endif

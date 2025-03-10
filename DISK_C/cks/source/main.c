@@ -2,7 +2,7 @@
 
 void main()
 {      
-
+	CarStatus state= {0};
 	int puge = 0;
 	//init_car_status();
 	//初始化车辆状态
@@ -18,16 +18,16 @@ void main()
 			welcome(&puge);
 			break;
 		case 2:
-			mainpage(&puge);
+			mainpage(&state,&puge);
 			break;
 		case 3:
-			light(&puge);
+			light(&state,&puge);
 			break;
 		case 4:
-			ac(&puge);
+			ac(&state,&puge);
 			break;
 		case 5:
-			autoguide(&puge);
+			autoguide(&state,&puge);
 			break;
 		default:
 			break;

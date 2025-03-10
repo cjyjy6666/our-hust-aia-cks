@@ -2,9 +2,9 @@
 
 
 
-void light(int *puge)
+void light(CarStatus* state,int *puge)
 {
-	CarStatus *status = get_car_status();
+	//CarStatus *status = get_car_status();
 	uint8_t new_state;
 	mouse_off(&mouse);
 
@@ -17,7 +17,7 @@ void light(int *puge)
 
 	while(1)
 	{
-		show_all();
+		show_all(state);
 		
 		mouse_show(&mouse);
         
@@ -29,7 +29,7 @@ void light(int *puge)
                 mouse_show(&mouse);   // ±£³ÖÊó±êÏÔÊ¾¸üĞÂ
             } while ((mouse.key & 1) == 1);  // ¼ì²é×ó¼ü×´Ì¬Î»
             
-            status->light_status.near_light ^= 1;
+            state->light_s.near_light ^= 1;
         }
 
         if (mouse_press(433,290,533,360) == 1) {
@@ -39,7 +39,7 @@ void light(int *puge)
                 mouse_show(&mouse);
             } while ((mouse.key & 1) == 1);
             
-            status->light_status.far_light ^= 1;    
+            state->light_s.far_light ^= 1;    
         }
 
 		if (mouse_press(100,190,200,260) == 1)
@@ -49,14 +49,14 @@ void light(int *puge)
                 mouse_show(&mouse);
             } while ((mouse.key & 1) == 1);
             
-			if(status->light_status.left) {
-                status->light_status.left = 0;
-                status->light_status.left_blink_state = 0;
+			if(state->light_s.left) {
+                state->light_s.left = 0;
+                state->light_s.left_blink_state = 0;
     
             }
 
-            status->light_status.right^=1;
-			status->light_status.right_blink_state=status->light_status.right;
+            state->light_s.right^=1;
+			state->light_s.right_blink_state=state->light_s.right;
 			
 		}
 		if (mouse_press(100,290,200,360) == 1)
@@ -66,14 +66,14 @@ void light(int *puge)
                 mouse_show(&mouse);
             } while ((mouse.key & 1) == 1);
             
-			if(status->light_status.right) {
-                status->light_status.right = 0;
-                status->light_status.right_blink_state = 0;
+			if(state->light_s.right) {
+                state->light_s.right = 0;
+                state->light_s.right_blink_state = 0;
                 
             }
 			
-            status->light_status.left^=1;
-			status->light_status.left_blink_state=status->light_status.left;
+            state->light_s.left^=1;
+			state->light_s.left_blink_state=state->light_s.left;
 			
 		}
 		if (mouse_press(266,290,366,360) == 1)
@@ -83,7 +83,7 @@ void light(int *puge)
                 mouse_show(&mouse);
             } while ((mouse.key & 1) == 1);
             
-            status->light_status.fog ^= 1;
+            state->light_s.fog ^= 1;
 		}
 		if (mouse_press(266,63,366,150) == 1)
 		{
@@ -93,11 +93,11 @@ void light(int *puge)
             } while ((mouse.key & 1) == 1);
             
             // ÇĞ»»Ë«ÉÁ×´Ì¬
-            new_state = !(status->light_status.right && status->light_status.left);
-            status->light_status.right = new_state;
-            status->light_status.left = new_state;
-            status->light_status.right_blink_state = new_state;
-            status->light_status.left_blink_state = new_state;
+            new_state = !(state->light_s.right && state->light_s.left);
+            state->light_s.right = new_state;
+            state->light_s.left = new_state;
+            state->light_s.right_blink_state = new_state;
+            state->light_s.left_blink_state = new_state;
             
             
 		}

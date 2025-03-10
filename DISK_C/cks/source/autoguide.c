@@ -1,7 +1,7 @@
 #include"allfunc.h"
 
 
-void autoguide(int *puge)
+void autoguide(CarStatus *state,int *puge)
 {
 
     TABLE T[Max];

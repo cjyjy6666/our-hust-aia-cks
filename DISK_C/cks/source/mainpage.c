@@ -1,6 +1,6 @@
 #include"allfunc.h"
 
-void mainpage(int *puge)
+void mainpage(CarStatus *state,int *puge)
 {
 	mouse_off(&mouse);
 
@@ -13,7 +13,7 @@ void mainpage(int *puge)
 
 	while (1)
 	{
-		show_all();
+		show_all(state);
 		mouse_show(&mouse);
 		if (mouse_press(10,450,90,490) == 1)
 		{

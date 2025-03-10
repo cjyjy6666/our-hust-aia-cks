@@ -1,22 +1,46 @@
-#include"allfunc.h"
-
 #ifndef __CAR_H__
 #define __CAR_H__
+#include"allfunc.h"
+struct car_light;
+struct car_ac;
 typedef struct
 {
    clock_t light_time;
    clock_t wiper_time;
    clock_t ac_time; 
 }Car_Timer;
-typedef struct
+typedef struct car_light
 {
-    struct car_light light_status;
-    struct car_ac ac_status;
+    int right;
+    int left;
+    int fog;
+    int near_light;
+    int far_light;
+    int left_blink_state;
+    int right_blink_state;
+}car_light;
+typedef struct car_ac 
+{
+    int ac_state;
+    int heating;
+    int fresh_air;
+    int defog;
+    int temp_h;//h means higher
+    int temp_l;//l means lower
+    int speed_h;
+    int speed_l;
+    int current_temp;
+    int speed;
+}car_ac;
+typedef struct CarStatus
+{
+    car_light light_s;
+    car_ac ac_s;
     Car_Timer timer;
 }CarStatus;
 
 //void init_car_status();
-CarStatus* get_car_status(void);
-int check_timer_expire(clock_t *timer, clock_t interval);
+//CarStatus* get_car_status(void);
+int check_timer_expire(clock_t* timer, clock_t interval);
 
 #endif

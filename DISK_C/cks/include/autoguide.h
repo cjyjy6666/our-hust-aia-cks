@@ -1,3 +1,5 @@
+#include"car.h"
+
 #ifndef __AUTOGUIDE_H__
 #define __AUTOGUIDE_H__
 #define X 999
@@ -22,7 +24,7 @@ typedef struct PriorityQueue
 }Queue;
 typedef Queue * QUEUE;
 
-void autoguide(int *puge);
+void autoguide(CarStatus *state,int *puge);
 void draw_autoguide();
 QUEUE InitializeQueue(int capacity);
 void enqueue(QUEUE Q, TABLE K);
