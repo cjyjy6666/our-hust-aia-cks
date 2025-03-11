@@ -18,6 +18,69 @@ void ac(CarStatus *state,int *puge)
 			*puge = 2;
 			break;
 		}
+        if(mouse_press(100,90,200,160) == 1)
+        {
+            do
+            {
+                MouseGet(&mouse);
+                mouse_show(&mouse);
+            }while ((mouse.key & 1) == 1);
+            if(state->ac_s.ac_state == 1)
+                state->ac_s.ac_state = 0;
+            else
+            state->ac_s.ac_state = 1;
+        }
+        if(mouse_press(100,190,200,260) == 1)
+        {
+            do
+            {
+                MouseGet(&mouse);
+                mouse_show(&mouse);
+            }while ((mouse.key & 1) == 1);
+            if(state->ac_s.ac_state == 2)
+                state->ac_s.ac_state = 0;
+            else
+            state->ac_s.ac_state = 2;
+        }
+        if(mouse_press(100,290,200,360) == 1)
+        {
+            do
+            {
+                MouseGet(&mouse);
+                mouse_show(&mouse);
+            }while ((mouse.key & 1) == 1);
+            if(state->ac_s.ac_state == 3)
+                state->ac_s.ac_state = 0;
+            else
+                state->ac_s.ac_state = 3;
+        }
+        if(mouse_press(433,90,533,160) == 1)
+        {
+            do
+            {
+                MouseGet(&mouse);
+                mouse_show(&mouse);
+            }while ((mouse.key & 1) == 1);
+            state->ac_s.circulate ^= 1;
+        }
+        if(mouse_press(433,190,533,260) == 1)
+        {
+            do
+            {
+                MouseGet(&mouse);
+                mouse_show(&mouse);
+            }while ((mouse.key & 1) == 1);
+            state->ac_s.fresh_air ^= 1;
+        }
+        if(mouse_press(433,290,533,360) == 1)
+        {
+            do
+            {
+                MouseGet(&mouse);
+                mouse_show(&mouse);
+            }while ((mouse.key & 1) == 1);
+            state->ac_s.defog ^= 1;
+        }
     }
 }
 
@@ -26,7 +89,7 @@ void draw_ac_page()
     Line2(603,600,633,600,0xFFFFFF);
 	Line2(603,600,603,630,0xFFFFFF);
 	Line2(603,600,633,630,0xFFFFFF);
-	Line2(633,600,603,630,0xFFFFFF);//ï¿½Ë³ï¿½ï¿½ï¿½Å¥
+	Line2(633,600,603,630,0xFFFFFF);//é€€å‡ºæŒ‰é’®
     
     bar2(100,90,200,160,0xFFFFFF);
 	bar2(100,190,200,260,0xFFFFFF);
@@ -35,10 +98,10 @@ void draw_ac_page()
 	bar2(433,190,533,260,0xFFFFFF);
     bar2(433,290,533,360,0xFFFFFF);
 
-    puthz(130, 115, "×Ô¶¯",24,30,0xFFFFFF);
-    puthz(130, 215, "ÖÆÀä",24,30,0xFFFFFF);
-    puthz(130, 315, "Å¯·ç",24,30,0xFFFFFF);
-    puthz(463, 115, "Ñ­»·",24,30,0xFFFFFF);
-    puthz(463, 215, "Í¨·ç",24,30,0xFFFFFF); 
-    puthz(463, 315, "³ýÎí",24,30,0xFFFFFF);
+    puthz(130, 115, "è‡ªåŠ¨",24,30,0xFFFFFF);
+    puthz(130, 215, "åˆ¶å†·",24,30,0xFFFFFF);
+    puthz(130, 315, "æš–é£Ž",24,30,0xFFFFFF);
+    puthz(463, 115, "å¾ªçŽ¯",24,30,0xFFFFFF);
+    puthz(463, 215, "é€šé£Ž",24,30,0xFFFFFF); 
+    puthz(463, 315, "é™¤é›¾",24,30,0xFFFFFF);
 }

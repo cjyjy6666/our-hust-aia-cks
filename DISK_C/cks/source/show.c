@@ -55,3 +55,5 @@ void light_blink(CarStatus *state)//转向灯闪烁函数
             state->light_s.right_blink_state = 0;
 	}
 }
+
+void show_ac(CarStatus *state)

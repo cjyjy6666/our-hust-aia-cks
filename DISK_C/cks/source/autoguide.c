@@ -6,6 +6,36 @@ void autoguide(CarStatus *state,int *puge)
 
     TABLE T[Max];
     int map[Max][Max]={'0'};
+	int map1[Max][Max]={
+	   //a,b,c,d,e,f,g
+		{0,5,4,X,X,X,X}//a
+		{5,0,3,X,5,X,X}//b
+		{4,3,0,6,5,X,X}//c
+		{X,X,6,0,5,5,X}//d
+		{X,5,5,5,0,7,5}//e
+		{X,X,X,5,7,0,5}//f
+		{X,X,X,X,5,5,0}//g
+	}
+	int map2[Max][Max]={
+		//a,b,c,d,e,f,g
+		 {0,5,3,X,5,X,X}//a
+		 {5,0,4,X,X,X,X}//b
+		 {3,4,0,6,5,X,X}//c
+		 {X,X,6,0,5,5,X}//d
+		 {5,X,5,5,0,7,5}//e
+		 {X,X,X,5,7,0,5}//f
+		 {X,X,X,X,5,5,0}//g
+	 }
+	int map3[Max][Max]={
+		//a,b,c,d,e,f,g
+		 {0,5,4,X,X,X,X}//a
+		 {5,0,3,X,5,X,X}//b
+		 {4,3,0,6,5,X,X}//c
+		 {X,X,6,0,5,5,X}//d
+		 {X,5,5,5,0,7,5}//e
+		 {X,X,X,5,7,0,5}//f
+		 {X,X,X,X,5,5,0}//g
+	 }
 
 
     mouse_off(&mouse);

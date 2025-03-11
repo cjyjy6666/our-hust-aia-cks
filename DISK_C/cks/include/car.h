@@ -21,16 +21,13 @@ typedef struct car_light
 }car_light;
 typedef struct car_ac 
 {
-    int ac_state;
-    int heating;
+    int ac_state;//0:off 1:auto 2:cold 3:heat 4:
     int fresh_air;
+    int circulate;
     int defog;
     int temp_h;//h means higher
     int temp_l;//l means lower
-    int speed_h;
-    int speed_l;
     int current_temp;
-    int speed;
 }car_ac;
 typedef struct CarStatus
 {
