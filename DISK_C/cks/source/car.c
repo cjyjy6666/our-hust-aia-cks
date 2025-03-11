@@ -3,11 +3,11 @@
 //CarStatus global_status = {0};  // 保持静态初始化为零
 
 // 初始化函数
-/*void init_car_status() 
+void init_car_status(CarStatus *state) 
 {
-    //global_status.timer.light_time = 0;
-    // 其他需要运行时初始化的字段
-}*/
+    randomize();
+    state->ac_s.current_temp=random(36);
+}
 
 /*CarStatus* get_car_status(void)
 {

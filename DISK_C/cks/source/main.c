@@ -4,7 +4,7 @@ void main()
 {      
 	CarStatus state= {0};
 	int puge = 0;
-	//init_car_status();
+	init_car_status(&state);
 	//初始化车辆状态
 	SetSVGA64k();
 	

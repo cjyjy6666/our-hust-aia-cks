@@ -25,8 +25,7 @@ typedef struct car_ac
     int fresh_air;
     int circulate;
     int defog;
-    int temp_h;//h means higher
-    int temp_l;//l means lower
+    int target_temp;
     int current_temp;
 }car_ac;
 typedef struct CarStatus
@@ -36,7 +35,8 @@ typedef struct CarStatus
     Car_Timer timer;
 }CarStatus;
 
-//void init_car_status();
+
+void init_car_status(CarStatus *state);
 //CarStatus* get_car_status(void);
 int check_timer_expire(clock_t* timer, clock_t interval);
 

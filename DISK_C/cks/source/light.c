@@ -21,19 +21,19 @@ void light(CarStatus* state,int *puge)
 		
 		mouse_show(&mouse);
         
-        // 锟睫革拷锟斤拷锟斤拷锟斤拷呒锟斤拷锟斤拷锟斤拷锟斤拷头偶锟斤拷锟斤拷锟�
+
         if (mouse_press(433,190,533,260) == 1) {
-            // 锟饺达拷锟斤拷锟斤拷头锟�
+            
             do {
-                MouseGet(&mouse);      // 锟斤拷锟斤拷锟斤拷取锟斤拷锟斤拷状态
-                mouse_show(&mouse);   // 锟斤拷锟斤拷锟斤拷锟斤拷锟绞撅拷锟斤拷锟�
-            } while ((mouse.key & 1) == 1);  // 锟斤拷锟斤拷锟斤拷状态位
+                MouseGet(&mouse); 
+                mouse_show(&mouse); 
+            } while ((mouse.key & 1) == 1);  
             
             state->light_s.near_light ^= 1;
         }
 
-        if (mouse_press(433,290,533,360) == 1) {
-            // 锟饺达拷锟斤拷锟斤拷头锟�
+        if (mouse_press(433,290,533,360) == 1) 
+		{
             do {
                 MouseGet(&mouse);
                 mouse_show(&mouse);
@@ -92,7 +92,7 @@ void light(CarStatus* state,int *puge)
                 mouse_show(&mouse);
             } while ((mouse.key & 1) == 1);
             
-            // 锟叫伙拷双锟斤拷状态
+
             new_state = !(state->light_s.right && state->light_s.left);
             state->light_s.right = new_state;
             state->light_s.left = new_state;
@@ -110,21 +110,10 @@ void light(CarStatus* state,int *puge)
 
 }
 
-/*	锟斤拷锟斤拷锟斤拷锟斤拷小锟斤拷锟斤拷
-没锟斤拷写双锟斤拷锟斤拷锟斤拷锟揭ｏ拷转同时锟斤拷锟铰碉拷锟斤拷锟斤拷
-双锟斤拷锟斤拷钮锟斤拷detect写锟侥的撅拷锟轿凤拷围锟斤拷锟斤拷锟皆改斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷
-*/
-
-/*锟斤拷锟解，锟斤拷锟斤拷锟斤拷婊癸拷锟斤拷锟绞憋拷洌�锟斤拷锟皆硷拷锟斤拷锟皆讹拷锟斤拷锟�
-*/
 
 void draw_light_page()
 {
-	/*draw_botton(100,190,200,260,0x00FF,0x0000);
-	draw_botton(100,290,200,360,0x00FF,0x0000);
-	draw_botton(266,440,366,510,0x00FF,0x0000);
-	draw_botton(433,190,533,260,0x00FF,0x0000);
-	draw_botton(433,290,533,360,0x00FF,0x0000);*/
+
 	bar2(100,190,200,260,0xFFFFFF);
 	bar2(100,290,200,360,0xFFFFFF);
 	bar2(266,290,366,360,0xFFFFFF);
@@ -137,11 +126,11 @@ void draw_light_page()
 	Line2(316,73,357,145,0xF800);
 	Line2(275,145,357,145,0xF800);
 	Put_Asc16_Size(308, 100, 2, 2, '!', 0xF800);
-	puthz(130, 215, "锟斤拷转",24,30,0xFFFFFF);
-    puthz(130, 315, "锟斤拷转",24,30,0xFFFFFF);
-    puthz(296, 315, "锟斤拷锟斤拷",24,30,0xFFFFFF);
-    puthz(463, 215, "锟斤拷锟斤拷",24,30,0xFFFFFF); 
-    puthz(463, 315, "远锟斤拷",24,30,0xFFFFFF); 
+	puthz(130, 215, "��ת",24,30,0xFFFFFF);//turn right
+    puthz(130, 315, "��ת",24,30,0xFFFFFF);//turn left
+    puthz(296, 315, "����",24,30,0xFFFFFF);//fog light
+    puthz(463, 215, "����",24,30,0xFFFFFF); //near light
+    puthz(463, 315, "Զ��",24,30,0xFFFFFF); //far light
 	Line2(603,600,633,600,0xFFFFFF);
 	Line2(603,600,603,630,0xFFFFFF);
 	Line2(603,600,633,630,0xFFFFFF);

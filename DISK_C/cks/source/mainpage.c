@@ -84,7 +84,7 @@ void draw_mainpage()
 	bar2(180,703,212,735,0xFFFFFF);
 	Put_Asc16_Size(145,703,2,2,'+',0xFFFFFF);
 	Put_Asc16_Size(185,703,2,2,'-',0xFFFFFF);
-	prt_hz24_asc32(143,643, "16到35℃可调", 0xFFFFFF, "HZK\\Hzk24f");
+	prt_hz24_asc32(143,643, "0到35℃可调", 0xFFFFFF, "HZK\\Hzk24f");
 }
 
 

@@ -11,7 +11,7 @@ void ac(CarStatus *state,int *puge)
     while(1)
     {
         show_all(state);
-		
+		temp(state);
 		mouse_show(&mouse);
         if (mouse_press(603,600,633,630) == 1)
 		{
@@ -28,7 +28,11 @@ void ac(CarStatus *state,int *puge)
             if(state->ac_s.ac_state == 1)
                 state->ac_s.ac_state = 0;
             else
-            state->ac_s.ac_state = 1;
+            {
+                state->ac_s.ac_state = 1;
+                state->ac_s.target_temp = 26;
+            }
+            
         }
         if(mouse_press(100,190,200,260) == 1)
         {
@@ -40,7 +44,10 @@ void ac(CarStatus *state,int *puge)
             if(state->ac_s.ac_state == 2)
                 state->ac_s.ac_state = 0;
             else
+            {
             state->ac_s.ac_state = 2;
+            state->ac_s.target_temp = state->ac_s.current_temp-1;
+            }
         }
         if(mouse_press(100,290,200,360) == 1)
         {
@@ -52,7 +59,10 @@ void ac(CarStatus *state,int *puge)
             if(state->ac_s.ac_state == 3)
                 state->ac_s.ac_state = 0;
             else
+            {
                 state->ac_s.ac_state = 3;
+                state->ac_s.target_temp = state->ac_s.current_temp+1;
+            }
         }
         if(mouse_press(433,90,533,160) == 1)
         {
@@ -89,7 +99,7 @@ void draw_ac_page()
     Line2(603,600,633,600,0xFFFFFF);
 	Line2(603,600,603,630,0xFFFFFF);
 	Line2(603,600,633,630,0xFFFFFF);
-	Line2(633,600,603,630,0xFFFFFF);//é€€å‡ºæŒ‰é’?
+	Line2(633,600,603,630,0xFFFFFF);
     
     bar2(100,90,200,160,0xFFFFFF);
 	bar2(100,190,200,260,0xFFFFFF);
@@ -104,4 +114,102 @@ void draw_ac_page()
     puthz(463, 115, "Ñ­»·",24,30,0xFFFFFF);//circulation
     puthz(463, 215, "Í¨·ç",24,30,0xFFFFFF); //air_refreshing
     puthz(463, 315, "³ýÎí",24,30,0xFFFFFF);//defoging
+}
+
+void temp(CarStatus *state)
+{
+    char tag_temp[5]={'\0'};
+    prt_hz24_asc32(40,735,tag_temp,0xFC44,"HZK\\Hzk24f");
+    if(state->ac_s.ac_state == 1)
+    {
+        if(state->ac_s.target_temp<=35&&state->ac_s.target_temp>=0)
+        {
+            if(mouse_press(140,703,172,735) == 1&&state->ac_s.target_temp<35)//temp+
+            {
+                do
+                {
+                    MouseGet(&mouse);
+                    mouse_show(&mouse);
+                }while ((mouse.key & 1) == 1);
+                state->ac_s.target_temp++;
+                bar1(40,735,130,770,0x0085);
+                sprintf(tag_temp,"%d¡æ",state->ac_s.target_temp);
+                prt_hz24_asc32(40,735,tag_temp,0xFC44,"HZK\\Hzk24f");
+            }
+            if(mouse_press(180,703,212,735) == 1&&state->ac_s.target_temp>0)//temp-
+            {
+                do
+                {
+                    MouseGet(&mouse);
+                    mouse_show(&mouse);
+                }while ((mouse.key & 1) == 1);
+                state->ac_s.target_temp--;
+                bar1(40,735,130,770,0x0085);
+                sprintf(tag_temp,"%d¡æ",state->ac_s.target_temp);
+                prt_hz24_asc32(40,735,tag_temp,0xFC44,"HZK\\Hzk24f");
+            } 
+        }
+    }
+    if(state->ac_s.ac_state == 2)
+    {
+        
+        if(state->ac_s.target_temp>=0&&state->ac_s.current_temp>=state->ac_s.target_temp)
+        {
+            if(mouse_press(140,703,172,735) == 1&&state->ac_s.current_temp>state->ac_s.target_temp)//temp+
+            {
+                do
+                {
+                    MouseGet(&mouse);
+                    mouse_show(&mouse);
+                }while ((mouse.key & 1) == 1);
+                state->ac_s.target_temp++;
+                bar1(40,735,130,770,0x0085);
+                sprintf(tag_temp,"%d¡æ",state->ac_s.target_temp);
+                prt_hz24_asc32(40,735,tag_temp,0xFC44,"HZK\\Hzk24f");
+            }
+            if(mouse_press(180,703,212,735) == 1&&state->ac_s.target_temp>0)//temp-
+            {
+                do
+                {
+                    MouseGet(&mouse);
+                    mouse_show(&mouse);
+                }while ((mouse.key & 1) == 1);
+                state->ac_s.target_temp--;
+                bar1(40,735,130,770,0x0085);
+                sprintf(tag_temp,"%d¡æ",state->ac_s.target_temp);
+                prt_hz24_asc32(40,735,tag_temp,0xFC44,"HZK\\Hzk24f");
+            }
+        } 
+    }
+    if(state->ac_s.ac_state == 3)
+    {
+        
+        if(state->ac_s.target_temp<=35&&state->ac_s.current_temp<=state->ac_s.target_temp)
+        {
+            if(mouse_press(140,703,172,735) == 1&&state->ac_s.target_temp<35)//temp+
+            {
+                do
+                {
+                    MouseGet(&mouse);
+                    mouse_show(&mouse);
+                }while ((mouse.key & 1) == 1);
+                state->ac_s.target_temp++;
+                bar1(40,735,130,770,0x0085);
+                sprintf(tag_temp,"%d¡æ",state->ac_s.target_temp);
+                prt_hz24_asc32(40,735,tag_temp,0xFC44,"HZK\\Hzk24f");
+            }
+            if(mouse_press(180,703,212,735) == 1&&state->ac_s.current_temp<state->ac_s.target_temp)//temp-
+            {
+                do
+                {
+                    MouseGet(&mouse);
+                    mouse_show(&mouse);
+                }while ((mouse.key & 1) == 1);
+                state->ac_s.target_temp--;
+                bar1(40,735,130,770,0x0085);
+                sprintf(tag_temp,"%d¡æ",state->ac_s.target_temp);
+                prt_hz24_asc32(40,735,tag_temp,0xFC44,"HZK\\Hzk24f");
+            }
+        } 
+    }
 }

@@ -39,7 +39,7 @@ void show_light(CarStatus *state)
 		bar1(956,452,990,493,0x0000);
 }
 
-void light_blink(CarStatus *state)//转向灯闪烁函数
+void light_blink(CarStatus *state)
 {
     //CarStatus *status = get_car_status();
 
@@ -59,6 +59,10 @@ void light_blink(CarStatus *state)//转向灯闪烁函数
 
 void show_ac(CarStatus *state)
 {
+	char cur_temp[5]={'\0'};
+	itoa(state->ac_s.current_temp,cur_temp,10);
+	sprintf(cur_temp,"%d��",state->ac_s.current_temp);
+	prt_hz24_asc32(40,667,cur_temp,0xFC44,"HZK\\Hzk24f");
 	if(state->ac_s.circulate)
 		Readbmp64k(710,452,"bmp\\accir.bmp");
 	else
