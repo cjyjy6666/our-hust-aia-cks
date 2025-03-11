@@ -3,6 +3,7 @@
 void show_all(CarStatus *state)
 {
 	show_light(state);
+	show_ac(state);
 }
 
 
@@ -57,3 +58,17 @@ void light_blink(CarStatus *state)//转向灯闪烁函数
 }
 
 void show_ac(CarStatus *state)
+{
+	if(state->ac_s.circulate)
+		Readbmp64k(710,452,"bmp\\accir.bmp");
+	else
+		bar1(710,452,744,472,0x0000);
+	if(state->ac_s.fresh_air)
+		Readbmp64k(710,532,"bmp\\acair.bmp");
+	else
+		bar1(710,532,744,549,0x0000);
+	if(state->ac_s.defog)
+		Readbmp64k(710,500,"bmp\\acfog.bmp");
+	else
+		bar1(710,500,744,526,0x0000);
+}
