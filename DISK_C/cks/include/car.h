@@ -27,6 +27,7 @@ typedef struct car_ac
     int defog;
     int target_temp;
     int current_temp;
+    int cur_t;//backup current_temp
 }car_ac;
 typedef struct CarStatus
 {

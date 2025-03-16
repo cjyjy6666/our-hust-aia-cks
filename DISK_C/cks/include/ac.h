@@ -12,7 +12,7 @@
 void ac(CarStatus *state,int *puge);
 void draw_ac_page();
 void temp(CarStatus *state);
-
+void temp_change(CarStatus *state);
 
 
 #endif

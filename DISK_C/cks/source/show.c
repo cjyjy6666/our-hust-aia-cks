@@ -75,4 +75,6 @@ void show_ac(CarStatus *state)
 		Readbmp64k(710,500,"bmp\\acfog.bmp");
 	else
 		bar1(710,500,744,526,0x0000);
+
+	temp_change(state);
 }

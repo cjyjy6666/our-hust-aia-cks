@@ -5,8 +5,13 @@
 // 初始化函数
 void init_car_status(CarStatus *state) 
 {
+    FILE *fp;
     randomize();
     state->ac_s.current_temp=random(36);
+    state->ac_s.cur_t=state->ac_s.current_temp;
+    fp=fopen("data\\temp.dat","rb+");
+    fread(&state->ac_s.target_temp,sizeof(int),1,fp);
+    fclose(fp);
 }
 
 /*CarStatus* get_car_status(void)

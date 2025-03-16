@@ -2,8 +2,6 @@
 
 void ac(CarStatus *state,int *puge)
 {
-    //CarStatus *status = get_car_status();
-	uint8_t new_state;
 	mouse_off(&mouse);
     draw_ac_page();
     mouse_on(mouse);
@@ -30,7 +28,7 @@ void ac(CarStatus *state,int *puge)
             else
             {
                 state->ac_s.ac_state = 1;
-                state->ac_s.target_temp = 26;
+                //state->ac_s.target_temp = 26;
             }
             
         }
@@ -119,6 +117,7 @@ void draw_ac_page()
 void temp(CarStatus *state)
 {
     char tag_temp[5]={'\0'};
+    FILE *fp;
     prt_hz24_asc32(40,735,tag_temp,0xFC44,"HZK\\Hzk24f");
     if(state->ac_s.ac_state == 1)
     {
@@ -135,6 +134,9 @@ void temp(CarStatus *state)
                 bar1(40,735,130,770,0x0085);
                 sprintf(tag_temp,"%d¡æ",state->ac_s.target_temp);
                 prt_hz24_asc32(40,735,tag_temp,0xFC44,"HZK\\Hzk24f");
+                fp=fopen("data\\temp.dat","wb+");
+                fwrite(&state->ac_s.target_temp,sizeof(int),1,fp);
+                fclose(fp);
             }
             if(mouse_press(180,703,212,735) == 1&&state->ac_s.target_temp>0)//temp-
             {
@@ -147,6 +149,9 @@ void temp(CarStatus *state)
                 bar1(40,735,130,770,0x0085);
                 sprintf(tag_temp,"%d¡æ",state->ac_s.target_temp);
                 prt_hz24_asc32(40,735,tag_temp,0xFC44,"HZK\\Hzk24f");
+                fp=fopen("data\\temp.dat","wb+");
+                fwrite(&state->ac_s.target_temp,sizeof(int),1,fp);
+                fclose(fp);
             } 
         }
     }
@@ -155,7 +160,7 @@ void temp(CarStatus *state)
         
         if(state->ac_s.target_temp>=0&&state->ac_s.current_temp>=state->ac_s.target_temp)
         {
-            if(mouse_press(140,703,172,735) == 1&&state->ac_s.current_temp>state->ac_s.target_temp)//temp+
+            if(mouse_press(140,703,172,735) == 1&&state->ac_s.cur_t>state->ac_s.target_temp)//temp+
             {
                 do
                 {
@@ -198,7 +203,7 @@ void temp(CarStatus *state)
                 sprintf(tag_temp,"%d¡æ",state->ac_s.target_temp);
                 prt_hz24_asc32(40,735,tag_temp,0xFC44,"HZK\\Hzk24f");
             }
-            if(mouse_press(180,703,212,735) == 1&&state->ac_s.current_temp<state->ac_s.target_temp)//temp-
+            if(mouse_press(180,703,212,735) == 1&&state->ac_s.cur_t<state->ac_s.target_temp)//temp-
             {
                 do
                 {
@@ -211,5 +216,41 @@ void temp(CarStatus *state)
                 prt_hz24_asc32(40,735,tag_temp,0xFC44,"HZK\\Hzk24f");
             }
         } 
+    }
+}
+
+void temp_change(CarStatus *state)
+{
+    if(state->ac_s.ac_state)
+    {
+        if(check_timer_expire(&(state->timer.ac_time),4*CLOCKS_PER_SEC)) 
+        {
+            if(state->ac_s.current_temp < state->ac_s.target_temp) 
+            {
+                bar1(40,667,130,702,0x0085);
+                state->ac_s.current_temp++;
+            } 
+            else if(state->ac_s.current_temp > state->ac_s.target_temp) 
+            {
+                bar1(40,667,130,702,0x0085);
+                state->ac_s.current_temp--;
+            }
+        }
+    }
+    else
+    {
+        if(check_timer_expire(&(state->timer.ac_time),4*CLOCKS_PER_SEC)) 
+        {
+            if(state->ac_s.current_temp < state->ac_s.cur_t) 
+            {
+                bar1(40,667,130,702,0x0085);
+                state->ac_s.current_temp++;
+            } 
+            else if(state->ac_s.current_temp > state->ac_s.cur_t) 
+            {
+                bar1(40,667,130,702,0x0085);
+                state->ac_s.current_temp--;
+            }
+        }
     }
 }
