@@ -5,9 +5,9 @@ struct car_light;
 struct car_ac;
 typedef struct
 {
-   clock_t light_time;
-   clock_t wiper_time;
-   clock_t ac_time; 
+    clock_t light_time;
+    clock_t wiper_time;
+    clock_t ac_time; 
 }Car_Timer;
 typedef struct car_light
 {
@@ -29,11 +29,19 @@ typedef struct car_ac
     int current_temp;
     int cur_t;//backup current_temp
 }car_ac;
+typedef struct car_wiper
+{
+    int auto_w;
+    int once;
+    int fast;
+    int slow;
+}car_wiper;
 typedef struct CarStatus
 {
     car_light light_s;
     car_ac ac_s;
     Car_Timer timer;
+    car_wiper wiper_s;
 }CarStatus;
 
 

@@ -29,6 +29,9 @@ void main()
 		case 5:
 			autoguide(&state,&puge);
 			break;
+		case 6:
+			wiper(&state,&puge);
+			break;
 		default:
 			break;
 		}

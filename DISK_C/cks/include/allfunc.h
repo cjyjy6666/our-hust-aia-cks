@@ -25,7 +25,7 @@
 #include"show.h"
 #include"car.h"
 #include"autoguide.h"
-
+#include"wiper.h"
 
 #define NUM0 0x5230
 #define NUM1 0x4f31

@@ -30,6 +30,11 @@ void mainpage(CarStatus *state,int *puge)
 			*puge = 5;
 			break;
 		}
+		if (mouse_press(10,550,90,590) == 1)
+		{
+			*puge = 6;
+			break;
+		}
 	}
 
 }
