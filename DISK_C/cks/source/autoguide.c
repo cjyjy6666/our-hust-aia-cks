@@ -4,7 +4,7 @@
 void autoguide(CarStatus *state,int *puge)
 {
 
-	int start=0;
+	int end,start=0;
     TABLE T[Max];
     int map[Max][Max]={0};
 	int map1[Max][Max]={
@@ -101,9 +101,53 @@ void autoguide(CarStatus *state,int *puge)
 		{
 			if(mouse_press(21,26,55,55) == 1)
 			{
-				g
+				memcpy(map,map1,sizeof(map));
+				Dijkstra(map,start,T);
+				if(mouse_press(340, 95, 480, 155) == 1)
+				{
+					if(mouse_press(23,159,59,205) == 1) end=1;
+					else if(mouse_press(71,110,107,145) == 1) end=2;
+					else if(mouse_press(134,41,187,78) == 1) end=3;
+					else if(mouse_press(140,158,186,198) == 1) end=4;
+					else if(mouse_press(251,34,294,78) == 1) end=5;
+					else if(mouse_press(254,158,294,199) == 1) end=6;
+					
+					
 
+				}
 			}
+			else if(mouse_press(23,159,59,205) == 1)
+			{
+				memcpy(map,map2,sizeof(map));
+				Dijkstra(map,start,T);
+			}
+			else if(mouse_press(71,110,107,145) == 1)
+			{
+				memcpy(map,map3,sizeof(map));
+				Dijkstra(map,start,T);
+			}
+			else if(mouse_press(134,41,187,78) == 1)
+			{
+				memcpy(map,map4,sizeof(map));
+				Dijkstra(map,start,T);
+			}
+			else if(mouse_press(140,158,186,198) == 1)
+			{
+				memcpy(map,map5,sizeof(map));
+				Dijkstra(map,start,T);
+			}
+			else if(mouse_press(251,34,294,78) == 1)
+			{
+				memcpy(map,map6,sizeof(map));
+				Dijkstra(map,start,T);
+			}
+			else if(mouse_press(254,158,294,199) == 1)
+			{
+				memcpy(map,map7,sizeof(map));
+				Dijkstra(map,start,T);
+			}
+			else if(mouse_press(340, 170, 480, 230) == 1);
+
 
 		}
 
@@ -137,19 +181,19 @@ void draw_autoguide()
 	bar1(825,624,962,730, 0x7BEF);//7鏍?
     bar2(825,624,962,730,0x000000);
 	bar1(21,26,55,55, 0x7BEF);
-    bar2(21,26,55,55,0x000000);
+    bar2(21,26,55,55,0x000000);//
     bar1(23,159,59,205, 0x7BEF);
-    bar2(23,159,59,205,0x000000);
+    bar2(23,159,59,205,0x000000);//
     bar1(71,110,107,145, 0x7BEF);
-    bar2(71,110,107,145,0x000000);
+    bar2(71,110,107,145,0x000000);//
     bar1(134,41,187,78, 0x7BEF);
-    bar2(134,41,187,78,0x000000);
+    bar2(134,41,187,78,0x000000);//
     bar1(140,158,186,198, 0x7BEF);
-    bar2(140,158,186,198,0x000000);
+    bar2(140,158,186,198,0x000000);//
     bar1(251,34,294,78, 0x7BEF);
-    bar2(251,34,294,78,0x000000);
+    bar2(251,34,294,78,0x000000);//
     bar1(254,158,294,199, 0x7BEF);
-    bar2(254,158,294,199,0x000000);
+    bar2(254,158,294,199,0x000000);//
     Line_Thick(112,359,112,631,1, 0x000000);
     Line_Thick(147,359,251,506, 1,0x000000);
     Line_Thick(189,641,233,599, 1,0x000000);
@@ -182,7 +226,7 @@ void draw_autoguide()
 	prt_hz16_asc16_size(836,657,3,3,"七栋",0x000000,"HZK\\HZK16K");
 	puthz(352,25,"起点",48,55,0x000000);
 	puthz(352,100,"终点",48,55,0x000000);
-	puthz(352,175,"开始",48,55,0x000000);
+	puthz(352,175,"取消",48,55,0x000000);
 
 
 
