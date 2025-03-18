@@ -4,8 +4,9 @@
 void autoguide(CarStatus *state,int *puge)
 {
 
+	int start=0;
     TABLE T[Max];
-    int map[Max][Max]={'0'};
+    int map[Max][Max]={0};
 	int map1[Max][Max]={
 	   //a,b,c,d,e,f,g
 		{0,5,4,X,X,X,X},//a
@@ -17,9 +18,9 @@ void autoguide(CarStatus *state,int *puge)
 		{X,X,X,X,5,5,0},//g
 	} ;
 	int map2[Max][Max]={
-		//a,b,c,d,e,f,g
-		 {0,5,3,X,5,X,X},//a
-		 {5,0,4,X,X,X,X},//b
+		//b,a,c,d,e,f,g
+		 {0,5,3,X,5,X,X},//b
+		 {5,0,4,X,X,X,X},//a
 		 {3,4,0,6,5,X,X},//c
 		 {X,X,6,0,5,5,X},//d
 		 {5,X,5,5,0,7,5},//e
@@ -27,15 +28,57 @@ void autoguide(CarStatus *state,int *puge)
 		 {X,X,X,X,5,5,0},//g
 	 };
 	int map3[Max][Max]={
-		//a,b,c,d,e,f,g
-		 {0,5,4,X,X,X,X},//a
-		 {5,0,3,X,5,X,X},//b
-		 {4,3,0,6,5,X,X},//c
-		 {X,X,6,0,5,5,X},//d
-		 {X,5,5,5,0,7,5},//e
+		//c,b,a,d,e,f,g
+		 {0,3,4,6,5,X,X},//c
+		 {3,0,5,X,5,X,X},//b
+		 {4,5,0,X,X,X,X},//a
+		 {6,X,X,0,5,5,X},//d
+		 {5,5,X,5,0,7,5},//e
 		 {X,X,X,5,7,0,5},//f
 		 {X,X,X,X,5,5,0},//g
 	 };
+	 int map4[Max][Max]={
+		//d,b,c,a,e,f,g
+		 {0,X,6,X,5,5,X},//d
+		 {X,0,3,5,5,X,X},//b
+		 {6,3,0,4,5,X,X},//c
+		 {X,5,4,0,X,X,X},//a
+		 {5,5,5,X,0,7,5},//e
+		 {5,X,X,X,7,0,5},//f
+		 {X,X,X,X,5,5,0},//g
+	 };
+	 int map5[Max][Max]={
+		//e,b,c,d,a,f,g
+		 {0,5,5,5,X,7,5},//e
+		 {5,0,3,X,5,X,X},//b
+		 {5,3,0,6,4,X,X},//c
+		 {5,X,6,0,X,5,X},//d
+		 {X,5,4,X,0,X,X},//a
+		 {7,X,X,5,X,0,5},//f
+		 {5,X,X,X,X,5,0},//g
+	 } ;
+	 int map6[Max][Max]={
+		//f,b,c,d,e,a,g
+		 {0,X,X,5,7,X,5},//f
+		 {X,0,3,X,5,5,X},//b
+		 {X,3,0,6,5,4,X},//c
+		 {5,X,6,0,5,X,X},//d
+		 {7,5,5,5,0,X,5},//e
+		 {X,5,4,X,X,0,X},//a
+		 {5,X,X,X,5,X,0},//g
+	 } ;
+	 int map7[Max][Max]={
+		//g,b,c,d,e,f,a
+		 {0,X,X,X,5,5,X},//g
+		 {X,0,3,X,5,X,5},//b
+		 {X,3,0,6,5,X,4},//c
+		 {X,X,6,0,5,5,X},//d
+		 {5,5,5,5,0,7,X},//e
+		 {5,X,X,5,7,0,X},//f
+		 {X,5,4,X,X,X,0},//a
+	 } ;
+
+
 
 
     mouse_off(&mouse);
@@ -54,6 +97,16 @@ void autoguide(CarStatus *state,int *puge)
             *puge=2;
             break;
         }
+        if(mouse_press(340, 20, 480, 80) == 1)
+		{
+			if(mouse_press(21,26,55,55) == 1)
+			{
+				g
+
+			}
+
+		}
+
 
 
 		
@@ -69,19 +122,19 @@ void draw_autoguide()
     Line_Thick(965,53,1024,0, 1,0x000000);
     Line_Thick(0,250,1024,250, 1,0x000000);
 	Line_Thick(320,0,320,250,1, 0x000000);
-	bar1(64,295,173,359, 0x7BEF);//1Ê†ã
+	bar1(64,295,173,359, 0x7BEF);//1Ê†?
     bar2(64,295,173,359,0x000000);
-	bar1(65,631,189,742, 0x7BEF);//2Ê†ã
+	bar1(65,631,189,742, 0x7BEF);//2Ê†?
     bar2(65,631,189,742,0x000000);
-	bar1(223,506,344,599, 0x7BEF);//3Ê†ã 
+	bar1(223,506,344,599, 0x7BEF);//3Ê†? 
     bar2(223,506,344,599,0x000000);
-	bar1(436,330,612,426, 0x7BEF);//4Ê†ã
+	bar1(436,330,612,426, 0x7BEF);//4Ê†?
     bar2(436,330,612,426,0x000000);
-	bar1(450,630,605,727, 0x7BEF);//5Ê†ã
+	bar1(450,630,605,727, 0x7BEF);//5Ê†?
 	bar2(450,630,605,727,0x000000);
-    bar1(819,316,959,427, 0x7BEF);//6Ê†ã
+    bar1(819,316,959,427, 0x7BEF);//6Ê†?
     bar2(819,316,959,427,0x000000);
-	bar1(825,624,962,730, 0x7BEF);//7Ê†ã
+	bar1(825,624,962,730, 0x7BEF);//7Ê†?
     bar2(825,624,962,730,0x000000);
 	bar1(21,26,55,55, 0x7BEF);
     bar2(21,26,55,55,0x000000);
@@ -117,9 +170,20 @@ void draw_autoguide()
     Line_Thick(272,78,272,158, 1,0x000000);
     Line_Thick(186,184,254,184, 1,0x000000);
     Line_Thick(179,158,251,72, 1,0x000000);
-    bar1(340, 20, 480, 60,0x340F);
-    bar1(340, 90, 480, 130,0x340F);
+    bar1(340, 20, 480, 80,0xFF44);
+    bar1(340, 95, 480, 155,0x340F);
     bar1(340, 170, 480, 230,0x340F);
+	prt_hz16_asc16_size(70,303,3,3,"“ª∂∞",0x000000,"HZK\\HZK16K");
+	prt_hz16_asc16_size(73,663,3,3,"∂˛∂∞",0x000000,"HZK\\HZK16K");
+	prt_hz16_asc16_size(231,530,3,3,"»˝∂∞",0x000000,"HZK\\HZK16K");
+	prt_hz16_asc16_size(470,354,3,3,"Àƒ∂∞",0x000000,"HZK\\HZK16K");
+	prt_hz16_asc16_size(474,657,3,3,"ŒÂ∂∞",0x000000,"HZK\\HZK16K");
+	prt_hz16_asc16_size(836,352,3,3,"¡˘∂∞",0x000000,"HZK\\HZK16K");
+	prt_hz16_asc16_size(836,657,3,3,"∆ﬂ∂∞",0x000000,"HZK\\HZK16K");
+	puthz(352,25,"∆µ„",48,55,0x000000);
+	puthz(352,100,"÷’µ„",48,55,0x000000);
+	puthz(352,175,"ø™ º",48,55,0x000000);
+
 
 
 
@@ -130,7 +194,7 @@ void draw_autoguide()
 
 
 
-void InitializeTable(int start,TABLE T[])//ÂàùÂßãÂåñË°®Ê†º	
+void InitializeTable(int start,TABLE T[])//ÂàùÂ?ãÂåñË°®Ê†º	
 {
 	int i;
 	for(i=0;i<Max;i++)
@@ -145,7 +209,7 @@ void InitializeTable(int start,TABLE T[])//ÂàùÂßãÂåñË°®Ê†º
 	
 }
 
-QUEUE InitializeQueue(int capacity)//ÂàùÂßãÂåñÈòüÂàó
+QUEUE InitializeQueue(int capacity)//ÂàùÂ?ãÂåñÈòüÂàó
 {
     int i;
 	QUEUE Q;
