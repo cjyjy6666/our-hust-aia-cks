@@ -5,7 +5,6 @@ void main()
 	CarStatus state= {0};
 	int puge = 0;
 	init_car_status(&state);
-	//初始化车辆状态
 	SetSVGA64k();
 	
 	mouse_init();
@@ -32,6 +31,9 @@ void main()
 		case 6:
 			wiper(&state,&puge);
 			break;
+		case 7:
+			drive(&state,&puge);
+			break;
 		default:
 			break;
 		}
@@ -39,8 +41,3 @@ void main()
 	}
 	CloseSVGA();
 }
-
-
-//�����ʿ���
-//ʯ����ѧ����qq��1092957376
-//�Թ���ѧ����qq��2945322359

@@ -4,7 +4,7 @@ void mainpage(CarStatus *state,int *puge)
 {
 	mouse_off(&mouse);
 
-	draw_mainpage();
+	draw_mainpage(state);
 
 
 
@@ -35,12 +35,17 @@ void mainpage(CarStatus *state,int *puge)
 			*puge = 6;
 			break;
 		}
+		if (mouse_press(543,450,623,490) == 1)
+		{
+			*puge = 7;
+			break;
+		}
 	}
 
 }
 
 //然后从main函数开始做的
-void draw_mainpage()
+void draw_mainpage(CarStatus *state)
 {
 	bar1(0, 0, 1024, 768,0x0085);//和背景图中一样的深蓝色
 	//Readbmp64k(0,0,"bmp\\background.bmp");
@@ -79,7 +84,7 @@ void draw_mainpage()
 	bar2(543,450,623,490,0xFFFFFF);
 	bar2(543,500,623,540,0xFFFFFF);
 	bar2(543,550,623,590,0xFFFFFF);//右边栏三个按钮
-
+	puthz(558,458,"驾驶",24,26,0XFFFFFF);
 	bar2(280,420,360,460,0xFFFFFF);//中间的空调按钮
 	puthz(295,428,"导航",24,26,0XFFFFFF);
 	//下方状态栏
@@ -90,6 +95,19 @@ void draw_mainpage()
 	Put_Asc16_Size(145,703,2,2,'+',0xFFFFFF);
 	Put_Asc16_Size(185,703,2,2,'-',0xFFFFFF);
 	prt_hz24_asc32(143,643, "0到35℃可调", 0xFFFFFF, "HZK\\Hzk24f");
+	puthz(317,635,"车外天气",32,33,0x7FFF);
+	switch(state->wiper_s.rain)
+	{
+		case 0:
+			puthz(350,670,"晴天",32,33,0xFFFFFF);
+			break;
+		case 1:
+			puthz(350,670,"小雨",32,33,0xFFFFFF);
+			break;
+		case 2:
+			puthz(350,670,"大雨",32,33,0xFFFFFF);
+			break;
+	}
 }
 
 

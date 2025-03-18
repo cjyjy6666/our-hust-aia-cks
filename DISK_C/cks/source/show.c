@@ -4,6 +4,7 @@ void show_all(CarStatus *state)
 {
 	show_light(state);
 	show_ac(state);
+	show_wiper(state);
 }
 
 
@@ -77,4 +78,16 @@ void show_ac(CarStatus *state)
 		bar1(710,500,744,526,0x0000);
 
 	temp_change(state);
+}
+
+void show_wiper(CarStatus *state)
+{
+	if(state->wiper_s.cur_wip==2)
+		Readbmp64k(930,700,"bmp\\w1.bmp");
+	else
+		bar1(930,700,990,747,0x0000);
+	if(state->wiper_s.cur_wip==1)
+		Readbmp64k(930,650,"bmp\\w2.bmp");
+	else
+		bar1(930,650,990,694,0x0000);
 }

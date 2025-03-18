@@ -35,6 +35,8 @@ typedef struct car_wiper
     int once;
     int fast;
     int slow;
+    int rain;
+    int cur_wip;
 }car_wiper;
 typedef struct CarStatus
 {
@@ -46,7 +48,6 @@ typedef struct CarStatus
 
 
 void init_car_status(CarStatus *state);
-//CarStatus* get_car_status(void);
 int check_timer_expire(clock_t* timer, clock_t interval);
 
 #endif
