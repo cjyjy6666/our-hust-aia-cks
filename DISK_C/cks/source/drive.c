@@ -93,7 +93,7 @@ void draw_drive_page()
     puthz(463, 315, "นÛนโ",24,30,0xFFFFFF);//view
 }
 
-int needle_s(CarStatus *state,double s)//from 0~180
+int needle_s(CarStatus *state,double s)//from 20~160
 {
     int x,y,x1,y1;
     if(state->drive_s.angle_s<s)
@@ -136,7 +136,7 @@ int needle_s(CarStatus *state,double s)//from 0~180
     }
 }
 
-int needle_n(CarStatus *state,double s)//from 0~180
+int needle_n(CarStatus *state,double s)//from 20~160
 {
     int x,y,x1,y1;
     if(state->drive_s.angle_n<s)
