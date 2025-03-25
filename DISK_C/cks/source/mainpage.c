@@ -2,6 +2,7 @@
 
 void mainpage(CarStatus *state,int *puge)
 {
+	int is_init_n=0,init_phase_n=0,is_init_s=0,init_phase_s=0;
 	mouse_off(&mouse);
 
 	draw_mainpage(state);
@@ -15,6 +16,44 @@ void mainpage(CarStatus *state,int *puge)
 	{
 		show_all(state);
 		mouse_show(&mouse);
+		if(!is_init_s)
+		{
+			switch(init_phase_s)
+			{
+                case 0: // 正向转动
+                    if(needle_s(state,160))
+					{
+                        init_phase_s=1;
+                        state->timer.drive_time_s=clock();
+                    }
+                    break;
+                case 1: // 逆向转动
+                    if(needle_s(state,20))
+					{
+                        is_init_s=1;
+                    }
+                    break;
+			}
+		}
+		if(!is_init_n)
+		{
+			switch(init_phase_n)
+			{
+                case 0: // 正向转动
+                    if(needle_n(state,160))
+					{
+                        init_phase_n=1;
+                        state->timer.drive_time_n=clock();
+                    }
+                    break;
+                case 1: // 逆向转动
+                    if(needle_n(state,20))
+					{
+						is_init_n=1;
+                    }
+                    break;
+			}
+		}
 		if (mouse_press(10,450,90,490) == 1)
 		{
 			*puge = 3;
