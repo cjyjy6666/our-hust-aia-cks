@@ -2,7 +2,7 @@
 
 void mainpage(CarStatus *state,int *puge)
 {
-	int is_init_n=0,init_phase_n=0,is_init_s=0,init_phase_s=0;
+	static int is_init_n=0,init_phase_n=0,is_init_s=0,init_phase_s=0;
 	mouse_off(&mouse);
 
 	draw_mainpage(state);

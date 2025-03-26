@@ -1,10 +1,11 @@
 #include"allfunc.h"
-
+#define PI 3.1415926
 void show_all(CarStatus *state)
 {
 	show_light(state);
 	show_ac(state);
 	show_wiper(state);
+	show_drive(state);
 }
 
 
@@ -90,4 +91,75 @@ void show_wiper(CarStatus *state)
 		Readbmp64k(930,650,"bmp\\w2.bmp");
 	else
 		bar1(930,650,990,694,0x0000);
+}
+
+void show_drive(CarStatus *state)
+{
+	int xs,ys,xs1,ys1,xn,yn,xn1,yn1;
+	xs=(int)(829-150*cos(state->drive_s.angle_s*PI/180));
+    ys=(int)(400-150*sin(state->drive_s.angle_s*PI/180));
+    xs1=(int)(829-50*cos(state->drive_s.angle_s*PI/180));
+    ys1=(int)(400-50*sin(state->drive_s.angle_s*PI/180));
+	xn=(int)(829-150*cos(state->drive_s.angle_n*PI/180));
+    yn=(int)(194-150*sin(state->drive_s.angle_n*PI/180));
+    xn1=(int)(829-50*cos(state->drive_s.angle_n*PI/180));
+    yn1=(int)(194-50*sin(state->drive_s.angle_n*PI/180));
+	Line2(xs1,ys1,xs,ys,0xF800);
+	Line2(xn1,yn1,xn,yn,0xF800);
+	if(state->drive_s.forward==1&&state->drive_s.sport==0&&state->drive_s.comfort==0&&state->drive_s.view==0)
+	{
+		//bar1(800,460,840,500,0x0000);
+		Put_Asc16_Size(800,460,2,2,'D',0xF800);
+		needle_s(state,100);
+		if(!state->drive_s.once_f)
+		{
+			if(n_change(state))
+			state->drive_s.once_f=1;
+		}
+	}
+	if(state->drive_s.back==1)
+	{
+		//bar1(800,460,840,500,0x0000);
+		Put_Asc16_Size(800,460,2,2,'R',0xF800);
+		needle_s(state,60);
+		if(!state->drive_s.once_b)
+		{
+			if(n_change(state))
+			state->drive_s.once_b=1;
+		}
+	}
+	if(state->drive_s.park==1)
+	{
+		//bar1(800,460,840,500,0x0000);
+		Put_Asc16_Size(800,460,2,2,'P',0xF800);
+		needle_s(state,20);
+		if(!state->drive_s.once_p)
+		{
+			if(n_change(state))
+			state->drive_s.once_p=1;
+		}
+	}
+	if(state->drive_s.sport==1)
+	{
+		//bar1(800,460,840,500,0x0000);
+		Put_Asc16_Size(800,460,2,2,'S',0xF800);
+		needle_s(state,150);
+		if(!state->drive_s.once_s)
+		{
+			if(n_change(state))
+			state->drive_s.once_s=1;
+		}
+	}
+	if(state->drive_s.comfort==1)
+	{
+		//bar1(800,460,840,500,0x0000);
+		Put_Asc16_Size(800,460,2,2,'D',0xF800);
+		needle_s(state,80);
+	}
+	if(state->drive_s.view==1)
+	{
+		//bar1(800,460,840,500,0x0000);
+		Put_Asc16_Size(800,460,2,2,'D',0xF800);
+		needle_s(state,40);
+	}
 }

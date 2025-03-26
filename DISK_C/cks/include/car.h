@@ -50,6 +50,10 @@ typedef struct car_drive
     int view;
     double angle_s;
     double angle_n;
+    int once_f;
+    int once_b;
+    int once_p;
+    int once_s;
 }car_drive;
 typedef struct CarStatus
 {
