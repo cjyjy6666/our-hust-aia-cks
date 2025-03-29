@@ -6,6 +6,7 @@ void show_all(CarStatus *state)
 	show_ac(state);
 	show_wiper(state);
 	show_drive(state);
+	show_media(state);
 }
 
 
@@ -162,4 +163,21 @@ void show_drive(CarStatus *state)
 		Put_Asc16_Size(800,460,2,2,'D',0xF800);
 		needle_s(state,40);
 	}
+}
+
+void show_media(CarStatus *state)
+{
+	char call_str[10]={'\0'};
+	if(state->media_s.on_call)
+	{
+		if(check_timer_expire(&(state->timer.call_time), CLOCKS_PER_SEC))
+		{
+			state->media_s.call_second++;
+			bar1(660,600,860,748,0x0000);
+			sprintf(call_str,"Í¨»°ÖÐ:%dÃë",state->media_s.call_second);
+			prt_hz24_asc32(660,700,call_str,0xFC44,"HZK\\Hzk24f");
+		}
+	}
+	else
+	bar1(660,600,860,748,0x0000);
 }

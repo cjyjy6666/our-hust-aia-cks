@@ -10,6 +10,7 @@ typedef struct
     clock_t ac_time; 
     clock_t drive_time_s;
     clock_t drive_time_n;
+    clock_t call_time;
 }Car_Timer;
 typedef struct car_light
 {
@@ -55,6 +56,11 @@ typedef struct car_drive
     int once_p;
     int once_s;
 }car_drive;
+typedef struct car_media
+{
+    int on_call;
+    int call_second;
+}car_media;
 typedef struct CarStatus
 {
     car_light light_s;
@@ -62,6 +68,7 @@ typedef struct CarStatus
     Car_Timer timer;
     car_wiper wiper_s;
     car_drive drive_s;
+    car_media media_s;
 }CarStatus;
 
 

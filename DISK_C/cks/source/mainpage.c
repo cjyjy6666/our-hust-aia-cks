@@ -79,6 +79,11 @@ void mainpage(CarStatus *state,int *puge)
 			*puge = 7;
 			break;
 		}
+		if (mouse_press(543,500,623,540) == 1)
+		{
+			*puge = 8;//9,10,11,12 are used
+			break;
+		}
 	}
 
 }
@@ -124,6 +129,7 @@ void draw_mainpage(CarStatus *state)
 	bar2(543,500,623,540,0xFFFFFF);
 	bar2(543,550,623,590,0xFFFFFF);//右边栏三个按钮
 	puthz(558,458,"驾驶",24,26,0XFFFFFF);
+	puthz(558,508,"媒体",24,26,0XFFFFFF);
 	bar2(280,420,360,460,0xFFFFFF);//中间的空调按钮
 	puthz(295,428,"导航",24,26,0XFFFFFF);
 	//下方状态栏

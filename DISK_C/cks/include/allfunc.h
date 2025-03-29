@@ -27,6 +27,9 @@
 #include"autoguide.h"
 #include"wiper.h"
 #include"drive.h"
+#include"media.h"
+#include"phone.h"
+#include"contact.h"
 
 #define NUM0 0x5230
 #define NUM1 0x4f31

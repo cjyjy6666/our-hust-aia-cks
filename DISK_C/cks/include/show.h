@@ -9,5 +9,6 @@ void light_blink(CarStatus *state);
 void show_ac(CarStatus *state);
 void show_wiper(CarStatus *state);
 void show_drive(CarStatus *state);
+void show_media(CarStatus *state);
 
 #endif

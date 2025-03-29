@@ -34,6 +34,18 @@ void main()
 		case 7:
 			drive(&state,&puge);
 			break;
+		case 8:
+			draw_mainpage(&state);
+			media(&state,&puge);
+			break;
+		case 9:
+			draw_mainpage(&state);
+			phone(&state,&puge);
+			break;
+		case 10:
+			draw_mainpage(&state);
+			contact(&state,&puge);
+			break;
 		default:
 			break;
 		}
