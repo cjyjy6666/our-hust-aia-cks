@@ -10,7 +10,7 @@ void phone(CarStatus *state,int *puge)
     int newline_pos=-1;//to find \n
     int i;//in for
 	mouse_off(&mouse);
-    draw_phone_page();
+    draw_phone_page(state);
     mouse_on(mouse);
 
     while(1)
@@ -31,6 +31,16 @@ void phone(CarStatus *state,int *puge)
             } while ((mouse.key & 1) == 1);
             state->media_s.on_call^=1;
             state->media_s.call_second=0;
+            if(state->media_s.on_call)
+            {
+                bar1(434,191,532,259,0x0085);
+                puthz(463, 215, "¹Ò¶Ï",24,30,0xF800);
+            }
+            else
+            {
+                bar1(434,191,532,259,0x0085);
+                puthz(463, 215, "²¦´ò",24,30,0xFFFFFF);
+            }
         }
         if (mouse_press(433,290,533,360) == 1)//save
 		{
@@ -88,7 +98,7 @@ void phone(CarStatus *state,int *puge)
     }
 }
 
-void draw_phone_page()
+void draw_phone_page(CarStatus *state)
 {
     Line2(603,600,633,600,0xFFFFFF);
 	Line2(603,600,603,630,0xFFFFFF);
@@ -121,7 +131,17 @@ void draw_phone_page()
     Put_Asc16_Size(190,324,2,2,'X',0xFFFFFF);
     bar2(433,190,533,260,0xFFFFFF);
 	bar2(433,290,533,360,0xFFFFFF);
-    puthz(463, 215, "²¦´ò",24,30,0xFFFFFF); //call
+    //call
+    if(state->media_s.on_call)
+    {
+        bar1(434,191,532,259,0x0085);
+        puthz(463, 215, "¹Ò¶Ï",24,30,0xF800);
+    }
+    else
+    {
+        bar1(434,191,532,259,0x0085);
+        puthz(463, 215, "²¦´ò",24,30,0xFFFFFF);
+    }
     puthz(463, 315, "´æºÅ",24,30,0xFFFFFF); //save
     bar2(240,90,620,150,0xFC44);
     bar1(241,91,619,149,0x0085);
