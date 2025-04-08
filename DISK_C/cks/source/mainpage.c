@@ -1,4 +1,5 @@
 #include"allfunc.h"
+#define PI 3.1415926537
 
 void mainpage(CarStatus *state,int *puge)
 {
@@ -91,6 +92,7 @@ void mainpage(CarStatus *state,int *puge)
 //然后从main函数开始做的
 void draw_mainpage(CarStatus *state)
 {
+	int i,x,y,x1,y1,x2,y2;
 	bar1(0, 0, 1024, 768,0x0085);//和背景图中一样的深蓝色
 	//Readbmp64k(0,0,"bmp\\background.bmp");
 	Line_Thick(633, 0, 633, 768, 1, 0x7FFF);//和背景图中一样的亮浅绿色
@@ -152,6 +154,31 @@ void draw_mainpage(CarStatus *state)
 		case 2:
 			puthz(350,670,"大雨",32,33,0xFFFFFF);
 			break;
+	}
+	puthz(829-16,195,"转速",16,17,0xFFFFFF);
+	puthz(829-16,401,"速度",16,17,0xFFFFFF);
+	for(i=20;i<170;i+=10)
+	{
+		x=(int)(829-176*cos(i*PI/180));
+        y=(int)(400-176*sin(i*PI/180));
+        x1=(int)(829-170*cos(i*PI/180));
+        y1=(int)(400-170*sin(i*PI/180));
+		x2=(int)(829-165*cos(i*PI/180));
+        y2=(int)(400-165*sin(i*PI/180));
+		Line2(x1,y1,x,y,0xFFFFFF);
+		if(((i-20)/10)%2==0)
+			put_asc16_number_size(x2,y2,1,1,(i-20)*2,0xFFFFFF);
+	}
+	for(i=20;i<170;i+=20)
+	{
+		x=(int)(829-176*cos(i*PI/180));
+        y=(int)(194-176*sin(i*PI/180));
+        x1=(int)(829-170*cos(i*PI/180));
+        y1=(int)(194-170*sin(i*PI/180));
+		x2=(int)(829-165*cos(i*PI/180));
+        y2=(int)(194-165*sin(i*PI/180));
+		Line2(x1,y1,x,y,0xFFFFFF);
+		put_asc16_number_size(x2,y2,1,1,(i-20)/10,0xFFFFFF);
 	}
 }
 

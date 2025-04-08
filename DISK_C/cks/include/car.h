@@ -11,6 +11,7 @@ typedef struct
     clock_t drive_time_s;
     clock_t drive_time_n;
     clock_t call_time;
+    clock_t music_time;
 }Car_Timer;
 typedef struct car_light
 {
@@ -60,6 +61,8 @@ typedef struct car_media
 {
     int on_call;
     int call_second;
+    int music;//-1:music off,>-1:music index
+    int mus_ord;//0Ë³Ğò²¥·Å,1ÂÒĞò,2µ¥ÇúÑ­»·
 }car_media;
 typedef struct CarStatus
 {

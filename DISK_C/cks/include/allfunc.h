@@ -30,6 +30,8 @@
 #include"media.h"
 #include"phone.h"
 #include"contact.h"
+#include"music.h"
+#include"sounder.h"
 
 #define NUM0 0x5230
 #define NUM1 0x4f31

@@ -131,14 +131,14 @@ int needle_s(CarStatus *state,double s)//from 20~160
     int x,y,x1,y1;
     if(state->drive_s.angle_s<s)
     {
-        x=(int)(829-150*cos(state->drive_s.angle_s*PI/180));
-        y=(int)(400-150*sin(state->drive_s.angle_s*PI/180));
+        x=(int)(829-130*cos(state->drive_s.angle_s*PI/180));
+        y=(int)(400-130*sin(state->drive_s.angle_s*PI/180));
         x1=(int)(829-50*cos(state->drive_s.angle_s*PI/180));
         y1=(int)(400-50*sin(state->drive_s.angle_s*PI/180));
         if((check_timer_expire(&(state->timer.drive_time_s),CLOCKS_PER_SEC/40))&&(fabs(state->drive_s.angle_s-s)>3))
         {
             Line_Thick(x1,y1,x,y,14,0x0085);
-            state->drive_s.angle_s+=4;
+            state->drive_s.angle_s+=3;
             //Line2(x1,y1,x,y,0xF800);
         }
         if(fabs(state->drive_s.angle_s-s)<5)
@@ -150,14 +150,14 @@ int needle_s(CarStatus *state,double s)//from 20~160
     }
     if(state->drive_s.angle_s>s)
     {
-        x=(int)(829-150*cos(state->drive_s.angle_s*PI/180));
-        y=(int)(400-150*sin(state->drive_s.angle_s*PI/180));
+        x=(int)(829-130*cos(state->drive_s.angle_s*PI/180));
+        y=(int)(400-130*sin(state->drive_s.angle_s*PI/180));
         x1=(int)(829-50*cos(state->drive_s.angle_s*PI/180));
         y1=(int)(400-50*sin(state->drive_s.angle_s*PI/180));
         if((check_timer_expire(&(state->timer.drive_time_s),CLOCKS_PER_SEC/40))&&(fabs(state->drive_s.angle_s-s)>3))
         {
             Line_Thick(x1,y1,x,y,14,0x0085);
-            state->drive_s.angle_s-=4;
+            state->drive_s.angle_s-=3;
             //Line2(x1,y1,x,y,0xF800);
         }
         if(fabs(state->drive_s.angle_s-s)<5)
@@ -174,8 +174,8 @@ int needle_n(CarStatus *state,double s)//from 20~160
     int x,y,x1,y1;
     if(state->drive_s.angle_n<s)
     {
-        x=(int)(829-150*cos(state->drive_s.angle_n*PI/180));
-        y=(int)(194-150*sin(state->drive_s.angle_n*PI/180));
+        x=(int)(829-130*cos(state->drive_s.angle_n*PI/180));
+        y=(int)(194-130*sin(state->drive_s.angle_n*PI/180));
         x1=(int)(829-50*cos(state->drive_s.angle_n*PI/180));
         y1=(int)(194-50*sin(state->drive_s.angle_n*PI/180));
         if((check_timer_expire(&(state->timer.drive_time_n),CLOCKS_PER_SEC/40))&&(fabs(state->drive_s.angle_n-s)>3))
@@ -193,8 +193,8 @@ int needle_n(CarStatus *state,double s)//from 20~160
     }
     if(state->drive_s.angle_n>s)
     {
-        x=(int)(829-150*cos(state->drive_s.angle_n*PI/180));
-        y=(int)(194-150*sin(state->drive_s.angle_n*PI/180));
+        x=(int)(829-130*cos(state->drive_s.angle_n*PI/180));
+        y=(int)(194-130*sin(state->drive_s.angle_n*PI/180));
         x1=(int)(829-50*cos(state->drive_s.angle_n*PI/180));
         y1=(int)(194-50*sin(state->drive_s.angle_n*PI/180));
         if((check_timer_expire(&(state->timer.drive_time_n),CLOCKS_PER_SEC/40))&&(fabs(state->drive_s.angle_n-s)>3))
