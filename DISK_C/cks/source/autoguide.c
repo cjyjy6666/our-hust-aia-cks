@@ -9,76 +9,7 @@ void autoguide(CarStatus *state,int *puge)
 	int i1=0;
     TABLE T[Max];
     int map[Max][Max]={0};
-	// int map1[Max][Max]={
-	//    //a,b,c,d,e,f,g
-	// 	{0,5,4,X,X,X,X},//a
-	// 	{5,0,3,X,5,X,X},//b
-	// 	{4,3,0,6,5,X,X},//c
-	// 	{X,X,6,0,5,5,X},//d
-	// 	{X,5,5,5,0,7,5},//e
-	// 	{X,X,X,5,7,0,5},//f
-	// 	{X,X,X,X,5,5,0},//g
-	// } ;
-	// int map2[Max][Max]={
-	// 	//b,a,c,d,e,f,g
-	// 	 {0,5,3,X,5,X,X},//b
-	// 	 {5,0,4,X,X,X,X},//a
-	// 	 {3,4,0,6,5,X,X},//c
-	// 	 {X,X,6,0,5,5,X},//d
-	// 	 {5,X,5,5,0,7,5},//e
-	// 	 {X,X,X,5,7,0,5},//f
-	// 	 {X,X,X,X,5,5,0},//g
-	//  };
-	// int map3[Max][Max]={
-	// 	//c,b,a,d,e,f,g
-	// 	 {0,3,4,6,5,X,X},//c
-	// 	 {3,0,5,X,5,X,X},//b
-	// 	 {4,5,0,X,X,X,X},//a
-	// 	 {6,X,X,0,5,5,X},//d
-	// 	 {5,5,X,5,0,7,5},//e
-	// 	 {X,X,X,5,7,0,5},//f
-	// 	 {X,X,X,X,5,5,0},//g
-	//  };
-	//  int map4[Max][Max]={
-	// 	//d,b,c,a,e,f,g
-	// 	 {0,X,6,X,5,5,X},//d
-	// 	 {X,0,3,5,5,X,X},//b
-	// 	 {6,3,0,4,5,X,X},//c
-	// 	 {X,5,4,0,X,X,X},//a
-	// 	 {5,5,5,X,0,7,5},//e
-	// 	 {5,X,X,X,7,0,5},//f
-	// 	 {X,X,X,X,5,5,0},//g
-	//  };
-	//  int map5[Max][Max]={
-	// 	//e,b,c,d,a,f,g
-	// 	 {0,5,5,5,X,7,5},//e
-	// 	 {5,0,3,X,5,X,X},//b
-	// 	 {5,3,0,6,4,X,X},//c
-	// 	 {5,X,6,0,X,5,X},//d
-	// 	 {X,5,4,X,0,X,X},//a
-	// 	 {7,X,X,5,X,0,5},//f
-	// 	 {5,X,X,X,X,5,0},//g
-	//  } ;
-	//  int map6[Max][Max]={
-	// 	//f,b,c,d,e,a,g
-	// 	 {0,X,X,5,7,X,5},//f
-	// 	 {X,0,3,X,5,5,X},//b
-	// 	 {X,3,0,6,5,4,X},//c
-	// 	 {5,X,6,0,5,X,X},//d
-	// 	 {7,5,5,5,0,X,5},//e
-	// 	 {X,5,4,X,X,0,X},//a
-	// 	 {5,X,X,X,5,X,0},//g
-	//  } ;
-	//  int map7[Max][Max]={
-	// 	//g,b,c,d,e,f,a
-	// 	 {0,X,X,X,5,5,X},//g
-	// 	 {X,0,3,X,5,X,5},//b
-	// 	 {X,3,0,6,5,X,4},//c
-	// 	 {X,X,6,0,5,5,X},//d
-	// 	 {5,5,5,5,0,7,X},//e
-	// 	 {5,X,X,5,7,0,X},//f
-	// 	 {X,5,4,X,X,X,0},//a
-	//  } ;
+	
 	 int numRegions ;
 	 int numEndRegions ;
 	 int i,j,k;
@@ -181,12 +112,14 @@ void autoguide(CarStatus *state,int *puge)
                 MouseGet(&mouse);
                 mouse_show(&mouse);
             } while ((mouse.key & 1) == 1);
-            
+            // put_asc16_number_size(750,100,2,2,regions[6].start,0x000000);
 		
 
 			mouse_off(&mouse);
 			bar1(340, 20, 480, 80,0x340F);
 			puthz(352,25,"Æðµã",48,55,0x000000);
+			puthz(531,89,"ÇëÔÚ×ó²àÍ¼ÖÐÑ¡ÔñÆðµã",48,45,0x19E6);
+
 			mouse_on(mouse);
 
 
@@ -208,17 +141,18 @@ void autoguide(CarStatus *state,int *puge)
 				bar1(340, 95, 480, 155,0xFF44);
 		        puthz(352,100,"ÖÕµã",48,55,0x000000);
 				Circlefill((regions[i].x1)+20,(regions[i].y1)+20,3,0xF800);
+				bar1(515,82,1000,148,0x7FFE);
 				mouse_on(mouse);
 				Dijkstra(map,0, T);
-				for(i=0;i<Max;i++){
+				for(j=0;j<Max;j++){
 					switch(regions[i].start){
 					case 0:break;
-					case 1:if(T[i]->path==0)T[i]->path+=1;break;
-					case 2:if(T[i]->path==0)T[i]->path+=2;break;
-					case 3:if(T[i]->path==0)T[i]->path+=3;break;
-					case 4:if(T[i]->path==0)T[i]->path+=4;break;
-					case 5:if(T[i]->path==0)T[i]->path+=5;break;
-					case 6:if(T[i]->path==0)T[i]->path+=6;break;
+					case 1:if(T[j]->path==0)T[j]->path+=1;break;
+					case 2:if(T[j]->path==0)T[j]->path+=2;break;
+					case 3:if(T[j]->path==0)T[j]->path+=3;break;
+					case 4:if(T[j]->path==0)T[j]->path+=4;break;
+					case 5:if(T[j]->path==0)T[j]->path+=5;break;
+					case 6:if(T[j]->path==0)T[j]->path+=6;break;
 					}
 				}
 				switch(regions[i].start){
@@ -232,6 +166,7 @@ void autoguide(CarStatus *state,int *puge)
 					}
 					
 				begin=regions[i].start;
+                // put_asc16_number_size(750,100,2,2,begin,0x000000);
 				i1=2;
 				break;
 			}
@@ -251,15 +186,80 @@ void autoguide(CarStatus *state,int *puge)
 			// ï¿½ï¿½ï¿½ï¿½ï¿½Õµï¿½Ñ¡ï¿½ï¿½
 		if((mouse_press(340, 95, 480, 155) == 1)&&(i1==2))
 		{
-			ClickRegion ea={21, 26, 55, 55, NULL, 0};
-			ClickRegion eb={23, 159, 59, 205, NULL, 1};
-			ClickRegion ec={71, 110, 107, 145, NULL, 2};
-			ClickRegion ed={134, 41, 187, 78, NULL, 3};
-			ClickRegion ee={140,158,186,198, NULL, 4};
-			ClickRegion ef={251,34,294,78, NULL, 5};
-			ClickRegion eg={254, 158, 294, 199, NULL, 6};
+			ClickRegion ea={21, 26, 55, 55,{
+				//a,b,c,d,e,f,g
+				 {0,5,4,X,X,X,X},//a
+				 {5,0,3,X,5,X,X},//b
+				 {4,3,0,6,5,X,X},//c
+				 {X,X,6,0,5,5,X},//d
+				 {X,5,5,5,0,7,5},//e
+				 {X,X,X,5,7,0,5},//f
+				 {X,X,X,X,5,5,0},//g
+			 } , 0};
+			ClickRegion eb={23, 159, 59, 205, {
+				//b,a,c,d,e,f,g
+		         {0,5,3,X,5,X,X},//b
+		         {5,0,4,X,X,X,X},//a
+		         {3,4,0,6,5,X,X},//c
+		         {X,X,6,0,5,5,X},//d
+		         {5,X,5,5,0,7,5},//e
+		         {X,X,X,5,7,0,5},//f
+		         {X,X,X,X,5,5,0},//g
+			 }, 1};
+			ClickRegion ec={71, 110, 107, 145, {
+				//c,b,a,d,e,f,g
+				 {0,3,4,6,5,X,X},//c
+				 {3,0,5,X,5,X,X},//b
+				 {4,5,0,X,X,X,X},//a
+				 {6,X,X,0,5,5,X},//d
+				 {5,5,X,5,0,7,5},//e
+				 {X,X,X,5,7,0,5},//f
+				 {X,X,X,X,5,5,0},//g
+			 }, 2};
+			ClickRegion ed={134, 41, 187, 78, {
+				//d,b,c,a,e,f,g
+				 {0,X,6,X,5,5,X},//d
+				 {X,0,3,5,5,X,X},//b
+				 {6,3,0,4,5,X,X},//c
+				 {X,5,4,0,X,X,X},//a
+				 {5,5,5,X,0,7,5},//e
+				 {5,X,X,X,7,0,5},//f
+				 {X,X,X,X,5,5,0},//g
+			 }, 3};
+			ClickRegion ee={140,158,186,198, {
+				//e,b,c,d,a,f,g
+				 {0,5,5,5,X,7,5},//e
+				 {5,0,3,X,5,X,X},//b
+				 {5,3,0,6,4,X,X},//c
+				 {5,X,6,0,X,5,X},//d
+				 {X,5,4,X,0,X,X},//a
+				 {7,X,X,5,X,0,5},//f
+				 {5,X,X,X,X,5,0},//g
+			 }, 4};
+			ClickRegion ef={251,34,294,78, {
+				//f,b,c,d,e,a,g
+				 {0,X,X,5,7,X,5},//f
+				 {X,0,3,X,5,5,X},//b
+				 {X,3,0,6,5,4,X},//c
+				 {5,X,6,0,5,X,X},//d
+				 {7,5,5,5,0,X,5},//e
+				 {X,5,4,X,X,0,X},//a
+				 {5,X,X,X,5,X,0},//g
+			 } , 5};
+			ClickRegion eg={254, 158, 294, 199, {
+				//g,b,c,d,e,f,a
+				 {0,X,X,X,5,5,X},//g
+				 {X,0,3,X,5,X,5},//b
+				 {X,3,0,6,5,X,4},//c
+				 {X,X,6,0,5,5,X},//d
+				 {5,5,5,5,0,7,X},//e
+				 {5,X,X,5,7,0,X},//f
+				 {X,5,4,X,X,X,0},//a
+			 }, 6};
 			endRegions[0] = ea; endRegions[1] = eb; endRegions[2] = ec; endRegions[3] = ed; endRegions[4] = ee; endRegions[5] = ef; endRegions[6] = eg;
 			i1=3;
+            // put_asc16_number_size(750,100,2,2,endRegions[6].start,0x000000);
+
 
 			do {
 				MouseGet(&mouse);
@@ -269,6 +269,8 @@ void autoguide(CarStatus *state,int *puge)
 			mouse_off(&mouse);
 			bar1(340, 95, 480, 155,0x340F);
 			puthz(352,100,"ÖÕµã",48,55,0x000000);
+			puthz(531,89,"ÇëÔÚ×ó²àÍ¼ÖÐÑ¡ÔñÖÕµã",48,45,0x19E6);
+
 			mouse_on(mouse);
 
 				
@@ -284,9 +286,13 @@ void autoguide(CarStatus *state,int *puge)
 				} while ((mouse.key & 1) == 1);
 						
 				end = endRegions[i].start;
+                // put_asc16_number_size(750,100,2,2,end,0x000000);
+				mouse_off(&mouse);
 				bar1(340, 170, 480, 230,0xFF44);
-		        puthz(352,175,"¿ªÊ¼",48,55,0x000000);
+		        puthz(352,175,"¿ªÊ¼",48,55,0x000000);				
+				bar1(515,82,1000,148,0x7FFE);
 				Circlefill((endRegions[i].x1)+20,(endRegions[i].y1)+20,3,0xF800);
+				mouse_on(mouse);
 
 				break;
 			}
@@ -307,6 +313,7 @@ void autoguide(CarStatus *state,int *puge)
 		if((mouse_press(340, 170, 480, 230) == 1)&&(i1==4))
 		{
 			 // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿?
+			 int time;
 			 int path[Max];
 			 int pathLength = 0;
 			 int current = end;
@@ -324,30 +331,53 @@ void autoguide(CarStatus *state,int *puge)
 				 path[j] = path[pathLength - j - 1];
 				 path[pathLength - j - 1] = temp;
 			 }
-			//  t=path[0];
-			// path[0]= path[pathLength-1];
-			//  path[pathLength-1]=t;
+			 time=T[end]->distance;
+			 i1=5;
+			
 		 
 			 // ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			 for (j= 0; j < pathLength - 1; j++) {
-				int x1;int y1;int x2;int y2; int stepX;int stepY;
+				int x1;int y1;int x2;int y2;
 				  x1 = getRegionX(path[j]);
 				  y1 = getRegionY(path[j]);
 				  x2 = getRegionX(path[j + 1]);
 				  y2 = getRegionY(path[j + 1]);
-				 stepX = (int)((x2 - x1) / 10);
-				 stepY = (int)((y2 - y1) / 10);
 				 Line_Thick(x1, y1, x2, y2, 1, 0xF800);
-				//  for (k = 0; k <= 10; k++) {
-				// 	 int x = x1 + stepX * k;
-				// 	 int y = y1 + stepY * k;
-				// 	 Circlefill(x, y, 3, 0xF800);
-				// 	 delayer(10);
-
-				 }
 			 }
+			for (j= 0; j < pathLength - 1; j++) {
+				int x1;int y1;int x2;int y2; int stepX;int stepY;
+				x1 = getRegionXx(path[j]);
+				y1 = getRegionYy(path[j]);
+				x2 = getRegionXx(path[j + 1]);
+				y2 = getRegionYy(path[j + 1]);
+				stepX = (int)((x2 - x1) / 15);
+				stepY = (int)((y2 - y1) / 15);
+				for (k = 0; k <= 15; k++) {
+					int x = x1 + stepX * k;
+					int y = y1 + stepY * k;
+					Circlefill(x, y, 8, 0xF800);
+					delayer(10);
+
+				}
+			 }
+			mouse_off(&mouse);
+			puthz(531,89,"±¾´Îµ¼º½ÓÃÊ±    ·ÖÖÓ",48,45,0x19E6);
+			bar1(801, 84, 890, 141,0x7FFE);
+			put_asc16_number_size(820, 93,3,3,time,0xFFA5);
+			bar1(340, 170, 480, 230,0xFF44);
+		    puthz(352,175,"Íê³É",48,55,0x000000);
+			mouse_on(mouse);
+
 		 
 			 
+		}
+		if((mouse_press(340, 170, 480, 230) == 1)&&(i1==5)){
+			i1=0;
+			mouse_off(&mouse);
+
+			draw_autoguide();
+
+			mouse_on(mouse);
 		}
 
 	
@@ -357,41 +387,68 @@ void autoguide(CarStatus *state,int *puge)
 		
 		
 	}
-
-
+    for (i = 0; i < Max; i++) {
+        free(T[i]);
+    }
+}
 
 // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Xï¿½ï¿½ï¿½ï¿½
 int getRegionX(int region) {
 	
 
     switch (region) {
-        case 0: return 21;
-        case 1: return 23;
-        case 2: return 71;
-        case 3: return 134;
-        case 4: return 140;
-        case 5: return 251;
-        case 6: return 254;
+        case 0: return 39;
+        case 1: return 39;
+        case 2: return 88;
+        case 3: return 160;
+        case 4: return 160;
+        case 5: return 272;
+        case 6: return 272;
         default: return 0;
     }
 }
 
+int getRegionXx(int region) {
+	
+
+    switch (region) {
+        case 0: return 111;
+        case 1: return 111;
+        case 2: return 277;
+        case 3: return 517;
+        case 4: return 517;
+        case 5: return 891;
+        case 6: return 891;
+        default: return 0;
+    }
+}
 // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Yï¿½ï¿½ï¿½ï¿½
 int getRegionY(int region) {
-	int a=26,b=159,c=110,d=41,e=158,f=34,g=158;
 	
     switch (region) {
-        case 0: return 26;
-        case 1: return 159;
-        case 2: return 110;
-        case 3: return 41;
-        case 4: return 158;
-        case 5: return 34;
-        case 6: return 158;
+        case 0: return 42;
+        case 1: return 183;
+        case 2: return 130;
+        case 3: return 59;
+        case 4: return 183;
+        case 5: return 59;
+        case 6: return 183;
         default: return 0;
     }
 }
-
+int getRegionYy(int region) {
+	
+    switch (region) {
+        case 0: return 326;
+        case 1: return 692;
+        case 2: return 552;
+        case 3: return 377;
+        case 4: return 692;
+        case 5: return 377;
+        case 6: return 692;
+        default: return 0;
+    }
+}
 // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó³Ùºï¿½ï¿½ï¿½
 void delayer(int ms) {
     long endTime = clock() + ms;
@@ -406,6 +463,29 @@ void draw_autoguide()
     Line_Thick(965,53,1024,0, 1,0x000000);
     Line_Thick(0,250,1024,250, 1,0x000000);
 	Line_Thick(320,0,320,250,1, 0x000000);
+
+	Line_Thick(111,326,111,692,1, 0x000000);
+	Line_Thick(111,326,277,551,1, 0x000000);
+	Line_Thick(277,551,111,692,1, 0x000000);
+	Line_Thick(277,551,517,692,1, 0x000000);
+	Line_Thick(111,692,517,692,1, 0x000000);
+	Line_Thick(277,551,517,377,1, 0x000000);
+	Line_Thick(517,377,517,692,1, 0x000000);
+	Line_Thick(517,377,891,377,1, 0x000000);
+	Line_Thick(517,692,891,692,1, 0x000000);
+	Line_Thick(891,377,891,692,1, 0x000000);
+	Line_Thick(517,692,891,377,1, 0x000000);
+	Line_Thick(39,42,39,183,1, 0x000000);
+	Line_Thick(39,42,88,130,1, 0x000000);
+	Line_Thick(39,183,88,130,1, 0x000000);
+	Line_Thick(88,130,160,59,1, 0x000000);
+	Line_Thick(88,130,160,183,1, 0x000000);
+	Line_Thick(39,183,160,183,1, 0x000000);
+	Line_Thick(160,59,160,183,1, 0x000000);
+	Line_Thick(160,59,272,59,1, 0x000000);
+	Line_Thick(160,183,272,183,1, 0x000000);
+	Line_Thick(272,59,272,183,1, 0x000000);
+	Line_Thick(160,183,272,59,1, 0x000000);
 	bar1(64,295,173,359, 0x7BEF);//1ï¿??
     bar2(64,295,173,359,0x000000);
 	bar1(65,631,189,742, 0x7BEF);//2ï¿??
@@ -434,30 +514,6 @@ void draw_autoguide()
     bar2(251,34,294,78,0x000000);//
     bar1(254,158,294,199, 0x7BEF);
     bar2(254,158,294,199,0x000000);//
-    Line_Thick(112,359,112,631,1, 0x000000);
-    Line_Thick(147,359,251,506, 1,0x000000);
-    Line_Thick(189,641,233,599, 1,0x000000);
-	Line_Thick(344,550,518,426, 1,0x000000);
-	Line_Thick(344,550,518,630, 1,0x000000);
-    //Line_Thick(344,550,518,550, 1,0x000000);
-    Line_Thick(189,693,450,693, 1,0x000000);
-    //Line_Thick(518,426,518,630, 1,0x000000);
-    Line_Thick(612,343,819,343, 1,0x000000);
-    Line_Thick(896,427,896,624, 1,0x000000);
-    Line_Thick(605,692,825,692, 1,0x000000);
-    Line_Thick(580,630,819,416, 1,0x000000);
-    Line_Thick(37,55,37,159, 1,0x000000);
-    Line_Thick(48,55,80,110, 1,0x000000);
-    Line_Thick(59,161,72,145, 1,0x000000);
-	Line_Thick(107,128,159,78, 1,0x000000);
-	Line_Thick(107,128,159,158, 1,0x000000);
-    //Line_Thick(107,128,159,128, 1,0x000000);
-    //Line_Thick(159,78,159,158, 1,0x000000);
-    Line_Thick(59,184,140,184, 1,0x000000);
-    Line_Thick(187,48,251,48, 1,0x000000);
-    Line_Thick(272,78,272,158, 1,0x000000);
-    Line_Thick(186,184,254,184, 1,0x000000);
-    Line_Thick(179,158,251,72, 1,0x000000);
     bar1(340, 20, 480, 80,0xFF44);
     bar1(340, 95, 480, 155,0x340F);
     bar1(340, 170, 480, 230,0x340F);
@@ -504,7 +560,6 @@ QUEUE InitializeQueue(int capacity)//åˆï¿½?ï¿½åŒ–é˜Ÿåˆ—
 	Q=malloc(sizeof(Queue));
 	Q->capacity=capacity;
 	Q->size=0;
-	
 	for(i=1;i<Max;i++)
 	{
 		Q->element[i]=NULL;

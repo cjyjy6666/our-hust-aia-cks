@@ -40,7 +40,8 @@ void Dijkstra(int map[Max][Max],int start,TABLE T[]);
 int getRegionX(int region);
 int getRegionY(int region);
 void delayer(int ms);
-
+int getRegionXx(int region);
+int getRegionYy(int region);
 
 
 #endif
