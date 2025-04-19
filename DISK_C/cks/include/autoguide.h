@@ -15,7 +15,14 @@ typedef struct node
 	char name;
 }Node;
 typedef Node* TABLE;
-
+typedef struct {
+    int x1;
+	int y1;
+	int x2;
+	int y2; // 鼠标点击区域
+    int map[Max][Max];    // 对应的地图
+    int start;          // 起始点
+} ClickRegion;
 typedef struct PriorityQueue 
 {
 	int size;//当前优先队列里顶点数 
@@ -30,8 +37,9 @@ QUEUE InitializeQueue(int capacity);
 void enqueue(QUEUE Q, TABLE K);
 int dequeue(QUEUE Q);
 void Dijkstra(int map[Max][Max],int start,TABLE T[]);
-
-
+int getRegionX(int region);
+int getRegionY(int region);
+void delayer(int ms);
 
 
 
