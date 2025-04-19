@@ -13,6 +13,10 @@ void init_car_status(CarStatus *state)
     fp=fopen("data\\temp.dat","rb+");
     fread(&state->ac_s.target_temp,sizeof(int),1,fp);
     fclose(fp);
+    state->drive_s.angle_s =20.0;
+    state->drive_s.angle_n =20.0;
+    state->media_s.music=-1;
+    randomize();
 }
 
 /*CarStatus* get_car_status(void)

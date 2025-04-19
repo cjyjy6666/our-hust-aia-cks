@@ -1,5 +1,5 @@
 #include"allfunc.h"
-
+#define PI 3.1415926537
 void drive(CarStatus *state,int *puge)
 {
     mouse_off(&mouse);
@@ -14,6 +14,94 @@ void drive(CarStatus *state,int *puge)
 			*puge = 2;
 			break;
 		}
+        if(mouse_press(100,90,200,160) == 1)
+        {
+            do
+            {
+                MouseGet(&mouse);
+                mouse_show(&mouse);
+            }while ((mouse.key & 1) == 1);
+            state->drive_s.forward = 1;
+            state->drive_s.back = 0;
+            state->drive_s.park = 0;
+            state->drive_s.view = 0;
+            state->drive_s.sport=0;
+            state->drive_s.comfort=0;
+            bar1(800,460,840,500,0x0000);
+            state->drive_s.once_f=0;
+        }
+        if(mouse_press(100,190,200,260) == 1)
+        {
+            do
+            {
+                MouseGet(&mouse);
+                mouse_show(&mouse);
+            }while ((mouse.key & 1) == 1);
+            state->drive_s.forward = 0;
+            state->drive_s.back = 1;
+            state->drive_s.park = 0;
+            bar1(800,460,840,500,0x0000);
+            state->drive_s.once_b=0;
+        }
+        if(mouse_press(100,290,200,360) == 1)
+        {
+            do
+            {
+                MouseGet(&mouse);
+                mouse_show(&mouse);
+            }while ((mouse.key & 1) == 1);
+            state->drive_s.forward = 0;
+            state->drive_s.back = 0;
+            state->drive_s.park = 1;
+            bar1(800,460,840,500,0x0000);
+            state->drive_s.once_p=0;
+        }
+        if(state->drive_s.forward)
+        {
+            if(mouse_press(433,90,533,160) == 1)
+            {
+                do
+                {
+                    MouseGet(&mouse);
+                    mouse_show(&mouse);
+                }while ((mouse.key & 1) == 1);
+                state->drive_s.sport = 1;
+                state->drive_s.comfort=0;
+                state->drive_s.view=0;
+                bar1(800,460,840,500,0x0000);
+                state->drive_s.once_s=0;
+            }
+            if(mouse_press(433,190,533,260) == 1)
+            {
+                do
+                {
+                    MouseGet(&mouse);
+                    mouse_show(&mouse);
+                }while ((mouse.key & 1) == 1);
+                state->drive_s.comfort = 1;
+                state->drive_s.sport=0;
+                state->drive_s.view=0;
+                bar1(800,460,840,500,0x0000);
+            }
+            if(mouse_press(433,290,533,360) == 1)
+            {
+                do
+                {
+                    MouseGet(&mouse);
+                    mouse_show(&mouse);
+                }while ((mouse.key & 1) == 1);	
+                state->drive_s.view = 1;
+                state->drive_s.sport=0;
+                state->drive_s.comfort=0;
+                bar1(800,460,840,500,0x0000);
+            }
+        }
+        else
+        {
+            state->drive_s.view = 0;
+            state->drive_s.sport=0;
+            state->drive_s.comfort=0;
+        }
     }
 }
 
@@ -30,11 +118,119 @@ void draw_drive_page()
     bar2(433,90,533,160,0xFFFFFF);
 	bar2(433,190,533,260,0xFFFFFF);
     bar2(433,290,533,360,0xFFFFFF);
+    puthz(130, 115, "前进",24,30,0xFFFFFF);//forward s=100
+    puthz(130, 215, "后退",24,30,0xFFFFFF);//back s=40
+    puthz(130, 315, "泊车",24,30,0xFFFFFF);//park s=30
+    puthz(463, 115, "运动",24,30,0xFFFFFF);//sport s=170
+    puthz(463, 215, "舒适",24,30,0xFFFFFF); //comfort s=80
+    puthz(463, 315, "观光",24,30,0xFFFFFF);//view s=40
+}
 
-    puthz(130, 115, "前进",24,30,0xFFFFFF);//forward
-    puthz(130, 215, "后退",24,30,0xFFFFFF);//back
-    puthz(130, 315, "泊车",24,30,0xFFFFFF);//parking
-    puthz(463, 115, "运动",24,30,0xFFFFFF);//sports
-    puthz(463, 215, "舒适",24,30,0xFFFFFF); //comofort
-    puthz(463, 315, "观光",24,30,0xFFFFFF);//viewing
+int needle_s(CarStatus *state,double s)//from 20~160
+{
+    int x,y,x1,y1;
+    if(state->drive_s.angle_s<s)
+    {
+        x=(int)(829-130*cos(state->drive_s.angle_s*PI/180));
+        y=(int)(400-130*sin(state->drive_s.angle_s*PI/180));
+        x1=(int)(829-50*cos(state->drive_s.angle_s*PI/180));
+        y1=(int)(400-50*sin(state->drive_s.angle_s*PI/180));
+        if((check_timer_expire(&(state->timer.drive_time_s),CLOCKS_PER_SEC/40))&&(fabs(state->drive_s.angle_s-s)>3))
+        {
+            Line_Thick(x1,y1,x,y,14,0x0085);
+            state->drive_s.angle_s+=3;
+            //Line2(x1,y1,x,y,0xF800);
+        }
+        if(fabs(state->drive_s.angle_s-s)<5)
+        {
+            state->drive_s.angle_s=s;
+            return 1;
+        }
+        return 0;
+    }
+    if(state->drive_s.angle_s>s)
+    {
+        x=(int)(829-130*cos(state->drive_s.angle_s*PI/180));
+        y=(int)(400-130*sin(state->drive_s.angle_s*PI/180));
+        x1=(int)(829-50*cos(state->drive_s.angle_s*PI/180));
+        y1=(int)(400-50*sin(state->drive_s.angle_s*PI/180));
+        if((check_timer_expire(&(state->timer.drive_time_s),CLOCKS_PER_SEC/40))&&(fabs(state->drive_s.angle_s-s)>3))
+        {
+            Line_Thick(x1,y1,x,y,14,0x0085);
+            state->drive_s.angle_s-=3;
+            //Line2(x1,y1,x,y,0xF800);
+        }
+        if(fabs(state->drive_s.angle_s-s)<5)
+        {
+            state->drive_s.angle_s=s;
+            return 1;
+        }
+        return 0;
+    }
+}
+
+int needle_n(CarStatus *state,double s)//from 20~160
+{
+    int x,y,x1,y1;
+    if(state->drive_s.angle_n<s)
+    {
+        x=(int)(829-130*cos(state->drive_s.angle_n*PI/180));
+        y=(int)(194-130*sin(state->drive_s.angle_n*PI/180));
+        x1=(int)(829-50*cos(state->drive_s.angle_n*PI/180));
+        y1=(int)(194-50*sin(state->drive_s.angle_n*PI/180));
+        if((check_timer_expire(&(state->timer.drive_time_n),CLOCKS_PER_SEC/40))&&(fabs(state->drive_s.angle_n-s)>3))
+        {
+            Line_Thick(x1,y1,x,y,14,0x0085);
+            state->drive_s.angle_n+=3;
+            //Line2(x1,y1,x,y,0xF800);
+        }
+        if(fabs(state->drive_s.angle_n-s)<5)
+        {
+            state->drive_s.angle_n=s;
+            return 1;
+        }
+        return 0;
+    }
+    if(state->drive_s.angle_n>s)
+    {
+        x=(int)(829-130*cos(state->drive_s.angle_n*PI/180));
+        y=(int)(194-130*sin(state->drive_s.angle_n*PI/180));
+        x1=(int)(829-50*cos(state->drive_s.angle_n*PI/180));
+        y1=(int)(194-50*sin(state->drive_s.angle_n*PI/180));
+        if((check_timer_expire(&(state->timer.drive_time_n),CLOCKS_PER_SEC/40))&&(fabs(state->drive_s.angle_n-s)>3))
+        {
+            Line_Thick(x1,y1,x,y,14,0x0085);
+            state->drive_s.angle_n-=3;
+            //Line2(x1,y1,x,y,0xF800);
+        }
+        if(fabs(state->drive_s.angle_n-s)<5)
+        {
+            state->drive_s.angle_n=s;
+            return 1;
+        }
+        return 0;
+    }
+}
+
+int n_change(CarStatus *state)
+{
+    static int phase=0;
+    switch(phase)
+	{
+        case 0: // 正向转动
+            if(needle_n(state,60))
+			{
+                phase=1;
+                state->timer.drive_time_n=clock();
+            }
+            break;
+        case 1: // 逆向转动
+            if(needle_n(state,20))
+			{
+                phase=0;
+				return 1;
+            }
+            break;
+	}
+    return 0;
 }

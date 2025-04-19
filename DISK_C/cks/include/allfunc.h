@@ -27,6 +27,11 @@
 #include"autoguide.h"
 #include"wiper.h"
 #include"drive.h"
+#include"media.h"
+#include"phone.h"
+#include"contact.h"
+#include"music.h"
+#include"sounder.h"
 
 #define NUM0 0x5230
 #define NUM1 0x4f31
@@ -65,7 +70,5 @@
 #define EIGHT 0x0938
 #define NINE 0x0a39
 #define ZERO 0x0b30
-extern MOUSE mouse;//����ȫ�ֱ���������Ŀ���̹���ͬһ�����ṹ
-//��ÿ������Ҫ���ģ��ļ���Ӧ����
-
+extern MOUSE mouse;
 #endif

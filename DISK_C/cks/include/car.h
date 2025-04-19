@@ -8,6 +8,11 @@ typedef struct
     clock_t light_time;
     clock_t wiper_time;
     clock_t ac_time; 
+    clock_t drive_time_s;
+    clock_t drive_time_n;
+    clock_t call_time;
+    clock_t music_time;
+    clock_t sounder_time[9];
 }Car_Timer;
 typedef struct car_light
 {
@@ -38,12 +43,36 @@ typedef struct car_wiper
     int rain;
     int cur_wip;
 }car_wiper;
+typedef struct car_drive
+{
+    int forward;
+    int back;
+    int park;
+    int sport;
+    int comfort;
+    int view;
+    double angle_s;
+    double angle_n;
+    int once_f;
+    int once_b;
+    int once_p;
+    int once_s;
+}car_drive;
+typedef struct car_media
+{
+    int on_call;
+    int call_second;
+    int music;//-1:music off,>-1:music index
+    int mus_ord;//0Ë³Ðò²¥·Å,1ÂÒÐò,2µ¥ÇúÑ­»·
+}car_media;
 typedef struct CarStatus
 {
     car_light light_s;
     car_ac ac_s;
     Car_Timer timer;
     car_wiper wiper_s;
+    car_drive drive_s;
+    car_media media_s;
 }CarStatus;
 
 
