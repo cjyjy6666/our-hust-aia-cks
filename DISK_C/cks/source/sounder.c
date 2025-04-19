@@ -22,6 +22,8 @@ void sounder(CarStatus *state,int *puge)
 		mouse_show(&mouse);
         if (mouse_press(603,600,633,630) == 1)
 		{
+            state->media_s.initialized=0;
+            state->media_s.first_time=1;
 			*puge = 8;
 			break;
 		}
@@ -77,7 +79,7 @@ int clamp(int value, int min, int max)
 
 //move_bar 函数：用当前的 y 值指针更新动画位置
 //当前位置 *py 趋近到目标 target 时返回 1（表示该段运动完成），否则返回 0
-int move_bar(CarStatus *state, int *py, int target, int x,int i)
+int move_bar(CarStatus *state, int *py, int target, int x,int i,int color)
 {
     // *py 为当前矩形条的 y 坐标（持久化保存）
     if(*py > target)
@@ -91,7 +93,7 @@ int move_bar(CarStatus *state, int *py, int target, int x,int i)
             // 计算步长，至少为1
             if(delta <= 0)
                 delta = 1;
-			bar1(x,*py-delta,x+40,*py,0x7FFF);
+			bar1(x,*py-delta,x+40,*py,color);
             *py -= delta;
             if(*py <= target)
             {
@@ -126,6 +128,7 @@ int move_bar(CarStatus *state, int *py, int target, int x,int i)
 
 void show_sound(CarStatus *state, int volume)
 {
+    int color;
     // 静态数组保存每个条的状态和动画周期状态
     static int peak[9]={0};       // 波峰位置
     static int valley[9]={0};     // 波谷位置
@@ -136,16 +139,19 @@ void show_sound(CarStatus *state, int volume)
     static int amplitude[9]={0};  // 振幅
     static int cycle[9]={0};      // 当前周期状态：0、1、2分别对应不同阶段
     static int current_y[9]={0};  // 每个矩形条当前的 y 坐标（动画状态持久化）
-    static int initialized=0;
-	static int first_time=1;
+
     int i;
     // 初始阶段：根据 volume 计算初始平衡位置及相关参数，并初始化当前 y 值
-    if(!initialized)
+    if(!state->media_s.initialized)
     {
         balance = (int)(340 - 2.3 * volume);
-        bar1(185, balance, 545, 340, 0x7FFF);  // 初始绘制
+        //bar1(185, balance, 545, 340, 0x7FFF);  // 初始绘制
         for(i = 0; i < 9; i++)
         {
+            if(i%2==0)
+                bar1(185 + i * 40, balance, 225+i*40, 340, 0x7FFF); // 初始绘制
+            else
+                bar1(185 + i * 40, balance, 225+i*40, 340, 0x0B5F); // 初始绘制
             b_signal[i] = random(2);
             b[i] = random((int)(0.1 * balance) + 1);
             if(b_signal[i])
@@ -158,7 +164,7 @@ void show_sound(CarStatus *state, int volume)
             current_y[i] = balance_p[i];
             cycle[i] = 0;
         }
-        initialized = 1;
+        state->media_s.initialized = 1;
     }
     // 对每个矩形条依次进行动画阶段处理
     // 周期：
@@ -167,23 +173,27 @@ void show_sound(CarStatus *state, int volume)
     // cycle 2: 重新计算下一周期的平衡位置，并从波谷移动到该平衡位置
     for(i = 0; i < 9; i++)
     {
+        if(i%2==0)
+            color=0x7FFF;
+        else
+            color=0x0B5F;
         switch(cycle[i])
         {
             case 0:
-                if(move_bar(state, &current_y[i], peak[i], 185 + i * 40,i))
+                if(move_bar(state, &current_y[i], peak[i], 185 + i * 40,i,color))
                 {
                     cycle[i] = 1;
                 }
                 break;
             case 1:
-                if(move_bar(state, &current_y[i], valley[i], 185 + i * 40,i))
+                if(move_bar(state, &current_y[i], valley[i], 185 + i * 40,i,color))
                 {
                     cycle[i] = 2;
                 }
                 break;
             case 2:
             {
-				if(!first_time)
+				if(!state->media_s.first_time)
 				{
 					// 计算新的漂移、平衡、振幅、波峰、波谷
 					balance = (int)(340 - 2.3 * volume);
@@ -194,13 +204,13 @@ void show_sound(CarStatus *state, int volume)
 					balance_p[i] = clamp(balance + b[i], 110, 340);
 				}
                 // 将当前状态强制从 valley 移动到新的平衡位置
-                if(move_bar(state, &current_y[i], balance_p[i], 185 + i * 40,i))
+                if(move_bar(state, &current_y[i], balance_p[i], 185 + i * 40,i,color))
                 {
                     amplitude[i] = random((int)(0.5*(340-balance_p[i])) + 1);
                     peak[i] = clamp(balance_p[i]-amplitude[i],110,340);
                     valley[i] = clamp(balance_p[i] + amplitude[i],110,340);
                     cycle[i] = 0;
-					first_time=0;
+					state->media_s.first_time=0;
                 }
                 break;
             }
