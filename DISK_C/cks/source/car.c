@@ -17,6 +17,8 @@ void init_car_status(CarStatus *state)
     state->drive_s.angle_n =20.0;
     state->media_s.music=-1;
     randomize();
+    state->media_s.initialized=0;
+    state->media_s.first_time=1;
 }
 
 /*CarStatus* get_car_status(void)

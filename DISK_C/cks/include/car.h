@@ -64,6 +64,8 @@ typedef struct car_media
     int call_second;
     int music;//-1:music off,>-1:music index
     int mus_ord;//0Ë³Ğò²¥·Å,1ÂÒĞò,2µ¥ÇúÑ­»·
+    int initialized;//for sounder
+    int first_time;
 }car_media;
 typedef struct CarStatus
 {
