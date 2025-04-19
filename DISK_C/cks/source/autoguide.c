@@ -13,6 +13,15 @@ void autoguide(CarStatus *state,int *puge)
 	 int numRegions ;
 	 int numEndRegions ;
 	 int i,j,k;
+	  // 初始化 TABLE 数组并检查内存分配是否成功
+	  for (i = 0; i < Max; i++) {
+        T[i] = malloc(sizeof(Node));
+        if (T[i] == NULL) {
+            // 处理内存分配失败的情况
+            // 可以添加日志记录或其他错误处理逻辑
+            return;
+        }
+	}
 
 
 
@@ -35,78 +44,8 @@ void autoguide(CarStatus *state,int *puge)
         }
         if((mouse_press(340, 20, 480, 80) == 1)&&(i1==0))
 		{
-			ClickRegion a={21, 26, 55, 55,{
-				//a,b,c,d,e,f,g
-				 {0,5,4,X,X,X,X},//a
-				 {5,0,3,X,5,X,X},//b
-				 {4,3,0,6,5,X,X},//c
-				 {X,X,6,0,5,5,X},//d
-				 {X,5,5,5,0,7,5},//e
-				 {X,X,X,5,7,0,5},//f
-				 {X,X,X,X,5,5,0},//g
-			 } , 0};
-			ClickRegion b={23, 159, 59, 205, {
-				//b,a,c,d,e,f,g
-		         {0,5,3,X,5,X,X},//b
-		         {5,0,4,X,X,X,X},//a
-		         {3,4,0,6,5,X,X},//c
-		         {X,X,6,0,5,5,X},//d
-		         {5,X,5,5,0,7,5},//e
-		         {X,X,X,5,7,0,5},//f
-		         {X,X,X,X,5,5,0},//g
-			 }, 1};
-			ClickRegion c={71, 110, 107, 145, {
-				//c,b,a,d,e,f,g
-				 {0,3,4,6,5,X,X},//c
-				 {3,0,5,X,5,X,X},//b
-				 {4,5,0,X,X,X,X},//a
-				 {6,X,X,0,5,5,X},//d
-				 {5,5,X,5,0,7,5},//e
-				 {X,X,X,5,7,0,5},//f
-				 {X,X,X,X,5,5,0},//g
-			 }, 2};
-			ClickRegion d={134, 41, 187, 78, {
-				//d,b,c,a,e,f,g
-				 {0,X,6,X,5,5,X},//d
-				 {X,0,3,5,5,X,X},//b
-				 {6,3,0,4,5,X,X},//c
-				 {X,5,4,0,X,X,X},//a
-				 {5,5,5,X,0,7,5},//e
-				 {5,X,X,X,7,0,5},//f
-				 {X,X,X,X,5,5,0},//g
-			 }, 3};
-			ClickRegion e={140,158,186,198, {
-				//e,b,c,d,a,f,g
-				 {0,5,5,5,X,7,5},//e
-				 {5,0,3,X,5,X,X},//b
-				 {5,3,0,6,4,X,X},//c
-				 {5,X,6,0,X,5,X},//d
-				 {X,5,4,X,0,X,X},//a
-				 {7,X,X,5,X,0,5},//f
-				 {5,X,X,X,X,5,0},//g
-			 }, 4};
-			ClickRegion f={251,34,294,78, {
-				//f,b,c,d,e,a,g
-				 {0,X,X,5,7,X,5},//f
-				 {X,0,3,X,5,5,X},//b
-				 {X,3,0,6,5,4,X},//c
-				 {5,X,6,0,5,X,X},//d
-				 {7,5,5,5,0,X,5},//e
-				 {X,5,4,X,X,0,X},//a
-				 {5,X,X,X,5,X,0},//g
-			 } , 5};
-			ClickRegion g={254, 158, 294, 199, {
-				//g,b,c,d,e,f,a
-				 {0,X,X,X,5,5,X},//g
-				 {X,0,3,X,5,X,5},//b
-				 {X,3,0,6,5,X,4},//c
-				 {X,X,6,0,5,5,X},//d
-				 {5,5,5,5,0,7,X},//e
-				 {5,X,X,5,7,0,X},//f
-				 {X,5,4,X,X,X,0},//a
-			 }, 6};
-			
-			regions[0] = a; regions[1] = b; regions[2] = c; regions[3] = d; regions[4] = e; regions[5] = f; regions[6] = g;
+			initializeClickRegions(regions);
+
 			i1=1;
 			do {
                 MouseGet(&mouse);
@@ -186,77 +125,8 @@ void autoguide(CarStatus *state,int *puge)
 			// 锟斤拷锟斤拷锟秸碉拷选锟斤拷
 		if((mouse_press(340, 95, 480, 155) == 1)&&(i1==2))
 		{
-			ClickRegion ea={21, 26, 55, 55,{
-				//a,b,c,d,e,f,g
-				 {0,5,4,X,X,X,X},//a
-				 {5,0,3,X,5,X,X},//b
-				 {4,3,0,6,5,X,X},//c
-				 {X,X,6,0,5,5,X},//d
-				 {X,5,5,5,0,7,5},//e
-				 {X,X,X,5,7,0,5},//f
-				 {X,X,X,X,5,5,0},//g
-			 } , 0};
-			ClickRegion eb={23, 159, 59, 205, {
-				//b,a,c,d,e,f,g
-		         {0,5,3,X,5,X,X},//b
-		         {5,0,4,X,X,X,X},//a
-		         {3,4,0,6,5,X,X},//c
-		         {X,X,6,0,5,5,X},//d
-		         {5,X,5,5,0,7,5},//e
-		         {X,X,X,5,7,0,5},//f
-		         {X,X,X,X,5,5,0},//g
-			 }, 1};
-			ClickRegion ec={71, 110, 107, 145, {
-				//c,b,a,d,e,f,g
-				 {0,3,4,6,5,X,X},//c
-				 {3,0,5,X,5,X,X},//b
-				 {4,5,0,X,X,X,X},//a
-				 {6,X,X,0,5,5,X},//d
-				 {5,5,X,5,0,7,5},//e
-				 {X,X,X,5,7,0,5},//f
-				 {X,X,X,X,5,5,0},//g
-			 }, 2};
-			ClickRegion ed={134, 41, 187, 78, {
-				//d,b,c,a,e,f,g
-				 {0,X,6,X,5,5,X},//d
-				 {X,0,3,5,5,X,X},//b
-				 {6,3,0,4,5,X,X},//c
-				 {X,5,4,0,X,X,X},//a
-				 {5,5,5,X,0,7,5},//e
-				 {5,X,X,X,7,0,5},//f
-				 {X,X,X,X,5,5,0},//g
-			 }, 3};
-			ClickRegion ee={140,158,186,198, {
-				//e,b,c,d,a,f,g
-				 {0,5,5,5,X,7,5},//e
-				 {5,0,3,X,5,X,X},//b
-				 {5,3,0,6,4,X,X},//c
-				 {5,X,6,0,X,5,X},//d
-				 {X,5,4,X,0,X,X},//a
-				 {7,X,X,5,X,0,5},//f
-				 {5,X,X,X,X,5,0},//g
-			 }, 4};
-			ClickRegion ef={251,34,294,78, {
-				//f,b,c,d,e,a,g
-				 {0,X,X,5,7,X,5},//f
-				 {X,0,3,X,5,5,X},//b
-				 {X,3,0,6,5,4,X},//c
-				 {5,X,6,0,5,X,X},//d
-				 {7,5,5,5,0,X,5},//e
-				 {X,5,4,X,X,0,X},//a
-				 {5,X,X,X,5,X,0},//g
-			 } , 5};
-			ClickRegion eg={254, 158, 294, 199, {
-				//g,b,c,d,e,f,a
-				 {0,X,X,X,5,5,X},//g
-				 {X,0,3,X,5,X,5},//b
-				 {X,3,0,6,5,X,4},//c
-				 {X,X,6,0,5,5,X},//d
-				 {5,5,5,5,0,7,X},//e
-				 {5,X,X,5,7,0,X},//f
-				 {X,5,4,X,X,X,0},//a
-			 }, 6};
-			endRegions[0] = ea; endRegions[1] = eb; endRegions[2] = ec; endRegions[3] = ed; endRegions[4] = ee; endRegions[5] = ef; endRegions[6] = eg;
+			initializeClickRegions(endRegions);
+
 			i1=3;
             // put_asc16_number_size(750,100,2,2,endRegions[6].start,0x000000);
 
@@ -276,6 +146,17 @@ void autoguide(CarStatus *state,int *puge)
 				
 			numEndRegions = sizeof(endRegions) / sizeof(endRegions[0]);
 		}
+		else if((mouse_press(340, 170, 480, 230) == 1)&&(i1==2))
+			{
+				i1=0;
+				
+			    mouse_off(&mouse);
+
+				draw_autoguide();
+			 
+				mouse_on(mouse);
+            
+			}			 
 	
 		for (i = 0; i < numEndRegions; i++) {
 			if ((mouse_press(endRegions[i].x1, endRegions[i].y1, endRegions[i].x2, endRegions[i].y2) == 1)&&(i1==3)) {
@@ -296,17 +177,7 @@ void autoguide(CarStatus *state,int *puge)
 
 				break;
 			}
-			else if((mouse_press(340, 170, 480, 230) == 1)&&(i1==3))
-			{
-				i1=0;
-				
-			    mouse_off(&mouse);
-
-				draw_autoguide();
-			 
-				mouse_on(mouse);
-                break;
-			}			 
+			
 
 		}
 
@@ -350,12 +221,12 @@ void autoguide(CarStatus *state,int *puge)
 				y1 = getRegionYy(path[j]);
 				x2 = getRegionXx(path[j + 1]);
 				y2 = getRegionYy(path[j + 1]);
-				stepX = (int)((x2 - x1) / 15);
-				stepY = (int)((y2 - y1) / 15);
-				for (k = 0; k <= 15; k++) {
+				stepX = (int)((x2 - x1) / 10);
+				stepY = (int)((y2 - y1) / 10);
+				for (k = 0; k <= 10; k++) {
 					int x = x1 + stepX * k;
 					int y = y1 + stepY * k;
-					Circlefill(x, y, 8, 0xF800);
+					Circlefill(x, y,8, 0xF800);
 					delayer(10);
 
 				}
@@ -390,6 +261,87 @@ void autoguide(CarStatus *state,int *puge)
     for (i = 0; i < Max; i++) {
         free(T[i]);
     }
+}
+
+void initializeClickRegions(ClickRegion regions[Max]) {
+    ClickRegion a = {21, 26, 55, 55, {
+        //a,b,c,d,e,f,g
+        {0, 5, 4, X, X, X, X}, //a
+        {5, 0, 3, X, 5, X, X}, //b
+        {4, 3, 0, 6, 5, X, X}, //c
+        {X, X, 6, 0, 5, 5, X}, //d
+        {X, 5, 5, 5, 0, 7, 5}, //e
+        {X, X, X, 5, 7, 0, 5}, //f
+        {X, X, X, X, 5, 5, 0}  //g
+    }, 0};
+    ClickRegion b = {23, 159, 59, 205, {
+        //b,a,c,d,e,f,g
+        {0, 5, 3, X, 5, X, X}, //b
+        {5, 0, 4, X, X, X, X}, //a
+        {3, 4, 0, 6, 5, X, X}, //c
+        {X, X, 6, 0, 5, 5, X}, //d
+        {5, X, 5, 5, 0, 7, 5}, //e
+        {X, X, X, 5, 7, 0, 5}, //f
+        {X, X, X, X, 5, 5, 0}  //g
+    }, 1};
+    ClickRegion c = {71, 110, 107, 145, {
+        //c,b,a,d,e,f,g
+        {0, 3, 4, 6, 5, X, X}, //c
+        {3, 0, 5, X, 5, X, X}, //b
+        {4, 5, 0, X, X, X, X}, //a
+        {6, X, X, 0, 5, 5, X}, //d
+        {5, 5, X, 5, 0, 7, 5}, //e
+        {X, X, X, 5, 7, 0, 5}, //f
+        {X, X, X, X, 5, 5, 0}  //g
+    }, 2};
+    ClickRegion d = {134, 41, 187, 78, {
+        //d,b,c,a,e,f,g
+        {0, X, 6, X, 5, 5, X}, //d
+        {X, 0, 3, 5, 5, X, X}, //b
+        {6, 3, 0, 4, 5, X, X}, //c
+        {X, 5, 4, 0, X, X, X}, //a
+        {5, 5, 5, X, 0, 7, 5}, //e
+        {5, X, X, X, 7, 0, 5}, //f
+        {X, X, X, X, 5, 5, 0}  //g
+    }, 3};
+    ClickRegion e = {140, 158, 186, 198, {
+        //e,b,c,d,a,f,g
+        {0, 5, 5, 5, X, 7, 5}, //e
+        {5, 0, 3, X, 5, X, X}, //b
+        {5, 3, 0, 6, 4, X, X}, //c
+        {5, X, 6, 0, X, 5, X}, //d
+        {X, 5, 4, X, 0, X, X}, //a
+        {7, X, X, 5, X, 0, 5}, //f
+        {5, X, X, X, X, 5, 0}  //g
+    }, 4};
+    ClickRegion f = {251, 34, 294, 78, {
+        //f,b,c,d,e,a,g
+        {0, X, X, 5, 7, X, 5}, //f
+        {X, 0, 3, X, 5, 5, X}, //b
+        {X, 3, 0, 6, 5, 4, X}, //c
+        {5, X, 6, 0, 5, X, X}, //d
+        {7, 5, 5, 5, 0, X, 5}, //e
+        {X, 5, 4, X, X, 0, X}, //a
+        {5, X, X, X, 5, X, 0}  //g
+    }, 5};
+    ClickRegion g = {254, 158, 294, 199, {
+        //g,b,c,d,e,f,a
+        {0, X, X, X, 5, 5, X}, //g
+        {X, 0, 3, X, 5, X, 5}, //b
+        {X, 3, 0, 6, 5, X, 4}, //c
+        {X, X, 6, 0, 5, 5, X}, //d
+        {5, 5, 5, 5, 0, 7, X}, //e
+        {5, X, X, 5, 7, 0, X}, //f
+        {X, 5, 4, X, X, X, 0}  //a
+    }, 6};
+
+    regions[0] = a;
+    regions[1] = b;
+    regions[2] = c;
+    regions[3] = d;
+    regions[4] = e;
+    regions[5] = f;
+    regions[6] = g;
 }
 
 // 锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷取锟斤拷锟斤拷锟絏锟斤拷锟斤拷
@@ -458,12 +410,11 @@ void delayer(int ms) {
 void draw_autoguide()
 {
     bar1(0, 0, 1024, 768,0x7FFE);
-    bar1(965,0,1024,53,0xF800);
-    Line_Thick(965,0,1024,53, 1,0x000000);
-    Line_Thick(965,53,1024,0, 1,0x000000);
+	bar1(0,0,320,250,0x025C);
+   
     Line_Thick(0,250,1024,250, 1,0x000000);
 	Line_Thick(320,0,320,250,1, 0x000000);
-
+	
 	Line_Thick(111,326,111,692,1, 0x000000);
 	Line_Thick(111,326,277,551,1, 0x000000);
 	Line_Thick(277,551,111,692,1, 0x000000);
@@ -517,16 +468,32 @@ void draw_autoguide()
     bar1(340, 20, 480, 80,0xFF44);
     bar1(340, 95, 480, 155,0x340F);
     bar1(340, 170, 480, 230,0x340F);
-	prt_hz16_asc16_size(70,303,3,3,"一栋",0x000000,"HZK\\HZK16K");
-	prt_hz16_asc16_size(73,663,3,3,"二栋",0x000000,"HZK\\HZK16K");
-	prt_hz16_asc16_size(231,530,3,3,"三栋",0x000000,"HZK\\HZK16K");
-	prt_hz16_asc16_size(470,354,3,3,"四栋",0x000000,"HZK\\HZK16K");
-	prt_hz16_asc16_size(474,657,3,3,"五栋",0x000000,"HZK\\HZK16K");
-	prt_hz16_asc16_size(836,352,3,3,"六栋",0x000000,"HZK\\HZK16K");
-	prt_hz16_asc16_size(836,657,3,3,"七栋",0x000000,"HZK\\HZK16K");
+	puthz(70,303,"一栋",48,45,0x000000);
+	puthz(73,663,"二栋",48,45,0x000000);
+	puthz(231,530,"三栋",48,45,0x000000);
+	puthz(470,354,"四栋",48,45,0x000000);
+	puthz(474,657,"五栋",48,45,0x000000);
+	puthz(836,352,"六栋",48,45,0x000000);
+	puthz(836,657,"七栋",48,45,0x000000);
 	puthz(352,25,"起点",48,55,0x000000);
 	puthz(352,100,"终点",48,55,0x000000);
 	puthz(352,175,"取消",48,55,0x000000);
+	bar1(0,248,1024,280,0x02F8);
+	bar1(0,248,46,768,0x02F8);
+	bar1(0,730,1024,768,0x02F8);
+	bar1(965,248,1024,768,0x02F8);
+	Line_Thick(46,280,965,280,1, 0x000000);
+	Line_Thick(46,280,46,730,1, 0x000000);
+	Line_Thick(46,730,965,730,1, 0x000000);
+	Line_Thick(965,280,965,730,1, 0x000000);
+	Line_Thick(0,250,46,280,1, 0x000000);
+	Line_Thick(1024,250,965,280,1, 0x000000);
+	Line_Thick(0,768,46,730,1, 0x000000);
+	Line_Thick(1024,768,965,730,1, 0x000000);
+	Line_Thick(0,250,1024,250, 1,0x000000);
+	bar1(965,0,1024,53,0xF800);
+    Line_Thick(965,0,1024,53, 1,0x000000);
+    Line_Thick(965,53,1024,0, 1,0x000000);
 
 
 

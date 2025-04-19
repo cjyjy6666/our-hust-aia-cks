@@ -42,6 +42,7 @@ int getRegionY(int region);
 void delayer(int ms);
 int getRegionXx(int region);
 int getRegionYy(int region);
+void initializeClickRegions(ClickRegion regions[Max]);
 
 
 #endif
