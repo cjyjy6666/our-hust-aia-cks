@@ -70,7 +70,5 @@
 #define EIGHT 0x0938
 #define NINE 0x0a39
 #define ZERO 0x0b30
-extern MOUSE mouse;//����ȫ�ֱ���������Ŀ���̹���ͬһ�����ṹ
-//��ÿ������Ҫ���ģ��ļ���Ӧ����
-
+extern MOUSE mouse;
 #endif

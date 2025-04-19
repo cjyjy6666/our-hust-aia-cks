@@ -5,5 +5,8 @@
 
 void sounder(CarStatus *state,int *puge);
 void sound_page();
+int clamp(int value,int min,int max);
+int move_bar(CarStatus *state,int *py,int target,int x,int i);
+void show_sound(CarStatus *state,int volume);
 
 #endif
