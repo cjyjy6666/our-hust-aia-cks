@@ -1,37 +1,42 @@
 #include"allfunc.h"
 
+// 空调控制主函数 | Main function for AC control
 void ac(CarStatus *state,int *puge)
 {
-	mouse_off(&mouse);
-    draw_ac_page();
-    mouse_on(mouse);
+	mouse_off(&mouse);    // 关闭鼠标显示 | Hide mouse cursor
+    draw_ac_page();       // 绘制空调页面 | Draw AC control page
+    mouse_on(mouse);      // 开启鼠标显示 | Show mouse cursor
 
-    while(1)
+    while(1)             // 主控制循环 | Main control loop
     {
-        show_all(state);
-		temp(state);
-		mouse_show(&mouse);
+        show_all(state); // 显示所有状态 | Display all status
+		temp(state);     // 温度控制处理 | Temperature control handling
+		mouse_show(&mouse); // 显示鼠标 | Show mouse cursor
+        
+        // 返回按钮检测 | Back button detection
         if (mouse_press(603,600,633,630) == 1)
 		{
-			*puge = 2;
+			*puge = 2;   // 返回主页面 | Return to main page
 			break;
 		}
+        
+        // 自动模式按钮 | Auto mode button
         if(mouse_press(100,90,200,160) == 1)
         {
             do
             {
                 MouseGet(&mouse);
                 mouse_show(&mouse);
-            }while ((mouse.key & 1) == 1);
+            }while ((mouse.key & 1) == 1); // 等待鼠标释放 | Wait for mouse release
             if(state->ac_s.ac_state == 1)
-                state->ac_s.ac_state = 0;
+                state->ac_s.ac_state = 0; // 关闭自动模式 | Turn off auto mode
             else
             {
-                state->ac_s.ac_state = 1;
-                //state->ac_s.target_temp = 26;
+                state->ac_s.ac_state = 1; // 开启自动模式 | Turn on auto mode
             }
-            
         }
+        
+        // 制冷模式按钮 | Cooling mode button
         if(mouse_press(100,190,200,260) == 1)
         {
             do
@@ -40,13 +45,15 @@ void ac(CarStatus *state,int *puge)
                 mouse_show(&mouse);
             }while ((mouse.key & 1) == 1);
             if(state->ac_s.ac_state == 2)
-                state->ac_s.ac_state = 0;
+                state->ac_s.ac_state = 0; // 关闭制冷模式 | Turn off cooling mode
             else
             {
-            state->ac_s.ac_state = 2;
-            state->ac_s.target_temp = state->ac_s.current_temp-1;
+                state->ac_s.ac_state = 2; // 开启制冷模式 | Turn on cooling mode
+                state->ac_s.target_temp = state->ac_s.current_temp-1; // 设置目标温度 | Set target temp
             }
         }
+        
+        // 暖风模式按钮 | Heating mode button
         if(mouse_press(100,290,200,360) == 1)
         {
             do
@@ -55,13 +62,15 @@ void ac(CarStatus *state,int *puge)
                 mouse_show(&mouse);
             }while ((mouse.key & 1) == 1);
             if(state->ac_s.ac_state == 3)
-                state->ac_s.ac_state = 0;
+                state->ac_s.ac_state = 0; // 关闭暖风模式 | Turn off heating mode
             else
             {
-                state->ac_s.ac_state = 3;
-                state->ac_s.target_temp = state->ac_s.current_temp+1;
+                state->ac_s.ac_state = 3; // 开启暖风模式 | Turn on heating mode
+                state->ac_s.target_temp = state->ac_s.current_temp+1; // 设置目标温度 | Set target temp
             }
         }
+        
+        // 循环模式按钮 | Circulation mode button
         if(mouse_press(433,90,533,160) == 1)
         {
             do
@@ -69,8 +78,10 @@ void ac(CarStatus *state,int *puge)
                 MouseGet(&mouse);
                 mouse_show(&mouse);
             }while ((mouse.key & 1) == 1);
-            state->ac_s.circulate ^= 1;
+            state->ac_s.circulate ^= 1; // 切换循环模式 | Toggle circulation mode
         }
+        
+        // 通风模式按钮 | Fresh air mode button
         if(mouse_press(433,190,533,260) == 1)
         {
             do
@@ -78,8 +89,10 @@ void ac(CarStatus *state,int *puge)
                 MouseGet(&mouse);
                 mouse_show(&mouse);
             }while ((mouse.key & 1) == 1);
-            state->ac_s.fresh_air ^= 1;
+            state->ac_s.fresh_air ^= 1; // 切换通风模式 | Toggle fresh air mode
         }
+        
+        // 除雾模式按钮 | Defog mode button
         if(mouse_press(433,290,533,360) == 1)
         {
             do
@@ -87,43 +100,51 @@ void ac(CarStatus *state,int *puge)
                 MouseGet(&mouse);
                 mouse_show(&mouse);
             }while ((mouse.key & 1) == 1);
-            state->ac_s.defog ^= 1;
+            state->ac_s.defog ^= 1; // 切换除雾模式 | Toggle defog mode
         }
     }
 }
 
+// 绘制空调控制页面 | Draw AC control page
 void draw_ac_page()
 {
+    // 绘制返回按钮 | Draw back button
     Line2(603,600,633,600,0xFFFFFF);
 	Line2(603,600,603,630,0xFFFFFF);
 	Line2(603,600,633,630,0xFFFFFF);
 	Line2(633,600,603,630,0xFFFFFF);
     
-    bar2(100,90,200,160,0xFFFFFF);
-	bar2(100,190,200,260,0xFFFFFF);
-    bar2(100,290,200,360,0xFFFFFF);
-    bar2(433,90,533,160,0xFFFFFF);
-	bar2(433,190,533,260,0xFFFFFF);
-    bar2(433,290,533,360,0xFFFFFF);
+    // 绘制模式选择按钮 | Draw mode selection buttons
+    bar2(100,90,200,160,0xFFFFFF);  // 自动模式 | Auto mode
+	bar2(100,190,200,260,0xFFFFFF); // 制冷模式 | Cooling mode
+    bar2(100,290,200,360,0xFFFFFF); // 暖风模式 | Heating mode
+    bar2(433,90,533,160,0xFFFFFF);  // 循环模式 | Circulation mode
+	bar2(433,190,533,260,0xFFFFFF); // 通风模式 | Fresh air mode
+    bar2(433,290,533,360,0xFFFFFF); // 除雾模式 | Defog mode
 
-    puthz(130, 115, "自动",24,30,0xFFFFFF);//auto
-    puthz(130, 215, "制冷",24,30,0xFFFFFF);//cold
-    puthz(130, 315, "暖风",24,30,0xFFFFFF);//heating
-    puthz(463, 115, "循环",24,30,0xFFFFFF);//circulation
-    puthz(463, 215, "通风",24,30,0xFFFFFF); //air_refreshing
-    puthz(463, 315, "除雾",24,30,0xFFFFFF);//defoging
+    // 添加按钮文字 | Add button labels
+    puthz(130, 115, "自动",24,30,0xFFFFFF); // 自动 | Auto
+    puthz(130, 215, "制冷",24,30,0xFFFFFF); // 制冷 | Cooling
+    puthz(130, 315, "暖风",24,30,0xFFFFFF); // 暖风 | Heating
+    puthz(463, 115, "循环",24,30,0xFFFFFF); // 循环 | Circulation
+    puthz(463, 215, "通风",24,30,0xFFFFFF); // 通风 | Fresh air
+    puthz(463, 315, "除雾",24,30,0xFFFFFF); // 除雾 | Defog
 }
 
+// 温度控制处理 | Temperature control handling
 void temp(CarStatus *state)
 {
     char tag_temp[5]={'\0'};
     FILE *fp;
     prt_hz24_asc32(40,735,tag_temp,0xFC44,"HZK\\Hzk24f");
+    
+    // 自动模式温度控制 | Auto mode temperature control
     if(state->ac_s.ac_state == 1)
     {
         if(state->ac_s.target_temp<=35&&state->ac_s.target_temp>=0)
         {
-            if(mouse_press(140,703,172,735) == 1&&state->ac_s.target_temp<35)//temp+
+            // 温度增加按钮 | Temperature increase button
+            if(mouse_press(140,703,172,735) == 1&&state->ac_s.target_temp<35)
             {
                 do
                 {
@@ -138,7 +159,8 @@ void temp(CarStatus *state)
                 fwrite(&state->ac_s.target_temp,sizeof(int),1,fp);
                 fclose(fp);
             }
-            if(mouse_press(180,703,212,735) == 1&&state->ac_s.target_temp>0)//temp-
+            // 温度减少按钮 | Temperature decrease button
+            if(mouse_press(180,703,212,735) == 1&&state->ac_s.target_temp>0)
             {
                 do
                 {
@@ -155,12 +177,14 @@ void temp(CarStatus *state)
             } 
         }
     }
+    
+    // 制冷模式温度控制 | Cooling mode temperature control
     if(state->ac_s.ac_state == 2)
     {
-        
         if(state->ac_s.target_temp>=0&&state->ac_s.current_temp>=state->ac_s.target_temp)
         {
-            if(mouse_press(140,703,172,735) == 1&&state->ac_s.cur_t>state->ac_s.target_temp)//temp+
+            // 温度增加按钮 | Temperature increase button
+            if(mouse_press(140,703,172,735) == 1&&state->ac_s.cur_t>state->ac_s.target_temp)
             {
                 do
                 {
@@ -172,7 +196,8 @@ void temp(CarStatus *state)
                 sprintf(tag_temp,"%d℃",state->ac_s.target_temp);
                 prt_hz24_asc32(40,735,tag_temp,0xFC44,"HZK\\Hzk24f");
             }
-            if(mouse_press(180,703,212,735) == 1&&state->ac_s.target_temp>0)//temp-
+            // 温度减少按钮 | Temperature decrease button
+            if(mouse_press(180,703,212,735) == 1&&state->ac_s.target_temp>0)
             {
                 do
                 {
@@ -186,12 +211,14 @@ void temp(CarStatus *state)
             }
         } 
     }
+    
+    // 暖风模式温度控制 | Heating mode temperature control
     if(state->ac_s.ac_state == 3)
     {
-        
         if(state->ac_s.target_temp<=35&&state->ac_s.current_temp<=state->ac_s.target_temp)
         {
-            if(mouse_press(140,703,172,735) == 1&&state->ac_s.target_temp<35)//temp+
+            // 温度增加按钮 | Temperature increase button
+            if(mouse_press(140,703,172,735) == 1&&state->ac_s.target_temp<35)
             {
                 do
                 {
@@ -203,7 +230,8 @@ void temp(CarStatus *state)
                 sprintf(tag_temp,"%d℃",state->ac_s.target_temp);
                 prt_hz24_asc32(40,735,tag_temp,0xFC44,"HZK\\Hzk24f");
             }
-            if(mouse_press(180,703,212,735) == 1&&state->ac_s.cur_t<state->ac_s.target_temp)//temp-
+            // 温度减少按钮 | Temperature decrease button
+            if(mouse_press(180,703,212,735) == 1&&state->ac_s.cur_t<state->ac_s.target_temp)
             {
                 do
                 {
@@ -219,37 +247,42 @@ void temp(CarStatus *state)
     }
 }
 
+// 温度变化处理 | Temperature change handling
 void temp_change(CarStatus *state)
 {
-    if(state->ac_s.ac_state)
+    if(state->ac_s.ac_state) // 如果空调开启 | If AC is on
     {
         if(check_timer_expire(&(state->timer.ac_time),4*CLOCKS_PER_SEC)) 
         {
+            // 当前温度低于目标温度 | Current temp lower than target
             if(state->ac_s.current_temp < state->ac_s.target_temp) 
             {
                 bar1(40,667,130,702,0x0085);
-                state->ac_s.current_temp++;
+                state->ac_s.current_temp++; // 温度升高 | Increase temperature
             } 
+            // 当前温度高于目标温度 | Current temp higher than target
             else if(state->ac_s.current_temp > state->ac_s.target_temp) 
             {
                 bar1(40,667,130,702,0x0085);
-                state->ac_s.current_temp--;
+                state->ac_s.current_temp--; // 温度降低 | Decrease temperature
             }
         }
     }
-    else
+    else // 如果空调关闭 | If AC is off
     {
         if(check_timer_expire(&(state->timer.ac_time),4*CLOCKS_PER_SEC)) 
         {
+            // 当前温度低于环境温度 | Current temp lower than ambient
             if(state->ac_s.current_temp < state->ac_s.cur_t) 
             {
                 bar1(40,667,130,702,0x0085);
-                state->ac_s.current_temp++;
+                state->ac_s.current_temp++; // 温度升高 | Increase temperature
             } 
+            // 当前温度高于环境温度 | Current temp higher than ambient
             else if(state->ac_s.current_temp > state->ac_s.cur_t) 
             {
                 bar1(40,667,130,702,0x0085);
-                state->ac_s.current_temp--;
+                state->ac_s.current_temp--; // 温度降低 | Decrease temperature
             }
         }
     }

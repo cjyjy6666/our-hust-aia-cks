@@ -1,125 +1,125 @@
 #include"allfunc.h"
 
-void wiper(CarStatus *state,int *puge)
+// 雨刷控制主函数 | Main function for wiper control
+void wiper(CarStatus *state, int *puge)
 {
-	mouse_off(&mouse);
-    draw_wiper_page();
-    mouse_on(mouse);
+    mouse_off(&mouse); // 关闭鼠标显示 | Hide mouse cursor
+    draw_wiper_page(); // 绘制雨刷页面 | Draw wiper page
+    mouse_on(mouse);   // 开启鼠标显示 | Show mouse cursor
 
-    while(1)
+    while(1) // 主循环 | Main loop
     {
-        show_all(state);	
-        mouse_show(&mouse);
-        if (mouse_press(603,600,633,630) == 1)
-		{
-			*puge = 2;
-			break;
-		}
-        if (mouse_press(100,190,200,260) == 1)
-		{
-			do 
-            {
-                MouseGet(&mouse);
-                mouse_show(&mouse);
-            } while ((mouse.key & 1) == 1);
-            state->wiper_s.auto_w^= 1;
-            state->wiper_s.once = 0;
-            state->wiper_s.fast = 0;
-            state->wiper_s.slow = 0;
+        show_all(state); // 显示所有状态 | Display all status
+        mouse_show(&mouse); // 显示鼠标 | Show mouse cursor
+        
+        // 返回按钮检测 | Back button detection
+        if (mouse_press(603,600,633,630) == 1) {
+            *puge = 2; // 返回主页面 | Return to main page
+            break;
         }
-        if (mouse_press(100,290,200,360) == 1)
-		{
-			do 
-            {
+        
+        // 自动模式按钮 | Auto mode button
+        if (mouse_press(100,190,200,260) == 1) {
+            do {
+                MouseGet(&mouse);
+                mouse_show(&mouse);
+            } while ((mouse.key & 1) == 1); // 等待鼠标释放 | Wait for mouse release
+            state->wiper_s.auto_w ^= 1; // 切换自动模式 | Toggle auto mode
+            state->wiper_s.once = 0;   // 关闭单次模式 | Disable once mode
+            state->wiper_s.fast = 0;   // 关闭快速模式 | Disable fast mode
+            state->wiper_s.slow = 0;   // 关闭慢速模式 | Disable slow mode
+        }
+        
+        // 手动模式按钮 | Manual mode button
+        if (mouse_press(100,290,200,360) == 1) {
+            do {
                 MouseGet(&mouse);
                 mouse_show(&mouse);
             } while ((mouse.key & 1) == 1);
-            state->wiper_s.once^= 1;
+            state->wiper_s.once ^= 1; // 切换单次模式 | Toggle once mode
             state->wiper_s.fast = 0;
             state->wiper_s.slow = 0;
             state->wiper_s.auto_w = 0;
-            state->timer.wiper_time = clock();
+            state->timer.wiper_time = clock(); // 记录时间 | Record time
         }
-        if (mouse_press(433,190,533,260) == 1)
-		{
-			do 
-            {
+        
+        // 快速模式按钮 | Fast mode button
+        if (mouse_press(433,190,533,260) == 1) {
+            do {
                 MouseGet(&mouse);
                 mouse_show(&mouse);
             } while ((mouse.key & 1) == 1);
-            state->wiper_s.fast^= 1;
+            state->wiper_s.fast ^= 1; // 切换快速模式 | Toggle fast mode
             state->wiper_s.slow = 0;
             state->wiper_s.auto_w = 0;
             state->wiper_s.once = 0;
         }
-        if (mouse_press(433,290,533,360) == 1)
-		{
-			do 
-            {
+        
+        // 慢速模式按钮 | Slow mode button
+        if (mouse_press(433,290,533,360) == 1) {
+            do {
                 MouseGet(&mouse);
                 mouse_show(&mouse);
             } while ((mouse.key & 1) == 1);
-            state->wiper_s.slow^= 1;
+            state->wiper_s.slow ^= 1; // 切换慢速模式 | Toggle slow mode
             state->wiper_s.fast = 0;
             state->wiper_s.auto_w = 0;
             state->wiper_s.once = 0;
         }
-        /* 雨刷逻辑 */
-        // 自动模式优先
-        if(state->wiper_s.auto_w) 
-        {
-            if(state->wiper_s.rain == 2) 
-            {       // 大雨
-                state->wiper_s.cur_wip = 2;
+        
+        /* 雨刷逻辑 | Wiper logic */
+        // 自动模式优先 | Auto mode has highest priority
+        if(state->wiper_s.auto_w) {
+            if(state->wiper_s.rain == 2) {       // 大雨 | Heavy rain
+                state->wiper_s.cur_wip = 2;     // 快速雨刷 | Fast wiper
             } 
-            else if(state->wiper_s.rain == 1) 
-            { // 小雨
-                state->wiper_s.cur_wip = 1;
+            else if(state->wiper_s.rain == 1) { // 小雨 | Light rain
+                state->wiper_s.cur_wip = 1;     // 慢速雨刷 | Slow wiper
             } 
-            else 
-            {                              // 晴天
-                state->wiper_s.cur_wip = 0;
+            else {                              // 晴天 | Sunny
+                state->wiper_s.cur_wip = 0;     // 关闭雨刷 | Turn off wiper
             }
         }
-        // 手动模式（互斥）
-        else if(state->wiper_s.fast) 
-        {
-            state->wiper_s.cur_wip = 2;
+        // 手动模式（互斥）| Manual mode (mutually exclusive)
+        else if(state->wiper_s.fast) {
+            state->wiper_s.cur_wip = 2; // 快速雨刷 | Fast wiper
         }
-        else if(state->wiper_s.slow) 
-        {
-            state->wiper_s.cur_wip = 1;
+        else if(state->wiper_s.slow) {
+            state->wiper_s.cur_wip = 1; // 慢速雨刷 | Slow wiper
         }
-        // 单次模式（最高优先级）
-        else if(state->wiper_s.once) 
-        {
-            state->wiper_s.cur_wip = 1;  // 改为慢速刮
-            if(check_timer_expire(&(state->timer.wiper_time), CLOCKS_PER_SEC)) 
-            {
-                state->wiper_s.cur_wip = 0;
-                state->wiper_s.once = 0; // 重置单次模式
+        // 单次模式（最高优先级）| Once mode (highest priority)
+        else if(state->wiper_s.once) {
+            state->wiper_s.cur_wip = 1;  // 改为慢速刮 | Change to slow wipe
+            if(check_timer_expire(&(state->timer.wiper_time), CLOCKS_PER_SEC)) {
+                state->wiper_s.cur_wip = 0; // 关闭雨刷 | Turn off wiper
+                state->wiper_s.once = 0;   // 重置单次模式 | Reset once mode
             }
         }
-        // 默认状态
-        else 
-        {
-            state->wiper_s.cur_wip = 0;
+        // 默认状态 | Default state
+        else {
+            state->wiper_s.cur_wip = 0; // 关闭雨刷 | Turn off wiper
         }
     }
 }
 
+// 绘制雨刷页面 | Draw wiper page
 void draw_wiper_page()
 {
-    bar2(100,190,200,260,0xFFFFFF);
-	bar2(100,290,200,360,0xFFFFFF);
-	bar2(433,190,533,260,0xFFFFFF);
-	bar2(433,290,533,360,0xFFFFFF);
-	puthz(130, 215, "自动",24,30,0xFFFFFF);//auto
-    puthz(130, 315, "手动",24,30,0xFFFFFF);//wipe once
-    puthz(463, 215, "高速",24,30,0xFFFFFF); //fast
-    puthz(463, 315, "低速",24,30,0xFFFFFF); //slow
-	Line2(603,600,633,600,0xFFFFFF);
-	Line2(603,600,603,630,0xFFFFFF);
-	Line2(603,600,633,630,0xFFFFFF);
-	Line2(633,600,603,630,0xFFFFFF);
+    // 绘制功能按钮 | Draw function buttons
+    bar2(100,190,200,260,0xFFFFFF); // 自动按钮 | Auto button
+    bar2(100,290,200,360,0xFFFFFF); // 手动按钮 | Manual button
+    bar2(433,190,533,260,0xFFFFFF); // 快速按钮 | Fast button
+    bar2(433,290,533,360,0xFFFFFF); // 慢速按钮 | Slow button
+    
+    // 添加按钮文字 | Add button labels
+    puthz(130, 215, "自动",24,30,0xFFFFFF); // 自动 | Auto
+    puthz(130, 315, "手动",24,30,0xFFFFFF); // 手动 | Manual
+    puthz(463, 215, "高速",24,30,0xFFFFFF); // 高速 | Fast
+    puthz(463, 315, "低速",24,30,0xFFFFFF); // 低速 | Slow
+    
+    // 绘制返回按钮 | Draw back button
+    Line2(603,600,633,600,0xFFFFFF);
+    Line2(603,600,603,630,0xFFFFFF);
+    Line2(603,600,633,630,0xFFFFFF);
+    Line2(633,600,603,630,0xFFFFFF);
 }
