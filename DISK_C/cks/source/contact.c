@@ -291,3 +291,4 @@ void del_num(char num[7][13], int select)
     fclose(temp);
     remove("data\\phone.dat"); // 删除原文件 | Delete original file
     rename("data\\temp.dat","data\\phone.dat"); // 重命名临时文件 | Rename temp file
+}

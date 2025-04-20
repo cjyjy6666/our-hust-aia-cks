@@ -212,3 +212,4 @@ void key_det(char ph_num[13], int *num_len)
         *num_len = 0; // 重置号码长度 | Reset number length
         ph_num[0] = '\0'; // 清空号码 | Clear number
     }
+}
