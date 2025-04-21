@@ -676,13 +676,13 @@ void button2(int x1, int y1, int x2, int y2, char *s, int *i) {
         *i=1;
         mouse_off(&mouse);
         bar1(x1, y1, x2, y2, 0x8410);
-        puthz(x1 + 30, y1 + 25, s, 24, 26, 0X000000);
+        puthz(x1 + 30, y1 + 25, s, 24, 30, 0X000000);
         mouse_on(mouse);
     } else if (*i && (mouse.x < x1 || mouse.x > x2 || mouse.y < y1 || mouse.y > y2)) {
         *i = 0;
         mouse_off(&mouse);
         bar1(x1, y1, x2, y2, 0xC618);
-        puthz(x1 + 30, y1 + 25, s, 24, 26, 0X000000);
+        puthz(x1 + 30, y1 + 25, s, 24, 30, 0X000000);
         mouse_on(mouse);
     }
 }

@@ -80,6 +80,26 @@ typedef struct ButtonS{
     int wudeng;
     int jinguang;
     int yuanguang;
+    int zidong;
+    int zhilen;
+    int nuanfeng;
+    int xunhuan;
+    int tongfeng;
+    int chuwu;
+    int zidong2;
+    int shoudong;
+    int kuaisu;
+    int mansu;
+    int qianjin;
+    int houtui;
+    int poche;
+    int yundong;
+    int shushi;
+    int guanguang;
+    int bohao;
+    int tongxun;
+    int yinyue;
+    int yinxiang;
 } ButtonS;
 
 typedef struct CarStatus

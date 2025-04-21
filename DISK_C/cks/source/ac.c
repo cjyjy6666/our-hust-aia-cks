@@ -12,6 +12,13 @@ void ac(CarStatus *state,int *puge)
         show_all(state); // 显示所有状态 | Display all status
 		temp(state);     // 温度控制处理 | Temperature control handling
 		mouse_show(&mouse); // 显示鼠标 | Show mouse cursor
+
+        button2(100,90,200,160,"自动",&state->button_s.zidong); // 自动模式按钮 | Auto mode button
+        button2(100,190,200,260,"制冷",&state->button_s.zhilen); // 制冷模式按钮 | Cooling mode button
+        button2(100,290,200,360,"暖风",&state->button_s.nuanfeng); // 暖风模式按钮 | Heating mode button
+        button2(433,90,533,160,"循环",&state->button_s.xunhuan); // 循环模式按钮 | Circulation mode button
+        button2(433,190,533,260,"通风",&state->button_s.tongfeng); // 新风模式按钮 | Fresh air mode button
+        button2(433,290,533,360,"除雾",&state->button_s.chuwu); // 定温模式按钮 | Fixed temperature mode button
         
         // 返回按钮检测 | Back button detection
         if (mouse_press(603,600,633,630) == 1)
@@ -115,20 +122,20 @@ void draw_ac_page()
 	Line2(633,600,603,630,0xFFFFFF);
     
     // 绘制模式选择按钮 | Draw mode selection buttons
-    bar2(100,90,200,160,0xFFFFFF);  // 自动模式 | Auto mode
-	bar2(100,190,200,260,0xFFFFFF); // 制冷模式 | Cooling mode
-    bar2(100,290,200,360,0xFFFFFF); // 暖风模式 | Heating mode
-    bar2(433,90,533,160,0xFFFFFF);  // 循环模式 | Circulation mode
-	bar2(433,190,533,260,0xFFFFFF); // 通风模式 | Fresh air mode
-    bar2(433,290,533,360,0xFFFFFF); // 除雾模式 | Defog mode
+    bar1(100,90,200,160,0xC618);  // 自动模式 | Auto mode
+	bar1(100,190,200,260,0xC618); // 制冷模式 | Cooling mode
+    bar1(100,290,200,360,0xC618); // 暖风模式 | Heating mode
+    bar1(433,90,533,160,0xC618);  // 循环模式 | Circulation mode
+	bar1(433,190,533,260,0xC618); // 通风模式 | Fresh air mode
+    bar1(433,290,533,360,0xC618); // 除雾模式 | Defog mode
 
     // 添加按钮文字 | Add button labels
-    puthz(130, 115, "自动",24,30,0xFFFFFF); // 自动 | Auto
-    puthz(130, 215, "制冷",24,30,0xFFFFFF); // 制冷 | Cooling
-    puthz(130, 315, "暖风",24,30,0xFFFFFF); // 暖风 | Heating
-    puthz(463, 115, "循环",24,30,0xFFFFFF); // 循环 | Circulation
-    puthz(463, 215, "通风",24,30,0xFFFFFF); // 通风 | Fresh air
-    puthz(463, 315, "除雾",24,30,0xFFFFFF); // 除雾 | Defog
+    puthz(130, 115, "自动",24,30,0x000000); // 自动 | Auto
+    puthz(130, 215, "制冷",24,30,0x000000); // 制冷 | Cooling
+    puthz(130, 315, "暖风",24,30,0x000000); // 暖风 | Heating
+    puthz(463, 115, "循环",24,30,0x000000); // 循环 | Circulation
+    puthz(463, 215, "通风",24,30,0x000000); // 通风 | Fresh air
+    puthz(463, 315, "除雾",24,30,0x000000); // 除雾 | Defog
 }
 
 // 温度控制处理 | Temperature control handling

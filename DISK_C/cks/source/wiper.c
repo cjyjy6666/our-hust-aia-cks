@@ -11,6 +11,11 @@ void wiper(CarStatus *state, int *puge)
     {
         show_all(state); // 显示所有状态 | Display all status
         mouse_show(&mouse); // 显示鼠标 | Show mouse cursor
+
+        button2(100,190,200,260,"自动",&state->button_s.zidong2); 
+        button2(100,290,200,360,"手动",&state->button_s.shoudong); 
+        button2(433,190,533,260,"高速",&state->button_s.kuaisu); 
+        button2(433,290,533,360,"低速",&state->button_s.mansu); 
         
         // 返回按钮检测 | Back button detection
         if (mouse_press(603,600,633,630) == 1) {
@@ -106,16 +111,16 @@ void wiper(CarStatus *state, int *puge)
 void draw_wiper_page()
 {
     // 绘制功能按钮 | Draw function buttons
-    bar2(100,190,200,260,0xFFFFFF); // 自动按钮 | Auto button
-    bar2(100,290,200,360,0xFFFFFF); // 手动按钮 | Manual button
-    bar2(433,190,533,260,0xFFFFFF); // 快速按钮 | Fast button
-    bar2(433,290,533,360,0xFFFFFF); // 慢速按钮 | Slow button
+    bar1(100,190,200,260,0xC618); // 自动按钮 | Auto button
+    bar1(100,290,200,360,0xC618); // 手动按钮 | Manual button
+    bar1(433,190,533,260,0xC618); // 快速按钮 | Fast button
+    bar1(433,290,533,360,0xC618); // 慢速按钮 | Slow button
     
     // 添加按钮文字 | Add button labels
-    puthz(130, 215, "自动",24,30,0xFFFFFF); // 自动 | Auto
-    puthz(130, 315, "手动",24,30,0xFFFFFF); // 手动 | Manual
-    puthz(463, 215, "高速",24,30,0xFFFFFF); // 高速 | Fast
-    puthz(463, 315, "低速",24,30,0xFFFFFF); // 低速 | Slow
+    puthz(130, 215, "自动",24,30,0x000000); // 自动 | Auto
+    puthz(130, 315, "手动",24,30,0x000000); // 手动 | Manual
+    puthz(463, 215, "高速",24,30,0x000000); // 高速 | Fast
+    puthz(463, 315, "低速",24,30,0x000000); // 低速 | Slow
     
     // 绘制返回按钮 | Draw back button
     Line2(603,600,633,600,0xFFFFFF);

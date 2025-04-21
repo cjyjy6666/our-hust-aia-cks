@@ -12,6 +12,14 @@ void drive(CarStatus *state, int *puge)
     {
         show_all(state); // 显示所有状态 | Display all status
         mouse_show(&mouse); // 显示鼠标 | Show mouse cursor
+
+        button2(100,90,200,160,"前进",&state->button_s.qianjin); 
+        button2(100,190,200,260,"后退",&state->button_s.houtui); 
+        button2(100,290,200,360,"泊车",&state->button_s.poche);
+        button2(433,90,533,160,"运动",&state->button_s.yundong); 
+        button2(433,190,533,260,"舒适",&state->button_s.shushi); 
+        button2(433,290,533,360,"观光",&state->button_s.guanguang); 
+        
         
         // 返回按钮检测 | Back button detection
         if (mouse_press(603,600,633,630) == 1) {
@@ -125,22 +133,22 @@ void draw_drive_page()
     Line2(633,600,603,630,0xFFFFFF);
     
     // 绘制主模式按钮 | Draw main mode buttons
-    bar2(100,90,200,160,0xFFFFFF); // 前进 | Forward
-    bar2(100,190,200,260,0xFFFFFF); // 后退 | Backward
-    bar2(100,290,200,360,0xFFFFFF); // 泊车 | Parking
+    bar1(100,90,200,160,0xC618); // 前进 | Forward
+    bar1(100,190,200,260,0xC618); // 后退 | Backward
+    bar1(100,290,200,360,0xC618); // 泊车 | Parking
     
     // 绘制子模式按钮 | Draw sub-mode buttons
-    bar2(433,90,533,160,0xFFFFFF); // 运动 | Sport
-    bar2(433,190,533,260,0xFFFFFF); // 舒适 | Comfort
-    bar2(433,290,533,360,0xFFFFFF); // 观光 | View
+    bar1(433,90,533,160,0xC618); // 运动 | Sport
+    bar1(433,190,533,260,0xC618); // 舒适 | Comfort
+    bar1(433,290,533,360,0xC618); // 观光 | View
     
     // 添加按钮文字 | Add button labels
-    puthz(130, 115, "前进",24,30,0xFFFFFF); // 前进 | Forward
-    puthz(130, 215, "后退",24,30,0xFFFFFF); // 后退 | Backward
-    puthz(130, 315, "泊车",24,30,0xFFFFFF); // 泊车 | Parking
-    puthz(463, 115, "运动",24,30,0xFFFFFF); // 运动 | Sport
-    puthz(463, 215, "舒适",24,30,0xFFFFFF); // 舒适 | Comfort
-    puthz(463, 315, "观光",24,30,0xFFFFFF); // 观光 | View
+    puthz(130, 115, "前进",24,30,0x000000); // 前进 | Forward
+    puthz(130, 215, "后退",24,30,0x000000); // 后退 | Backward
+    puthz(130, 315, "泊车",24,30,0x000000); // 泊车 | Parking
+    puthz(463, 115, "运动",24,30,0x000000); // 运动 | Sport
+    puthz(463, 215, "舒适",24,30,0x000000); // 舒适 | Comfort
+    puthz(463, 315, "观光",24,30,0x000000); // 观光 | View
 }
 
 // 速度表指针控制 | Speedometer needle control
