@@ -43,6 +43,12 @@ void delayer(int ms);
 int getRegionXx(int region);
 int getRegionYy(int region);
 void initializeClickRegions(ClickRegion regions[Max]);
-
-
+void handleStartButton(int *i1, ClickRegion regions[], int *numRegions);
+void handle_region_click(int *i1, ClickRegion *regions, int numRegions, 
+int map[Max][Max], TABLE T[], int *begin);
+void handleendButton(int *i1, ClickRegion endRegions[], int *numEndRegions);
+void handle_region_click_end(int *i1, ClickRegion endRegions[], int *numEndRegions, int *end);
+void drawPath(int *begin, int *end, TABLE T[], int *i1);
+void button1(int x1, int y1, int x2, int y2, char *s, int *i) ;
+void button2(int x1, int y1, int x2, int y2, char *s, int *i);
 #endif

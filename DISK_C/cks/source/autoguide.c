@@ -37,6 +37,7 @@ void autoguide(CarStatus *state,int *puge)
 		
 
 		mouse_show(&mouse);
+		
         if(mouse_press(965,0,1024,53) == 1)
         {
             *puge=2;
@@ -44,203 +45,23 @@ void autoguide(CarStatus *state,int *puge)
         }
         if((mouse_press(340, 20, 480, 80) == 1)&&(i1==0))
 		{
-			initializeClickRegions(regions);
-
-			i1=1;
-			do {
-                MouseGet(&mouse);
-                mouse_show(&mouse);
-            } while ((mouse.key & 1) == 1);
-            // put_asc16_number_size(750,100,2,2,regions[6].start,0x000000);
-		
-
-			mouse_off(&mouse);
-			bar1(340, 20, 480, 80,0x340F);
-			puthz(352,25,"起点",48,55,0x000000);
-			puthz(531,89,"请在左侧图中选择起点",48,45,0x19E6);
-
-			mouse_on(mouse);
-
-
-			
-			numRegions = sizeof(regions) / sizeof(regions[0]);
+			handleStartButton(&i1, regions, &numRegions);
 		}
 	
 			// 锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷录锟?
-		for (i = 0; i < numRegions; i++) {
-			if ((mouse_press(regions[i].x1, regions[i].y1, regions[i].x2, regions[i].y2) == 1)&&(i1==1)) {
-				TABLE temp;
-				do {
-					MouseGet(&mouse);
-					mouse_show(&mouse);
-					} while ((mouse.key & 1) == 1);
-					
-				memcpy(map, regions[i].map, sizeof(map));
-				mouse_off(&mouse);
-				bar1(340, 95, 480, 155,0xFF44);
-		        puthz(352,100,"终点",48,55,0x000000);
-				Circlefill((regions[i].x1)+20,(regions[i].y1)+20,3,0xF800);
-				bar1(515,82,1000,148,0x7FFE);
-				mouse_on(mouse);
-				Dijkstra(map,0, T);
-				for(j=0;j<Max;j++){
-					switch(regions[i].start){
-					case 0:break;
-					case 1:if(T[j]->path==0)T[j]->path+=1;break;
-					case 2:if(T[j]->path==0)T[j]->path+=2;break;
-					case 3:if(T[j]->path==0)T[j]->path+=3;break;
-					case 4:if(T[j]->path==0)T[j]->path+=4;break;
-					case 5:if(T[j]->path==0)T[j]->path+=5;break;
-					case 6:if(T[j]->path==0)T[j]->path+=6;break;
-					}
-				}
-				switch(regions[i].start){
-					case 0:break;
-					case 1:temp=T[0];T[0]=T[1];T[1]=temp;break;
-					case 2:temp=T[0];T[0]=T[2];T[2]=temp;break;
-					case 3:temp=T[0];T[0]=T[3];T[3]=temp;break;
-					case 4:temp=T[0];T[0]=T[4];T[4]=temp;break;
-					case 5:temp=T[0];T[0]=T[5];T[5]=temp;break;
-					case 6:temp=T[0];T[0]=T[6];T[6]=temp;break;
-					}
-					
-				begin=regions[i].start;
-                // put_asc16_number_size(750,100,2,2,begin,0x000000);
-				i1=2;
-				break;
-			}
-			else if(mouse_press(340, 170, 480, 230) == 1&&(i1==1)) {
-				i1=0;
-				
-				mouse_off(&mouse);
-
-				draw_autoguide();
-			
-				mouse_on(mouse);
-				break;
-			}			
-		}
+		handle_region_click(&i1, regions, numRegions, map, T, &begin);
 			
 	
 			// 锟斤拷锟斤拷锟秸碉拷选锟斤拷
-		if((mouse_press(340, 95, 480, 155) == 1)&&(i1==2))
-		{
-			initializeClickRegions(endRegions);
-
-			i1=3;
-            // put_asc16_number_size(750,100,2,2,endRegions[6].start,0x000000);
+		handleendButton(&i1, endRegions, &numEndRegions);
 
 
-			do {
-				MouseGet(&mouse);
-				mouse_show(&mouse);
-			} while ((mouse.key & 1) == 1);
-
-			mouse_off(&mouse);
-			bar1(340, 95, 480, 155,0x340F);
-			puthz(352,100,"终点",48,55,0x000000);
-			puthz(531,89,"请在左侧图中选择终点",48,45,0x19E6);
-
-			mouse_on(mouse);
-
-				
-			numEndRegions = sizeof(endRegions) / sizeof(endRegions[0]);
-		}
-		else if((mouse_press(340, 170, 480, 230) == 1)&&(i1==2))
-			{
-				i1=0;
-				
-			    mouse_off(&mouse);
-
-				draw_autoguide();
-			 
-				mouse_on(mouse);
-            
-			}			 
-	
-		for (i = 0; i < numEndRegions; i++) {
-			if ((mouse_press(endRegions[i].x1, endRegions[i].y1, endRegions[i].x2, endRegions[i].y2) == 1)&&(i1==3)) {
-				i1=4;
-                do {
-				MouseGet(&mouse);
-				mouse_show(&mouse);
-				} while ((mouse.key & 1) == 1);
-						
-				end = endRegions[i].start;
-                // put_asc16_number_size(750,100,2,2,end,0x000000);
-				mouse_off(&mouse);
-				bar1(340, 170, 480, 230,0xFF44);
-		        puthz(352,175,"开始",48,55,0x000000);				
-				bar1(515,82,1000,148,0x7FFE);
-				Circlefill((endRegions[i].x1)+20,(endRegions[i].y1)+20,3,0xF800);
-				mouse_on(mouse);
-
-				break;
-			}
-			
-
-		}
-
+		handle_region_click_end(&i1, endRegions, &numEndRegions, &end);
+		
+		
 		if((mouse_press(340, 170, 480, 230) == 1)&&(i1==4))
 		{
-			 // 锟斤拷锟斤拷锟斤拷锟铰凤拷锟?
-			 int time;
-			 int path[Max];
-			 int pathLength = 0;
-			 int current = end;
-			 while (current != begin) {
-				 path[pathLength] = current;
-				 pathLength++;
-				 current = T[current]->path;
-			 }
-			 path[pathLength] = begin;
-			 pathLength++;
-		 
-			 // 锟斤拷转路锟斤拷锟斤拷使锟斤拷锟斤拷锟姐到锟秸碉拷
-			 for (j= 0; j < pathLength / 2; j++) {
-				 int temp = path[j];
-				 path[j] = path[pathLength - j - 1];
-				 path[pathLength - j - 1] = temp;
-			 }
-			 time=T[end]->distance;
-			 i1=5;
-			
-		 
-			 // 锟斤拷锟斤拷小锟斤拷锟斤拷锟斤拷
-			 for (j= 0; j < pathLength - 1; j++) {
-				int x1;int y1;int x2;int y2;
-				  x1 = getRegionX(path[j]);
-				  y1 = getRegionY(path[j]);
-				  x2 = getRegionX(path[j + 1]);
-				  y2 = getRegionY(path[j + 1]);
-				 Line_Thick(x1, y1, x2, y2, 1, 0xF800);
-			 }
-			for (j= 0; j < pathLength - 1; j++) {
-				int x1;int y1;int x2;int y2; int stepX;int stepY;
-				x1 = getRegionXx(path[j]);
-				y1 = getRegionYy(path[j]);
-				x2 = getRegionXx(path[j + 1]);
-				y2 = getRegionYy(path[j + 1]);
-				stepX = (int)((x2 - x1) / 10);
-				stepY = (int)((y2 - y1) / 10);
-				for (k = 0; k <= 10; k++) {
-					int x = x1 + stepX * k;
-					int y = y1 + stepY * k;
-					Circlefill(x, y,8, 0xF800);
-					delayer(10);
-
-				}
-			 }
-			mouse_off(&mouse);
-			puthz(531,89,"本次导航用时    分钟",48,45,0x19E6);
-			bar1(801, 84, 890, 141,0x7FFE);
-			put_asc16_number_size(820, 93,3,3,time,0xFFA5);
-			bar1(340, 170, 480, 230,0xFF44);
-		    puthz(352,175,"完成",48,55,0x000000);
-			mouse_on(mouse);
-
-		 
-			 
+			drawPath(&begin, &end,  T, &i1);
 		}
 		if((mouse_press(340, 170, 480, 230) == 1)&&(i1==5)){
 			i1=0;
@@ -344,7 +165,7 @@ void initializeClickRegions(ClickRegion regions[Max]) {
     regions[6] = g;
 }
 
-// 锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷取锟斤拷锟斤拷锟絏锟斤拷锟斤拷
+// 取得指定区域的 X 坐标
 int getRegionX(int region) {
 	
 
@@ -359,7 +180,7 @@ int getRegionX(int region) {
         default: return 0;
     }
 }
-
+// 取得指定区域的 X 坐标
 int getRegionXx(int region) {
 	
 
@@ -374,7 +195,7 @@ int getRegionXx(int region) {
         default: return 0;
     }
 }
-// 锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷取锟斤拷锟斤拷锟結锟斤拷锟斤拷
+// 取得指定区域的 Y 坐标
 int getRegionY(int region) {
 	
     switch (region) {
@@ -388,6 +209,7 @@ int getRegionY(int region) {
         default: return 0;
     }
 }
+// 取得指定区域的 Y 坐标
 int getRegionYy(int region) {
 	
     switch (region) {
@@ -401,12 +223,12 @@ int getRegionYy(int region) {
         default: return 0;
     }
 }
-// 锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟接迟猴拷锟斤拷
+// 延时函数
 void delayer(int ms) {
     long endTime = clock() + ms;
     while (clock() < endTime);
 }
-
+// 绘制自动导航界面
 void draw_autoguide()
 {
     bar1(0, 0, 1024, 768,0x7FFE);
@@ -505,7 +327,7 @@ void draw_autoguide()
 
 
 
-void InitializeTable(int start,TABLE T[])//鍒濓拷?锟藉寲琛ㄦ牸	
+void InitializeTable(int start,TABLE T[])//初始化表格
 {
 	int i;
 	for(i=0;i<Max;i++)
@@ -520,7 +342,7 @@ void InitializeTable(int start,TABLE T[])//鍒濓拷?锟藉寲琛ㄦ牸
 	
 }
 
-QUEUE InitializeQueue(int capacity)//鍒濓拷?锟藉寲闃熷垪
+QUEUE InitializeQueue(int capacity)//初始化队列
 {
     int i;
 	QUEUE Q;
@@ -538,7 +360,7 @@ QUEUE InitializeQueue(int capacity)//鍒濓拷?锟藉寲闃熷垪
 	
 }
 
-void enqueue(QUEUE Q, TABLE K)//鍏ラ槦
+void enqueue(QUEUE Q, TABLE K)//入队
 {
 	int i,hole;
 	
@@ -567,7 +389,7 @@ void enqueue(QUEUE Q, TABLE K)//鍏ラ槦
 	Q->element[hole]=K;
 }
 
-int dequeue(QUEUE Q)//鍑洪槦
+int dequeue(QUEUE Q)//出队
 {	TABLE OUT;
 	int hole=1,child=2,last=Q->size;
 	OUT=Q->element[1];
@@ -588,7 +410,7 @@ int dequeue(QUEUE Q)//鍑洪槦
 	return OUT->name-65;
 	
 }
-
+//Dijkstra
 void Dijkstra(int map[Max][Max],int start,TABLE T[])
 {
 	int i;
@@ -620,3 +442,247 @@ void Dijkstra(int map[Max][Max],int start,TABLE T[])
 }
 
 
+void handleStartButton(int *i1, ClickRegion regions[], int *numRegions) {
+    if ((mouse_press(340, 20, 480, 80) == 1) && (*i1 == 0)) {
+        initializeClickRegions(regions);
+        *i1 = 1;
+        
+        // 等待鼠标释放
+        do {
+            MouseGet(&mouse);
+            mouse_show(&mouse);
+        } while ((mouse.key & 1) == 1);
+
+        // 更新界面元素
+        mouse_off(&mouse);
+        bar1(340, 20, 480, 80, 0x340F);
+        puthz(352, 25, "起点", 48, 55, 0x000000);
+        puthz(531, 89, "请在左侧图中选择起点", 48, 45, 0x19E6);
+        mouse_on(mouse);
+
+        // 计算区域数量
+        *numRegions = Max;  // 直接使用预定义的Max常量
+    }
+}
+
+void handle_region_click(int *i1, ClickRegion *regions, int numRegions, 
+	int map[Max][Max], TABLE T[], int *begin)
+{
+    int i,j;
+    TABLE temp;
+
+    for (i = 0; i < numRegions; i++) {
+/* 起点区域选择 */
+        if ((mouse_press(regions[i].x1, regions[i].y1, regions[i].x2, regions[i].y2)==1) && (*i1 == 1)) {
+/* BC31兼容的延时循环 */
+            do {
+            MouseGet(&mouse);
+            mouse_show(&mouse);
+            } while ((mouse.key & 1) == 1);
+
+/* 内存拷贝适配16位模式 */
+            _fmemcpy((int far *)map, (int far *)regions[i].map, (unsigned)(Max*Max*sizeof(int)));
+
+/* 图形操作 */
+            mouse_off(&mouse);
+            bar1(340, 95, 480, 155, 0xFF44);
+            puthz(352,100,"终点",48,55,0x000000);
+            Circlefill(regions[i].x1+20,regions[i].y1+20,3,0xF800);
+            bar1(515,82,1000,148,0x7FFE);
+            mouse_on(mouse);
+
+/* Dijkstra算法调用 */
+            Dijkstra(map,0, T);
+
+/* 路径权重调整 */
+            for(j=0;j<Max;j++){
+                if(regions[i].start != 0 && T[j]->path == 0)
+                T[j]->path += regions[i].start;
+            }
+
+/* 交换路径表 */
+            switch(regions[i].start){
+                case 1: temp=T[0]; T[0]=T[1]; T[1]=temp; break;
+                case 2: temp=T[0]; T[0]=T[2]; T[2]=temp; break;
+                case 3: temp=T[0]; T[0]=T[3]; T[3]=temp; break;
+                case 4: temp=T[0]; T[0]=T[4]; T[4]=temp; break;
+                case 5: temp=T[0]; T[0]=T[5]; T[5]=temp; break;
+                case 6: temp=T[0]; T[0]=T[6]; T[6]=temp; break;
+            }
+
+            *begin = regions[i].start;
+            *i1 = 2;
+            break;
+        }
+/* 取消按钮处理 */
+        else if(mouse_press(340, 170, 480, 230) == 1 && (*i1 == 1)) {
+            *i1=0;
+            mouse_off(&mouse);
+            draw_autoguide();
+            mouse_on(mouse);
+            break;
+        }
+    }
+}
+
+void handleendButton(int *i1, ClickRegion endRegions[], int *numEndRegions){
+	if((mouse_press(340, 95, 480, 155) == 1)&&(*i1==2))
+		{
+			initializeClickRegions(endRegions);
+
+			*i1=3;
+            // put_asc16_number_size(750,100,2,2,endRegions[6].start,0x000000);
+
+
+			do {
+				MouseGet(&mouse);
+				mouse_show(&mouse);
+			} while ((mouse.key & 1) == 1);
+
+			mouse_off(&mouse);
+			bar1(340, 95, 480, 155,0x340F);
+			puthz(352,100,"终点",48,55,0x000000);
+			puthz(531,89,"请在左侧图中选择终点",48,45,0x19E6);
+
+			mouse_on(mouse);
+
+				
+			*numEndRegions = Max;
+		}
+		else if((mouse_press(340, 170, 480, 230) == 1)&&(*i1==2))
+			{
+				*i1=0;
+				
+			    mouse_off(&mouse);
+
+				draw_autoguide();
+			 
+				mouse_on(mouse);
+            
+			}			 
+	
+}
+
+void handle_region_click_end(int *i1, ClickRegion endRegions[], int *numEndRegions, int *end)
+{
+
+	int i;		
+	for (i = 0; i < *numEndRegions; i++) {
+		if ((mouse_press(endRegions[i].x1, endRegions[i].y1, endRegions[i].x2, endRegions[i].y2) == 1)&&(*i1==3)) {
+			*i1=4;
+			do {
+			MouseGet(&mouse);
+			mouse_show(&mouse);
+			} while ((mouse.key & 1) == 1);
+					
+			*end = endRegions[i].start;
+			// put_asc16_number_size(750,100,2,2,end,0x000000);
+			mouse_off(&mouse);
+			bar1(340, 170, 480, 230,0xFF44);
+			puthz(352,175,"开始",48,55,0x000000);				
+			bar1(515,82,1000,148,0x7FFE);
+			Circlefill((endRegions[i].x1)+20,(endRegions[i].y1)+20,3,0xF800);
+			mouse_on(mouse);
+
+			break;
+		}
+		
+
+	
+    }
+}
+
+void drawPath(int *begin, int *end, TABLE T[], int *i1) {
+    int j, k;
+	 int time;
+	 int path[Max];
+	 int pathLength = 0;
+	 int current = *end;
+	 while (current != *begin) {
+		 path[pathLength] = current;
+		 pathLength++;
+		 current = T[current]->path;
+	 }
+	 path[pathLength] = *begin;
+	 pathLength++;
+		 
+			 // 锟斤拷转路锟斤拷锟斤拷使锟斤拷锟斤拷锟姐到锟秸碉拷
+	 for (j= 0; j < pathLength / 2; j++) {
+		 int temp = path[j];
+		 path[j] = path[pathLength - j - 1];
+		 path[pathLength - j - 1] = temp;
+	 }
+	 time=T[*end]->distance;
+	 *i1=5;
+			
+		 
+			 // 锟斤拷锟斤拷小锟斤拷锟斤拷锟斤拷
+	 for (j= 0; j < pathLength - 1; j++) {
+		int x1;int y1;int x2;int y2;
+		  x1 = getRegionX(path[j]);
+		  y1 = getRegionY(path[j]);
+		  x2 = getRegionX(path[j + 1]);
+		  y2 = getRegionY(path[j + 1]);
+		 Line_Thick(x1, y1, x2, y2, 1, 0xF800);
+	 }
+	for (j= 0; j < pathLength - 1; j++) {
+		int x1;int y1;int x2;int y2; int stepX;int stepY;
+		x1 = getRegionXx(path[j]);
+		y1 = getRegionYy(path[j]);
+		x2 = getRegionXx(path[j + 1]);
+		y2 = getRegionYy(path[j + 1]);
+		stepX = (int)((x2 - x1) / 10);
+		stepY = (int)((y2 - y1) / 10);
+		for (k = 0; k <= 10; k++) {
+			int x = x1 + stepX * k;
+			int y = y1 + stepY * k;
+			Circlefill(x, y,8, 0xF800);
+			delayer(10);
+		}
+	 }
+	mouse_off(&mouse);
+	puthz(531,89,"本次导航用时    分钟",48,45,0x19E6);
+	bar1(801, 84, 890, 141,0x7FFE);
+	put_asc16_number_size(820, 93,3,3,time,0xFFA5);
+	bar1(340, 170, 480, 230,0xFF44);
+    puthz(352,175,"完成",48,55,0x000000);
+	mouse_on(mouse);
+}
+
+void button1(int x1, int y1, int x2, int y2, char *s, int *i) {
+    // 验证输入参数
+   
+
+    if (mouse.x >= x1 && mouse.x <= x2 && mouse.y >= y1 && mouse.y <= y2 && !*i) {
+        *i=1;
+        mouse_off(&mouse);
+        bar1(x1, y1, x2, y2, 0x8410);
+        puthz(x1 + 15, y1 + 8, s, 24, 26, 0X000000);
+        mouse_on(mouse);
+    } else if (*i && (mouse.x < x1 || mouse.x > x2 || mouse.y < y1 || mouse.y > y2)) {
+        *i = 0;
+        mouse_off(&mouse);
+        bar1(x1, y1, x2, y2, 0xC618);
+        puthz(x1 + 15, y1 + 8, s, 24, 26, 0X000000);
+        mouse_on(mouse);
+    }
+}
+
+void button2(int x1, int y1, int x2, int y2, char *s, int *i) {
+    // 验证输入参数
+   
+
+    if (mouse.x >= x1 && mouse.x <= x2 && mouse.y >= y1 && mouse.y <= y2 && !*i) {
+        *i=1;
+        mouse_off(&mouse);
+        bar1(x1, y1, x2, y2, 0x8410);
+        puthz(x1 + 30, y1 + 25, s, 24, 26, 0X000000);
+        mouse_on(mouse);
+    } else if (*i && (mouse.x < x1 || mouse.x > x2 || mouse.y < y1 || mouse.y > y2)) {
+        *i = 0;
+        mouse_off(&mouse);
+        bar1(x1, y1, x2, y2, 0xC618);
+        puthz(x1 + 30, y1 + 25, s, 24, 26, 0X000000);
+        mouse_on(mouse);
+    }
+}

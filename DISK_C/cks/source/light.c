@@ -13,6 +13,12 @@ void light(CarStatus* state, int *puge)
         show_all(state); // 显示所有状态 | Display all status
         mouse_show(&mouse); // 显示鼠标 | Show mouse cursor
 
+        button2(100,290,200,360,"左转",&state->button_s.zuozhuan); // 左转向灯按钮 | Left turn signal button
+        button2(100,190,200,260,"右转",&state->button_s.youzhuan); // 右转向灯按钮 | Right turn signal button
+        button2(266,290,366,360,"雾灯",&state->button_s.wudeng); // 雾灯按钮 | Fog light button
+        button2(433,190,533,260,"近光",&state->button_s.jinguang); // 近光灯按钮 | Near light button
+        button2(433,290,533,360,"远光",&state->button_s.yuanguang); // 远光灯按钮 | Far light button
+
         // 近光灯按钮 | Near light button
         if (mouse_press(433,190,533,260) == 1) {
             do {
@@ -104,11 +110,11 @@ void light(CarStatus* state, int *puge)
 void draw_light_page()
 {
     // 绘制按钮 | Draw buttons
-    bar2(100,190,200,260,0xFFFFFF); // 右转向灯 | Right turn signal
-    bar2(100,290,200,360,0xFFFFFF); // 左转向灯 | Left turn signal
-    bar2(266,290,366,360,0xFFFFFF); // 雾灯 | Fog light
-    bar2(433,190,533,260,0xFFFFFF); // 近光灯 | Near light
-    bar2(433,290,533,360,0xFFFFFF); // 远光灯 | Far light
+    bar1(100,190,200,260,0xC618); // 右转向灯 | Right turn signal
+    bar1(100,290,200,360,0xC618); // 左转向灯 | Left turn signal
+    bar1(266,290,366,360,0xC618); // 雾灯 | Fog light
+    bar1(433,190,533,260,0xC618); // 近光灯 | Near light
+    bar1(433,290,533,360,0xC618); // 远光灯 | Far light
     
     // 绘制危险警告灯三角形 | Draw hazard warning triangle
     Line2(316,63,266,150,0xF800);
@@ -120,11 +126,11 @@ void draw_light_page()
     Put_Asc16_Size(308, 100, 2, 2, '!', 0xF800); // 感叹号 | Exclamation mark
     
     // 添加按钮文字 | Add button labels
-    puthz(130, 215, "右转",24,30,0xFFFFFF); // 右转 | Right turn
-    puthz(130, 315, "左转",24,30,0xFFFFFF); // 左转 | Left turn
-    puthz(296, 315, "雾灯",24,30,0xFFFFFF); // 雾灯 | Fog light
-    puthz(463, 215, "近光",24,30,0xFFFFFF); // 近光 | Near light
-    puthz(463, 315, "远光",24,30,0xFFFFFF); // 远光 | Far light
+    puthz(130, 215, "右转",24,30,0x000000); // 右转 | Right turn
+    puthz(130, 315, "左转",24,30,0x000000); // 左转 | Left turn
+    puthz(296, 315, "雾灯",24,30,0x000000); // 雾灯 | Fog light
+    puthz(463, 215, "近光",24,30,0x000000); // 近光 | Near light
+    puthz(463, 315, "远光",24,30,0x000000); // 远光 | Far light
     
     // 绘制返回按钮 | Draw back button
     Line2(603,600,633,600,0xFFFFFF);

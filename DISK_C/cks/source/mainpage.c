@@ -12,10 +12,21 @@ void mainpage(CarStatus *state, int *puge)
     draw_mainpage(state); // 绘制主页面 | Draw main page
     mouse_on(mouse);   // 开启鼠标显示 | Show mouse cursor
 
+
     while (1) // 主循环 | Main loop
     {
         show_all(state); // 显示所有状态 | Display all status
         mouse_show(&mouse); // 显示鼠标 | Show mouse cursor
+
+        button1(10,450,90,490,"灯光",&state->button_s.dengguang); // 灯光按钮 | Light button
+        button1(10,500,90,540,"空调",&state->button_s.kongtiao); // 空调按钮 | AC button
+        button1(280,420,360,460,"导航",&state->button_s.daohang); // 导航按钮 | Navigation button
+        button1(10,550,90,590,"雨刷",&state->button_s.yushua); // 雨刷按钮 | Wiper button
+        button1(543,450,623,490,"驾驶",&state->button_s.jiashi); // 驾驶按钮 | Drive button
+        button1(543,500,623,540,"媒体",&state->button_s.meiti); // 媒体按钮 | Media button
+        button1(543,550,623,590,"座椅",&state->button_s.zuoyi); // 座椅按钮 | Left button
+
+
         
         // 速度表初始化动画 | Speedometer initialization animation
         if(!is_init_s) {
@@ -118,24 +129,24 @@ void draw_mainpage(CarStatus *state)
     Readbmp64k(0,0,"bmp\\222.bmp"); // 读取背景图片 | Load background image
     
     // 绘制左侧按钮 | Draw left buttons
-    bar2(10,450,90,490,0xFFFFFF); // 灯光按钮 | Light button
-    bar2(10,500,90,540,0xFFFFFF); // 空调按钮 | AC button
-    bar2(10,550,90,590,0xFFFFFF); // 雨刷按钮 | Wiper button
-    puthz(25,458,"灯光",24,26,0XFFFFFF); // 灯光文字 | Light text
-    puthz(25,508,"空调",24,26,0XFFFFFF); // 空调文字 | AC text
-    puthz(25,558,"雨刷",24,26,0XFFFFFF); // 雨刷文字 | Wiper text
+    bar1(10,450,90,490,0xC618); // 灯光按钮 | Light button
+    bar1(10,500,90,540,0xC618); // 空调按钮 | AC button
+    bar1(10,550,90,590,0xC618); // 雨刷按钮 | Wiper button
+    puthz(25,458,"灯光",24,26,0X000000); // 灯光文字 | Light text
+    puthz(25,508,"空调",24,26,0X000000); // 空调文字 | AC text
+    puthz(25,558,"雨刷",24,26,0X000000); // 雨刷文字 | Wiper text
     
     // 绘制右侧按钮 | Draw right buttons
-    bar2(543,450,623,490,0xFFFFFF); // 驾驶按钮 | Drive button
-    bar2(543,500,623,540,0xFFFFFF); // 媒体按钮 | Media button
-    bar2(543,550,623,590,0xFFFFFF); // 座椅按钮 | Seat button
-    puthz(558,458,"驾驶",24,26,0XFFFFFF); // 驾驶文字 | Drive text
-    puthz(558,508,"媒体",24,26,0XFFFFFF); // 媒体文字 | Media text
-    puthz(558,558,"座椅",24,26,0XFFFFFF); // 座椅文字 | Seat text
+    bar1(543,450,623,490,0xC618); // 驾驶按钮 | Drive button
+    bar1(543,500,623,540,0xC618); // 媒体按钮 | Media button
+    bar1(543,550,623,590,0xC618); // 座椅按钮 | Seat button
+    puthz(558,458,"驾驶",24,26,0X000000); // 驾驶文字 | Drive text
+    puthz(558,508,"媒体",24,26,0X000000); // 媒体文字 | Media text
+    puthz(558,558,"座椅",24,26,0X000000); // 座椅文字 | Seat text
     
     // 绘制中央导航按钮 | Draw center navigation button
-    bar2(280,420,360,460,0xFFFFFF); 
-    puthz(295,428,"导航",24,26,0XFFFFFF); // 导航文字 | Navigation text
+    bar1(280,420,360,460,0xC618); 
+    puthz(295,428,"导航",24,26,0X000000); // 导航文字 | Navigation text
     
     // 绘制状态栏 | Draw status bar
     puthz(5,635,"车内温度",32,33,0x7FFF); // 车内温度 | Interior temperature

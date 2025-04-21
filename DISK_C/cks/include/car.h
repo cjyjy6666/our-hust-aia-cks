@@ -63,10 +63,25 @@ typedef struct car_media
     int on_call;
     int call_second;
     int music;//-1:music off,>-1:music index
-    int mus_ord;//0Ë³Ðò²¥·Å,1ÂÒÐò,2µ¥ÇúÑ­»·
+    int mus_ord;//0Ë³ï¿½ò²¥·ï¿½,1ï¿½ï¿½ï¿½ï¿½,2ï¿½ï¿½ï¿½ï¿½Ñ­ï¿½ï¿½
     int initialized;//for sounder
     int first_time;
 }car_media;
+typedef struct ButtonS{
+    int dengguang;
+    int kongtiao;
+    int yushua;
+    int jiashi;
+    int meiti;
+    int zuoyi;
+    int daohang;
+    int youzhuan;
+    int zuozhuan;
+    int wudeng;
+    int jinguang;
+    int yuanguang;
+} ButtonS;
+
 typedef struct CarStatus
 {
     car_light light_s;
@@ -75,6 +90,7 @@ typedef struct CarStatus
     car_wiper wiper_s;
     car_drive drive_s;
     car_media media_s;
+    ButtonS button_s;
 }CarStatus;
 
 
