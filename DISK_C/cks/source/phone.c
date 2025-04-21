@@ -168,11 +168,11 @@ void key_det(char ph_num[13], int *num_len)
                 MouseGet(&mouse);
                 mouse_show(&mouse);
             } while ((mouse.key & 1) == 1);
-            ph_num[(*num_len)++] = '1'; // 添加数字1 | Add number 1
-            ph_num[*num_len] = '\0'; // 添加结束符 | Add terminator
+            ph_num[(*num_len)++] = '1';
+            ph_num[*num_len] = '\0';
             bar1(241,91,619,149,0x0085);
-            x = 240 + (380 - 16 * (*num_len)) / 2; // 计算显示位置 | Calculate display position
-            put_asc16_size(x,104,2,2,ph_num,0xFC44); // 显示号码 | Display number
+            x = 240 + (380 - 16 * (*num_len)) / 2;
+            put_asc16_size(x,104,2,2,ph_num,0xFC44);
         }
         
         // 数字2按钮 | Number 2 button
@@ -188,7 +188,109 @@ void key_det(char ph_num[13], int *num_len)
             put_asc16_size(x,104,2,2,ph_num,0xFC44);
         }
         
-        // ... 其他数字按钮类似 (Other number buttons similar) ...
+        // 数字3按钮 | Number 3 button
+        if (mouse_press(180,110,220,150) == 1) {
+            do {
+                MouseGet(&mouse);
+                mouse_show(&mouse);
+            } while ((mouse.key & 1) == 1);
+            ph_num[(*num_len)++] = '3';
+            ph_num[*num_len] = '\0';
+            bar1(241,91,619,149,0x0085);
+            x = 240 + (380 - 16 * (*num_len)) / 2;
+            put_asc16_size(x,104,2,2,ph_num,0xFC44);
+        }
+        
+        // 数字4按钮 | Number 4 button
+        if (mouse_press(40,180,80,220) == 1) {
+            do {
+                MouseGet(&mouse);
+                mouse_show(&mouse);
+            } while ((mouse.key & 1) == 1);
+            ph_num[(*num_len)++] = '4';
+            ph_num[*num_len] = '\0';
+            bar1(241,91,619,149,0x0085);
+            x = 240 + (380 - 16 * (*num_len)) / 2;
+            put_asc16_size(x,104,2,2,ph_num,0xFC44);
+        }
+        
+        // 数字5按钮 | Number 5 button
+        if (mouse_press(110,180,150,220) == 1) {
+            do {
+                MouseGet(&mouse);
+                mouse_show(&mouse);
+            } while ((mouse.key & 1) == 1);
+            ph_num[(*num_len)++] = '5';
+            ph_num[*num_len] = '\0';
+            bar1(241,91,619,149,0x0085);
+            x = 240 + (380 - 16 * (*num_len)) / 2;
+            put_asc16_size(x,104,2,2,ph_num,0xFC44);
+        }
+        
+        // 数字6按钮 | Number 6 button
+        if (mouse_press(180,180,220,220) == 1) {
+            do {
+                MouseGet(&mouse);
+                mouse_show(&mouse);
+            } while ((mouse.key & 1) == 1);
+            ph_num[(*num_len)++] = '6';
+            ph_num[*num_len] = '\0';
+            bar1(241,91,619,149,0x0085);
+            x = 240 + (380 - 16 * (*num_len)) / 2;
+            put_asc16_size(x,104,2,2,ph_num,0xFC44);
+        }
+        
+        // 数字7按钮 | Number 7 button
+        if (mouse_press(40,250,80,290) == 1) {
+            do {
+                MouseGet(&mouse);
+                mouse_show(&mouse);
+            } while ((mouse.key & 1) == 1);
+            ph_num[(*num_len)++] = '7';
+            ph_num[*num_len] = '\0';
+            bar1(241,91,619,149,0x0085);
+            x = 240 + (380 - 16 * (*num_len)) / 2;
+            put_asc16_size(x,104,2,2,ph_num,0xFC44);
+        }
+        
+        // 数字8按钮 | Number 8 button
+        if (mouse_press(110,250,150,290) == 1) {
+            do {
+                MouseGet(&mouse);
+                mouse_show(&mouse);
+            } while ((mouse.key & 1) == 1);
+            ph_num[(*num_len)++] = '8';
+            ph_num[*num_len] = '\0';
+            bar1(241,91,619,149,0x0085);
+            x = 240 + (380 - 16 * (*num_len)) / 2;
+            put_asc16_size(x,104,2,2,ph_num,0xFC44);
+        }
+        
+        // 数字9按钮 | Number 9 button
+        if (mouse_press(180,250,220,290) == 1) {
+            do {
+                MouseGet(&mouse);
+                mouse_show(&mouse);
+            } while ((mouse.key & 1) == 1);
+            ph_num[(*num_len)++] = '9';
+            ph_num[*num_len] = '\0';
+            bar1(241,91,619,149,0x0085);
+            x = 240 + (380 - 16 * (*num_len)) / 2;
+            put_asc16_size(x,104,2,2,ph_num,0xFC44);
+        }
+        
+        // 数字0按钮 | Number 0 button
+        if (mouse_press(110,320,150,360) == 1) {
+            do {
+                MouseGet(&mouse);
+                mouse_show(&mouse);
+            } while ((mouse.key & 1) == 1);
+            ph_num[(*num_len)++] = '0';
+            ph_num[*num_len] = '\0';
+            bar1(241,91,619,149,0x0085);
+            x = 240 + (380 - 16 * (*num_len)) / 2;
+            put_asc16_size(x,104,2,2,ph_num,0xFC44);
+        }
         
         // 删除按钮 | Delete button
         if(*num_len > 0) {
@@ -197,7 +299,7 @@ void key_det(char ph_num[13], int *num_len)
                     MouseGet(&mouse);
                     mouse_show(&mouse);
                 } while ((mouse.key & 1) == 1);
-                ph_num[--(*num_len)] = '\0'; // 删除最后一个字符 | Delete last character
+                ph_num[--(*num_len)] = '\0';
                 bar1(241,91,619,149,0x0085);
                 x = 240 + (380 - 16 * (*num_len)) / 2;
                 put_asc16_size(x,104,2,2,ph_num,0xFC44);
@@ -206,10 +308,10 @@ void key_det(char ph_num[13], int *num_len)
     }
     else { // 如果号码长度达到限制 | If number length reaches limit
         bar1(241,91,619,149,0x0085);
-        prt_hz24_asc32(322,104,"号码应为11位!",0xFC44,"HZK\\Hzk24f"); // 显示提示 | Show prompt
-        while(mouse.key & 1) // 等待鼠标释放 | Wait for mouse release
+        prt_hz24_asc32(322,104,"号码应为11位!",0xFC44,"HZK\\Hzk24f");
+        while(mouse.key & 1)
             MouseGet(&mouse);
-        *num_len = 0; // 重置号码长度 | Reset number length
-        ph_num[0] = '\0'; // 清空号码 | Clear number
+        *num_len = 0;
+        ph_num[0] = '\0';
     }
 }
