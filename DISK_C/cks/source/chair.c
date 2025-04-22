@@ -30,6 +30,7 @@ void chair(CarStatus *state, int *puge) {
             }while((mouse.key & 1) == 1);
             state->chair_s.y1 -= 10;
             state->chair_s.x2 -= 10;
+            save_chair(state);
             draw_chair1(state->chair_s.x1,state->chair_s.y1);
             draw_chair2(state->chair_s.x2,state->chair_s.y2);
 
@@ -42,6 +43,7 @@ void chair(CarStatus *state, int *puge) {
             }while((mouse.key & 1) == 1);
             state->chair_s.y1 += 10;
             state->chair_s.x2 += 10;
+            save_chair(state);
             draw_chair1(state->chair_s.x1,state->chair_s.y1);
             draw_chair2(state->chair_s.x2,state->chair_s.y2);
             
@@ -53,6 +55,7 @@ void chair(CarStatus *state, int *puge) {
                 mouse_show(&mouse);
             }while((mouse.key & 1) == 1);
             state->chair_s.x1 -= 10;
+            save_chair(state);
             draw_chair1(state->chair_s.x1,state->chair_s.y1);
             
         }
@@ -63,6 +66,7 @@ void chair(CarStatus *state, int *puge) {
                 mouse_show(&mouse);
             }while((mouse.key & 1) == 1);
             state->chair_s.x1 += 10;
+            save_chair(state);
             draw_chair1(state->chair_s.x1,state->chair_s.y1);
         }
 
@@ -72,6 +76,7 @@ void chair(CarStatus *state, int *puge) {
                 mouse_show(&mouse);
             }while((mouse.key & 1) == 1);
             state->chair_s.y2 -= 10;
+            save_chair(state);
             draw_chair2(state->chair_s.x2,state->chair_s.y2);
             
         }
@@ -82,6 +87,7 @@ void chair(CarStatus *state, int *puge) {
                 mouse_show(&mouse);
             }while((mouse.key & 1) == 1);
             state->chair_s.y2 += 10;
+            save_chair(state);
             draw_chair2(state->chair_s.x2,state->chair_s.y2); 
         }
 
@@ -114,11 +120,11 @@ void draw_chair_page(int x1,int y1,int x2,int y2){
     draw_chair1(x1,y1);
     draw_chair2(x2,y2);
 
-     // 绘制返回按钮 | Draw back button
-     Line2(603,600,633,600,0xFFFFFF);
-     Line2(603,600,603,630,0xFFFFFF);
-     Line2(603,600,633,630,0xFFFFFF);
-     Line2(633,600,603,630,0xFFFFFF);
+    // 绘制返回按钮 | Draw back button
+    Line2(603,600,633,600,0xFFFFFF);
+    Line2(603,600,603,630,0xFFFFFF);
+    Line2(603,600,633,630,0xFFFFFF);
+    Line2(633,600,603,630,0xFFFFFF);
 
 
 
@@ -144,4 +150,12 @@ void draw_chair2(int x2,int y2){
         
 
     
+}
+
+void save_chair(CarStatus *state)
+{
+    FILE *fp;
+    fp=fopen("data\\chair.dat","wb+");
+    fwrite(&state->chair_s,sizeof(car_chair),1,fp);
+    fclose(fp); 
 }

@@ -19,10 +19,13 @@ void init_car_status(CarStatus *state)
     randomize();
     state->media_s.initialized=0;
     state->media_s.first_time=1;
-    state->chair_s.x1=170;
-    state->chair_s.y1=163;
-    state->chair_s.x2=470;
-    state->chair_s.y2=200;
+    fp=fopen("data\\chair.dat","rb+");
+    //state->chair_s.x1=170;
+    //state->chair_s.y1=163;
+    //state->chair_s.x2=470;
+    //state->chair_s.y2=200;
+    fread(&state->chair_s,sizeof(car_chair),1,fp);
+    fclose(fp);
 }
 
 /*CarStatus* get_car_status(void)
