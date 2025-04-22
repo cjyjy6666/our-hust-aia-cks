@@ -20,6 +20,13 @@ void contact(CarStatus *state, int *puge)
         show_all(state); // 显示所有状态 | Display all status
         mouse_show(&mouse); // 显示鼠标 | Show mouse cursor
         
+        button2(433,290,533,360,"删除", &state->button_s.shanchu); // 保存号码按钮 | Save number button
+        if(state->media_s.on_call) {
+           button3(433,190,532,260,"挂断", &state->button_s.guaduan); // 挂断按钮 | Hang up button
+        }
+        else {
+           button2(433,190,533,260,"拨打", &state->button_s.boda); // 拨打按钮 | Call button
+        }
         // 返回按钮检测 | Back button detection
         if (mouse_press(603,600,633,630) == 1) {
             *puge = 8;
@@ -79,12 +86,12 @@ void contact(CarStatus *state, int *puge)
             state->media_s.call_second = 0; // 重置通话时间 | Reset call time
             
             if(state->media_s.on_call) { // 如果是拨打状态 | If calling
-                bar1(434,191,532,259,0x0085);
+                bar1(434,191,532,259,0xC618);
                 puthz(463, 215, "挂断",24,30,0xF800); // 显示挂断 | Show hang up
             }
             else { // 如果是挂断状态 | If hanging up
-                bar1(434,191,532,259,0x0085);
-                puthz(463, 215, "拨打",24,30,0xFFFFFF); // 显示拨打 | Show call
+                bar1(434,191,532,259,0xC618);
+                puthz(463, 215, "拨打",24,30,0x000000); // 显示拨打 | Show call
             }
         }
         
@@ -113,20 +120,20 @@ void draw_contact_page(CarStatus *state)
     Line2(633,600,603,630,0xFFFFFF);
 
     // 绘制功能按钮 | Draw function buttons
-    bar2(433,190,533,260,0xFFFFFF); // 拨打/挂断按钮 | Call/Hang up button
-    bar2(433,290,533,360,0xFFFFFF); // 删除按钮 | Delete button
+    bar1(433,190,533,260,0xC618); // 拨打/挂断按钮 | Call/Hang up button
+    bar1(433,290,533,360,0xC618); // 删除按钮 | Delete button
     
     // 根据通话状态设置按钮样式 | Set button style based on call state
     if(state->media_s.on_call) {
-        bar1(434,191,532,259,0x0085);
+        bar1(434,191,532,259,0xC618);
         puthz(463, 215, "挂断",24,30,0xF800); // 挂断 | Hang up
     }
     else {
-        bar1(434,191,532,259,0x0085);
-        puthz(463, 215, "拨打",24,30,0xFFFFFF); // 拨打 | Call
+        bar1(434,191,532,259,0xC618);
+        puthz(463, 215, "拨打",24,30,0x000000); // 拨打 | Call
     }
     
-    puthz(463, 315, "删除",24,30,0xFFFFFF); // 删除 | Delete
+    puthz(463, 315, "删除",24,30,0x000000); // 删除 | Delete
     
     // 绘制联系人列表边框 | Draw contact list border
     bar2(20,60,250,350,0xFFFFFF);

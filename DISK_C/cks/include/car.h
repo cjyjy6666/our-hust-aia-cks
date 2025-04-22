@@ -100,6 +100,16 @@ typedef struct ButtonS{
     int tongxun;
     int yinyue;
     int yinxiang;
+    int guaduan;
+    int boda;
+    int cunhao;
+    int num1,num2,num3,num4,num5,num6,num7,num8,num9,num0,numx,num;
+    int shanchu;
+    int shunxu;
+    int luanxu;
+    int xunhuan1;
+    int bofang;
+    int zanting;
 } ButtonS;
 
 typedef struct CarStatus

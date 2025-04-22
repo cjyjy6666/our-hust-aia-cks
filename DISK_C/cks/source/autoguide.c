@@ -656,7 +656,7 @@ void button1(int x1, int y1, int x2, int y2, char *s, int *i) {
     if (mouse.x >= x1 && mouse.x <= x2 && mouse.y >= y1 && mouse.y <= y2 && !*i) {
         *i=1;
         mouse_off(&mouse);
-        bar1(x1, y1, x2, y2, 0x8410);
+        bar1(x1+4, y1+4, x2-4, y2-4, 0x8410);
         puthz(x1 + 15, y1 + 8, s, 24, 26, 0X000000);
         mouse_on(mouse);
     } else if (*i && (mouse.x < x1 || mouse.x > x2 || mouse.y < y1 || mouse.y > y2)) {
@@ -675,7 +675,7 @@ void button2(int x1, int y1, int x2, int y2, char *s, int *i) {
     if (mouse.x >= x1 && mouse.x <= x2 && mouse.y >= y1 && mouse.y <= y2 && !*i) {
         *i=1;
         mouse_off(&mouse);
-        bar1(x1, y1, x2, y2, 0x8410);
+        bar1(x1+4, y1+4, x2-4, y2-4, 0x8410);
         puthz(x1 + 30, y1 + 25, s, 24, 30, 0X000000);
         mouse_on(mouse);
     } else if (*i && (mouse.x < x1 || mouse.x > x2 || mouse.y < y1 || mouse.y > y2)) {
@@ -683,6 +683,45 @@ void button2(int x1, int y1, int x2, int y2, char *s, int *i) {
         mouse_off(&mouse);
         bar1(x1, y1, x2, y2, 0xC618);
         puthz(x1 + 30, y1 + 25, s, 24, 30, 0X000000);
+        mouse_on(mouse);
+    }
+}
+
+void button3(int x1, int y1, int x2, int y2, char *s, int *i) {
+    // 验证输入参数
+   
+
+    if (mouse.x >= x1 && mouse.x <= x2 && mouse.y >= y1 && mouse.y <= y2 && !*i) {
+        *i=1;
+        mouse_off(&mouse);
+        bar1(x1+4, y1+4, x2-4, y2-4, 0x8410);
+        puthz(x1 + 30, y1 + 25, s, 24, 30, 0xF800);
+        mouse_on(mouse);
+    } else if (*i && (mouse.x < x1 || mouse.x > x2 || mouse.y < y1 || mouse.y > y2)) {
+        *i = 0;
+        mouse_off(&mouse);
+        bar1(x1, y1, x2, y2, 0xC618);
+        puthz(x1 + 30, y1 + 25, s, 24, 30, 0xF800);
+        mouse_on(mouse);
+    }
+}
+
+void button4(int x1, int y1, int r, char s, int *i) {
+
+    // 验证输入参数
+   
+
+    if (mouse.x >= x1-r && mouse.x <= x1+r && mouse.y >= y1-r && mouse.y <= y1+r && !*i) {
+        *i=1;
+        mouse_off(&mouse);
+        Circlefill(x1,y1,r-2,0x8410);
+		Put_Asc16_Size(x1-10,y1-16,2,2,s,0x000000);
+        mouse_on(mouse);
+    } else if (*i && (mouse.x < x1-r || mouse.x > x1+r || mouse.y < y1-r || mouse.y > y1+r)) {
+        *i = 0;
+        mouse_off(&mouse);
+        Circlefill(x1,y1,r,0xC618);
+		Put_Asc16_Size(x1-10,y1-16,2,2,s,0x000000);
         mouse_on(mouse);
     }
 }

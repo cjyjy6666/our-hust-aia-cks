@@ -20,6 +20,26 @@ void music(CarStatus *state, int *puge)
         show_all(state); // 显示所有状态 | Display all status
         mouse_show(&mouse); // 显示鼠标 | Show mouse cursor
         
+        if(state->media_s.mus_ord == 0) {
+            button2(433,190,533,260,"顺序",&state->button_s.shunxu); // 顺序播放 | Order playback
+
+        }
+        
+        else if(state->media_s.mus_ord == 1) {
+            button2(433,190,533,260,"乱序",&state->button_s.luanxu); // 乱序播放 | Shuffle playback
+            
+        }
+        else if(state->media_s.mus_ord == 2) {
+            button2(433,190,533,260,"循环",&state->button_s.xunhuan1); // 循环播放 | Loop playback
+        }
+    
+        // 设置播放/暂停按钮初始状态 | Set initial play/pause button state
+        if(state->media_s.music == -1) {
+            button2(433,290,533,360,"播放",&state->button_s.bofang); // 播放 | Play
+        }
+        else {
+            button2(433,290,533,360,"暂停",&state->button_s.zanting); // 暂停 | Pause
+        }
         // 返回按钮检测 | Back button detection
         if (mouse_press(603,600,633,630) == 1) {
             *puge = 8; // 返回媒体页面 | Return to media page
@@ -66,18 +86,18 @@ void music(CarStatus *state, int *puge)
             // 切换播放模式 | Toggle play mode
             if(state->media_s.mus_ord == 0) { // 顺序->乱序 | Order->Shuffle
                 state->media_s.mus_ord = 1;
-                bar1(434,191,532,259,0x0085);
-                puthz(463, 215, "乱序",24,30,0xFFFFFF);
+                bar1(434,191,532,259,0xC618);
+                puthz(463, 215, "乱序",24,30,0x000000);
             }
             else if(state->media_s.mus_ord == 1) { // 乱序->循环 | Shuffle->Loop
                 state->media_s.mus_ord = 2;
-                bar1(434,191,532,259,0x0085);
-                puthz(463, 215, "循环",24,30,0xFFFFFF);
+                bar1(434,191,532,259,0xC618);
+                puthz(463, 215, "循环",24,30,0x000000);
             }
             else if(state->media_s.mus_ord == 2) { // 循环->顺序 | Loop->Order
                 state->media_s.mus_ord = 0;
-                bar1(434,191,532,259,0x0085);
-                puthz(463, 215, "顺序",24,30,0xFFFFFF);
+                bar1(434,191,532,259,0xC618);
+                puthz(463, 215, "顺序",24,30,0x000000);
             }
         }
         
@@ -98,12 +118,12 @@ void music(CarStatus *state, int *puge)
             
             // 更新按钮显示 | Update button display
             if(state->media_s.music == -1) {
-                bar1(434,291,532,359,0x0085);
-                puthz(463, 315, "播放",24,30,0xFFFFFF);
+                bar1(434,291,532,359,0xC618);
+                puthz(463, 315, "播放",24,30,0x000000);
             }
             else {
-                bar1(434,291,532,359,0x0085);
-                puthz(463, 315, "暂停",24,30,0xFFFFFF);
+                bar1(434,291,532,359,0xC618);
+                puthz(463, 315, "暂停",24,30,0x000000);
             }
         }
         
@@ -143,31 +163,31 @@ void draw_music_page(CarStatus *state)
     Line2(633,600,603,630,0xFFFFFF);
 
     // 绘制功能按钮 | Draw function buttons
-    bar2(433,190,533,260,0xFFFFFF); // 播放模式按钮 | Play mode button
-    bar2(433,290,533,360,0xFFFFFF); // 播放/暂停按钮 | Play/Pause button
+    bar1(433,190,533,260,0xC618); // 播放模式按钮 | Play mode button
+    bar1(433,290,533,360,0xC618); // 播放/暂停按钮 | Play/Pause button
 
     // 设置播放模式按钮初始状态 | Set initial play mode button state
     if(state->media_s.mus_ord == 0) {
-        bar1(434,191,532,259,0x0085);
-        puthz(463, 215, "顺序",24,30,0xFFFFFF); // 顺序 | Order
+        bar1(434,191,532,259,0xC618);
+        puthz(463, 215, "顺序",24,30,0x000000); // 顺序 | Order
     }
     else if(state->media_s.mus_ord == 1) {
-        bar1(434,191,532,259,0x0085);
-        puthz(463, 215, "乱序",24,30,0xFFFFFF); // 乱序 | Shuffle
+        bar1(434,191,532,259,0xC618);
+        puthz(463, 215, "乱序",24,30,0x000000); // 乱序 | Shuffle
     }
     else if(state->media_s.mus_ord == 2) {
-        bar1(434,191,532,259,0x0085);
-        puthz(463, 215, "循环",24,30,0xFFFFFF); // 循环 | Loop
+        bar1(434,191,532,259,0xC618);
+        puthz(463, 215, "循环",24,30,0x000000); // 循环 | Loop
     }
 
     // 设置播放/暂停按钮初始状态 | Set initial play/pause button state
     if(state->media_s.music == -1) {
-        bar1(434,291,532,359,0x0085);
-        puthz(463, 315, "播放",24,30,0xFFFFFF); // 播放 | Play
+        bar1(434,291,532,359,0xC618);
+        puthz(463, 315, "播放",24,30,0x000000); // 播放 | Play
     }
     else {
-        bar1(434,291,532,359,0x0085);
-        puthz(463, 315, "暂停",24,30,0xFFFFFF); // 暂停 | Pause
+        bar1(434,291,532,359,0xC618);
+        puthz(463, 315, "暂停",24,30,0x000000); // 暂停 | Pause
     }
 
     // 绘制音乐列表区域 | Draw music list area
@@ -182,7 +202,7 @@ void draw_music_page(CarStatus *state)
     Line2(292,95,292,80,0xFFFFFF);
     Line2(292,80,300,80,0xFFFFFF);
     Line2(300,80,285,60,0xFFFFFF);
-    
+ 
     // 绘制向下箭头 | Draw down arrow
     Line2(285,410-60,270,410-80,0xFFFFFF);
     Line2(270,410-80,278,410-80,0xFFFFFF);

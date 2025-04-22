@@ -19,6 +19,28 @@ void phone(CarStatus *state, int *puge)
     {
         show_all(state); // 显示所有状态 | Display all status
         mouse_show(&mouse); // 显示鼠标 | Show mouse cursor
+
+        button2(433,290,533,360,"存号", &state->button_s.cunhao); // 保存号码按钮 | Save number button
+        if(state->media_s.on_call) {
+           button3(433,190,532,260,"挂断", &state->button_s.guaduan); // 挂断按钮 | Hang up button
+        }
+        else {
+           button2(433,190,533,260,"拨打", &state->button_s.boda); // 拨打按钮 | Call button
+        }
+        button4(60,130,20,'1', &state->button_s.num1); // 数字按钮 | Number buttons
+        button4(130,130,20,'2', &state->button_s.num2); // 数字按钮 | Number buttons
+        button4(200,130,20,'3', &state->button_s.num3); // 数字按钮 | Number buttons
+        button4(60,200,20,'4', &state->button_s.num4); // 数字按钮 | Number buttons
+        button4(130,200,20,'5', &state->button_s.num5); // 数字按钮 | Number buttons
+        button4(200,200,20,'6', &state->button_s.num6); // 数字按钮 | Number buttons
+        button4(60,270,20,'7', &state->button_s.num7); // 数字按钮 | Number buttons
+        button4(130,270,20,'8', &state->button_s.num8); // 数字按钮 | Number buttons
+        button4(200,270,20,'9', &state->button_s.num9); // 数字按钮 | Number buttons
+        button4(60,340,20,'#', &state->button_s.num); // 数字按钮 | Number buttons
+        button4(130,340,20,'0', &state->button_s.num0); // 数字按钮 | Number buttons
+        button4(200,340,20,'X', &state->button_s.numx); // 数字按钮 | Number buttons
+
+
         
         // 返回按钮检测 | Back button detection
         if (mouse_press(603,600,633,630) == 1) {
@@ -39,11 +61,11 @@ void phone(CarStatus *state, int *puge)
             state->media_s.call_second = 0; // 重置通话时间 | Reset call time
             
             if(state->media_s.on_call) { // 如果是拨打状态 | If calling
-                bar1(434,191,532,259,0x0085);
+                bar1(434,191,532,259,0xC618);
                 puthz(463, 215, "挂断",24,30,0xF800); // 显示挂断 | Show hang up
             }
             else { // 如果是挂断状态 | If hanging up
-                bar1(434,191,532,259,0x0085);
+                bar1(434,191,532,259,0xC618);
                 puthz(463, 215, "拨打",24,30,0xFFFFFF); // 显示拨打 | Show call
             }
         }
@@ -110,48 +132,48 @@ void draw_phone_page(CarStatus *state)
     Line2(633,600,603,630,0xFFFFFF);
 
     // 绘制数字键盘 | Draw number pad
-    Circle(60,130,20,0xFFFFFF);  // 1
-    Circle(130,130,20,0xFFFFFF); // 2
-    Circle(200,130,20,0xFFFFFF); // 3
-    Circle(60,200,20,0xFFFFFF);  // 4
-    Circle(130,200,20,0xFFFFFF); // 5
-    Circle(200,200,20,0xFFFFFF); // 6
-    Circle(60,270,20,0xFFFFFF);  // 7
-    Circle(130,270,20,0xFFFFFF); // 8
-    Circle(200,270,20,0xFFFFFF); // 9
-    Circle(60,340,20,0xFFFFFF);  // #
-    Circle(130,340,20,0xFFFFFF); // 0
-    Circle(200,340,20,0xFFFFFF); // X (删除)
+    Circlefill(60,130,20,0xC618);  // 1
+    Circlefill(130,130,20,0xC618); // 2
+    Circlefill(200,130,20,0xC618); // 3
+    Circlefill(60,200,20,0xC618);  // 4
+    Circlefill(130,200,20,0xC618); // 5
+    Circlefill(200,200,20,0xC618); // 6
+    Circlefill(60,270,20,0xC618);  // 7
+    Circlefill(130,270,20,0xC618); // 8
+    Circlefill(200,270,20,0xC618); // 9
+    Circlefill(60,340,20,0xC618);  // #
+    Circlefill(130,340,20,0xC618); // 0
+    Circlefill(200,340,20,0xC618); // X (删除)
 
     // 绘制数字标签 | Draw number labels
-    Put_Asc16_Size(50,114,2,2,'1',0xFFFFFF);
-    Put_Asc16_Size(120,114,2,2,'2',0xFFFFFF);
-    Put_Asc16_Size(190,114,2,2,'3',0xFFFFFF);
-    Put_Asc16_Size(50,184,2,2,'4',0xFFFFFF);
-    Put_Asc16_Size(120,184,2,2,'5',0xFFFFFF);
-    Put_Asc16_Size(190,184,2,2,'6',0xFFFFFF);
-    Put_Asc16_Size(50,254,2,2,'7',0xFFFFFF);
-    Put_Asc16_Size(120,254,2,2,'8',0xFFFFFF);
-    Put_Asc16_Size(190,254,2,2,'9',0xFFFFFF);
-    Put_Asc16_Size(50,324,2,2,'#',0xFFFFFF);
-    Put_Asc16_Size(120,324,2,2,'0',0xFFFFFF);
-    Put_Asc16_Size(190,324,2,2,'X',0xFFFFFF);
+    Put_Asc16_Size(50,114,2,2,'1',0x000000);
+    Put_Asc16_Size(120,114,2,2,'2',0x000000);
+    Put_Asc16_Size(190,114,2,2,'3',0x000000);
+    Put_Asc16_Size(50,184,2,2,'4',0x000000);
+    Put_Asc16_Size(120,184,2,2,'5',0x000000);
+    Put_Asc16_Size(190,184,2,2,'6',0x000000);
+    Put_Asc16_Size(50,254,2,2,'7',0x000000);
+    Put_Asc16_Size(120,254,2,2,'8',0x000000);
+    Put_Asc16_Size(190,254,2,2,'9',0x000000);
+    Put_Asc16_Size(50,324,2,2,'#',0x000000);
+    Put_Asc16_Size(120,324,2,2,'0',0x000000);
+    Put_Asc16_Size(190,324,2,2,'X',0x000000);
 
     // 绘制功能按钮 | Draw function buttons
-    bar2(433,190,533,260,0xFFFFFF); // 拨打/挂断 | Call/Hang up
-    bar2(433,290,533,360,0xFFFFFF); // 保存号码 | Save number
+    bar1(433,190,533,260,0xC618); // 拨打/挂断 | Call/Hang up
+    bar1(433,290,533,360,0xC618); // 保存号码 | Save number
 
     // 设置拨打/挂断按钮状态 | Set call/hang up button state
     if(state->media_s.on_call) {
-        bar1(434,191,532,259,0x0085);
+        bar1(434,191,532,259,0xC618);
         puthz(463, 215, "挂断",24,30,0xF800); // 挂断 | Hang up
     }
     else {
-        bar1(434,191,532,259,0x0085);
-        puthz(463, 215, "拨打",24,30,0xFFFFFF); // 拨打 | Call
+        bar1(434,191,532,259,0xC618);
+        puthz(463, 215, "拨打",24,30,0x000000); // 拨打 | Call
     }
 
-    puthz(463, 315, "存号",24,30,0xFFFFFF); // 存号 | Save
+    puthz(463, 315, "存号",24,30,0x000000); // 存号 | Save
     bar2(240,90,620,150,0xFC44); // 号码显示区域 | Number display area
     bar1(241,91,619,149,0x0085); // 号码显示背景 | Number display background
 }
