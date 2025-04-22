@@ -110,7 +110,14 @@ typedef struct ButtonS{
     int xunhuan1;
     int bofang;
     int zanting;
+    int qian,hou,zuo,you,shang,xia;
+    int welcome;
 } ButtonS;
+
+typedef struct car_chair
+{
+    int x1,y1,x2,y2;
+}car_chair;
 
 typedef struct CarStatus
 {
@@ -121,6 +128,7 @@ typedef struct CarStatus
     car_drive drive_s;
     car_media media_s;
     ButtonS button_s;
+    car_chair chair_s;
 }CarStatus;
 
 

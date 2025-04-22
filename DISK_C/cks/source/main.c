@@ -14,7 +14,7 @@ void main()
         switch (puge)     // 根据当前页面状态切换 | Switch based on current page state
         {
         case 0:           // 欢迎页面 | Welcome page
-            welcome(&puge);
+            welcome(&state,&puge);
             break;
         case 2:           // 主控制页面 | Main control page
             mainpage(&state,&puge);
@@ -53,6 +53,9 @@ void main()
         case 12:          // 音响控制 | Sound system control
             draw_mainpage(&state);
             sounder(&state,&puge);
+            break;
+        case 13:          // 座椅调节 | Seat adjustment
+            chair(&state,&puge);
             break;
         default:          // 默认情况 | Default case
             break;

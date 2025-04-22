@@ -97,6 +97,12 @@ void mainpage(CarStatus *state, int *puge)
             *puge = 8; // 跳转至媒体页面 | Jump to media page
             break;
         }
+
+        // 座椅按钮 | Left button
+        if (mouse_press(543,550,623,590) == 1) {
+            *puge = 13; // 跳转至座椅页面 | Jump to left page
+            break;
+        }
     }
 }
 

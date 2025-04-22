@@ -19,6 +19,10 @@ void init_car_status(CarStatus *state)
     randomize();
     state->media_s.initialized=0;
     state->media_s.first_time=1;
+    state->chair_s.x1=170;
+    state->chair_s.y1=163;
+    state->chair_s.x2=470;
+    state->chair_s.y2=200;
 }
 
 /*CarStatus* get_car_status(void)
