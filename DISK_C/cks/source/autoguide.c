@@ -37,6 +37,96 @@ void autoguide(CarStatus *state,int *puge)
 		
 
 		mouse_show(&mouse);
+
+         if (mouse.x >= 340 && mouse.x <= 480 && mouse.y >= 20 && mouse.y <= 80 && !state->button_s.qidian&&(i1==0)) {
+            state->button_s.qidian=1;
+            mouse_off(&mouse);
+            bar1(340, 20, 480, 80,0xFD44);
+            puthz(352,25,"起点",48,55,0x000000);
+            mouse_on(mouse);
+        } else if (state->button_s.qidian&&(i1==0) && (mouse.x < 340 || mouse.x > 480 || mouse.y < 20 || mouse.y > 80)) {
+            state->button_s.qidian = 0;
+            mouse_off(&mouse);
+            bar1(340, 20, 480, 80,0xFF44);
+            puthz(352,25,"起点",48,55,0x000000);
+            mouse_on(mouse);
+        }
+
+      
+	
+			// 锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷录锟?
+         if (mouse.x >= 340 && mouse.x <= 480 && mouse.y >= 95 && mouse.y <= 155 && (!state->button_s.zhongdian)&&(i1==2)) {
+            state->button_s.zhongdian=1;
+            mouse_off(&mouse);
+            bar1(340, 95, 480, 155, 0xFD44);
+            puthz(352,100,"终点",48,55,0x000000);
+            mouse_on(mouse);
+        } else if (state->button_s.zhongdian&&(i1==2) && (mouse.x < 340 || mouse.x > 480 || mouse.y < 95 || mouse.y > 155)) {
+            state->button_s.zhongdian = 0;
+            mouse_off(&mouse);
+            bar1(340, 95, 480, 155, 0xFF44);
+            puthz(352,100,"终点",48,55,0x000000);
+            mouse_on(mouse);
+        }
+
+        
+        if (mouse.x >= 340 && mouse.x <= 480 && mouse.y >= 170 && mouse.y <= 230 && !state->button_s.kaishi&&(i1==4)) {
+            state->button_s.kaishi=1;
+            mouse_off(&mouse);
+			bar1(340, 170, 480, 230,0xFD44);
+			puthz(352,175,"开始",48,55,0x000000);				
+            mouse_on(mouse);
+        } else if (state->button_s.kaishi&&(i1==4) && (mouse.x < 340 || mouse.x > 480 || mouse.y < 170 || mouse.y > 230)) {
+            state->button_s.kaishi = 0;
+            mouse_off(&mouse);
+			bar1(340, 170, 480, 230,0xFF44);
+			puthz(352,175,"开始",48,55,0x000000);				
+            mouse_on(mouse);
+        }
+
+        if (mouse.x >= 340 && mouse.x <= 480 && mouse.y >= 170 && mouse.y <= 230 && !state->button_s.wancheng&&(i1==5)) {
+            state->button_s.wancheng=1;
+            mouse_off(&mouse);
+			bar1(340, 170, 480, 230,0xFD44);
+            puthz(352,175,"完成",48,55,0x000000);
+            mouse_on(mouse);
+        } else if (state->button_s.wancheng&&(i1==5) && (mouse.x < 340 || mouse.x > 480 || mouse.y < 170 || mouse.y > 230)) {
+            state->button_s.wancheng = 0;
+            mouse_off(&mouse);
+			bar1(340, 170, 480, 230,0xFF44);
+            puthz(352,175,"完成",48,55,0x000000);
+            mouse_on(mouse);
+        }
+
+        if (mouse.x >= 340 && mouse.x <= 480 && mouse.y >= 170 && mouse.y <= 230 && !state->button_s.quxiao&&(i1==1||i1==2||i1==3)) {
+            state->button_s.quxiao=1;
+            mouse_off(&mouse);
+            bar1(340, 170, 480, 230,0x320F);
+            puthz(352,175,"取消",48,55,0x000000);
+            mouse_on(mouse);
+        } else if (state->button_s.quxiao&&(i1==1||i1==2||i1==3) && (mouse.x < 340 || mouse.x > 480 || mouse.y < 170 || mouse.y > 230)) {
+            state->button_s.quxiao = 0;
+            mouse_off(&mouse);
+            bar1(340, 170, 480, 230,0x340F);
+            puthz(352,175,"取消",48,55,0x000000);
+            mouse_on(mouse);
+        }
+
+        if (mouse.x >= 440 && mouse.x <= 580 && mouse.y >= 400 && mouse.y <= 460 && !state->button_s.queding&&(i1==6)) {
+            state->button_s.queding=1;
+            mouse_off(&mouse);
+            bar1(440, 400, 580, 460, 0x8410); 
+            bar2(440, 400, 580, 460, 0x000000);
+            puthz(452, 405, "确定", 48,55, 0x000000);
+            mouse_on(mouse);
+        } else if (state->button_s.queding&&(i1==6) && (mouse.x < 440 || mouse.x > 580 || mouse.y < 400 || mouse.y > 460)) {
+            state->button_s.queding = 0;
+            mouse_off(&mouse);
+            bar1(440, 400, 580, 460, 0xC618); 
+            bar2(440, 400, 580, 460, 0x000000);
+            puthz(452, 405, "确定", 48,55, 0x000000);
+            mouse_on(mouse);
+        }
 		
         if(mouse_press(965,0,1024,53) == 1)
         {
@@ -71,6 +161,23 @@ void autoguide(CarStatus *state,int *puge)
 
 			mouse_on(mouse);
 		}
+
+        if((end ==begin)&&(i1==4)){
+            i1=6;
+            bar1(236,202,775,530,0xC618);
+            bar2(236,202,775,530,0x000000);
+            Line2(236,220,775,220,0x000000);
+            puthz(248,250,"请选择不同的起点和终点",48,45,0x000000);
+            bar1(440, 400, 580, 460, 0xC618); 
+            bar2(440, 400, 580, 460, 0x000000);
+            puthz(452, 405, "确定", 48,55, 0x000000);
+        }
+        if(mouse_press(440, 400, 580, 460) == 1&&(i1==6)){
+            i1=0;
+            mouse_off(&mouse);
+            draw_autoguide();
+            mouse_on(mouse);	
+        }
 
 	
 			
@@ -472,18 +579,14 @@ void handle_region_click(int *i1, ClickRegion *regions, int numRegions,
     TABLE temp;
 
     for (i = 0; i < numRegions; i++) {
-/* 起点区域选择 */
         if ((mouse_press(regions[i].x1, regions[i].y1, regions[i].x2, regions[i].y2)==1) && (*i1 == 1)) {
-/* BC31兼容的延时循环 */
             do {
             MouseGet(&mouse);
             mouse_show(&mouse);
             } while ((mouse.key & 1) == 1);
 
-/* 内存拷贝适配16位模式 */
             _fmemcpy((int far *)map, (int far *)regions[i].map, (unsigned)(Max*Max*sizeof(int)));
 
-/* 图形操作 */
             mouse_off(&mouse);
             bar1(340, 95, 480, 155, 0xFF44);
             puthz(352,100,"终点",48,55,0x000000);
@@ -491,16 +594,13 @@ void handle_region_click(int *i1, ClickRegion *regions, int numRegions,
             bar1(515,82,1000,148,0x7FFE);
             mouse_on(mouse);
 
-/* Dijkstra算法调用 */
             Dijkstra(map,0, T);
 
-/* 路径权重调整 */
             for(j=0;j<Max;j++){
                 if(regions[i].start != 0 && T[j]->path == 0)
                 T[j]->path += regions[i].start;
             }
 
-/* 交换路径表 */
             switch(regions[i].start){
                 case 1: temp=T[0]; T[0]=T[1]; T[1]=temp; break;
                 case 2: temp=T[0]; T[0]=T[2]; T[2]=temp; break;
@@ -514,7 +614,6 @@ void handle_region_click(int *i1, ClickRegion *regions, int numRegions,
             *i1 = 2;
             break;
         }
-/* 取消按钮处理 */
         else if(mouse_press(340, 170, 480, 230) == 1 && (*i1 == 1)) {
             *i1=0;
             mouse_off(&mouse);
@@ -586,6 +685,13 @@ void handle_region_click_end(int *i1, ClickRegion endRegions[], int *numEndRegio
 
 			break;
 		}
+        else if(mouse_press(340, 170, 480, 230) == 1 && (*i1 == 3)) {
+            *i1=0;
+            mouse_off(&mouse);
+            draw_autoguide();
+            mouse_on(mouse);
+            break;
+        }
 		
 
 	

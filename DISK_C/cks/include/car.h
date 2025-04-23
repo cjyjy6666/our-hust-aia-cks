@@ -112,6 +112,12 @@ typedef struct ButtonS{
     int zanting;
     int qian,hou,zuo,you,shang,xia;
     int welcome;
+    int qidian;
+    int zhongdian;
+    int kaishi;
+    int wancheng;
+    int quxiao;
+    int queding;
 } ButtonS;
 
 typedef struct car_chair
