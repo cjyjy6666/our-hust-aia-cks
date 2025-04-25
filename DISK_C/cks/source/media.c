@@ -16,6 +16,8 @@ void media(CarStatus *state, int *puge)
         button2(100,290,200,360,"Í¨Ñ¶",&state->button_s.tongxun); // Í¨Ñ¶Â¼°´Å¥ | Contact button
         button2(433,190,533,260,"ÒôÀÖ",&state->button_s.yinyue); // ÒôÀÖ°´Å¥ | Music button
         button2(433,290,533,360,"ÒôÏì",&state->button_s.yinxiang); // ÒôÏì°´Å¥ | Sound button
+        button5(603,600,633,630,&state->button_s.xxx); // ·µ»Ø°´Å¥ | Back button
+
         
         // ·µ»Ø°´Å¥¼ì²â | Back button detection
         if (mouse_press(603,600,633,630) == 1) {

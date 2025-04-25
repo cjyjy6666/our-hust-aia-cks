@@ -39,6 +39,8 @@ void phone(CarStatus *state, int *puge)
         button4(60,340,20,'#', &state->button_s.num); // 数字按钮 | Number buttons
         button4(130,340,20,'0', &state->button_s.num0); // 数字按钮 | Number buttons
         button4(200,340,20,'X', &state->button_s.numx); // 数字按钮 | Number buttons
+        button5(603,600,633,630,&state->button_s.xxx); // 返回按钮 | Back button
+
 
 
         
@@ -314,6 +316,17 @@ void key_det(char ph_num[13], int *num_len)
             put_asc16_size(x,104,2,2,ph_num,0xFC44);
         }
         
+        if (mouse_press(40,320,80,360) == 1) {
+            do {
+                MouseGet(&mouse);
+                mouse_show(&mouse);
+            } while ((mouse.key & 1) == 1);
+            ph_num[(*num_len)++] = '#';
+            ph_num[*num_len] = '\0';
+            bar1(241,91,619,149,0x0085);
+            x = 240 + (380 - 16 * (*num_len)) / 2;
+            put_asc16_size(x,104,2,2,ph_num,0xFC44);
+        }
         // 删除按钮 | Delete button
         if(*num_len > 0) {
             if (mouse_press(180,320,220,360) == 1) {

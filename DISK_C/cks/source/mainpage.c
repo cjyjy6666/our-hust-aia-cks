@@ -25,6 +25,7 @@ void mainpage(CarStatus *state, int *puge)
         button1(543,450,623,490,"驾驶",&state->button_s.jiashi); // 驾驶按钮 | Drive button
         button1(543,500,623,540,"媒体",&state->button_s.meiti); // 媒体按钮 | Media button
         button1(543,550,623,590,"座椅",&state->button_s.zuoyi); // 座椅按钮 | Left button
+        button1(0,0,80,40,"注销",&state->button_s.zhuxiao); // 退出按钮 | Exit button
 
 
         
@@ -103,6 +104,11 @@ void mainpage(CarStatus *state, int *puge)
             *puge = 13; // 跳转至座椅页面 | Jump to left page
             break;
         }
+
+        if(mouse_press(0,0,80,40)==1){ 
+            exit(1);// 退出按钮 | Exit button
+
+        }
     }
 }
 
@@ -163,6 +169,11 @@ void draw_mainpage(CarStatus *state)
     Put_Asc16_Size(185,703,2,2,'-',0xFFFFFF); // -符号 | - symbol
     prt_hz24_asc32(143,643, "0到35℃可调", 0xFFFFFF, "HZK\\Hzk24f"); // 温度范围 | Temp range
     
+    bar1(0,0,80,40,0xC618);
+    puthz(15,8,"注销",24,26,0X000000); // 注销按钮 | Logout button
+    prt_hz24_asc32(800,530, "安全带情况:正常", 0x7FFF, "HZK\\Hzk24f");
+    prt_hz24_asc32(800,570, "剩余油量:50L", 0x7FFF, "HZK\\Hzk24f");
+
     // 显示天气状态 | Display weather status
     puthz(317,635,"车外天气",32,33,0x7FFF); // 车外天气 | Exterior weather
     switch(state->wiper_s.rain) {

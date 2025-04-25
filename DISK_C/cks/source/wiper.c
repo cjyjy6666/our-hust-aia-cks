@@ -16,6 +16,8 @@ void wiper(CarStatus *state, int *puge)
         button2(100,290,200,360,"手动",&state->button_s.shoudong); 
         button2(433,190,533,260,"高速",&state->button_s.kuaisu); 
         button2(433,290,533,360,"低速",&state->button_s.mansu); 
+        button5(603,600,633,630,&state->button_s.xxx); // 返回按钮 | Back button
+
         
         // 返回按钮检测 | Back button detection
         if (mouse_press(603,600,633,630) == 1) {

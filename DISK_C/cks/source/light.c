@@ -18,6 +18,8 @@ void light(CarStatus* state, int *puge)
         button2(266,290,366,360,"雾灯",&state->button_s.wudeng); // 雾灯按钮 | Fog light button
         button2(433,190,533,260,"近光",&state->button_s.jinguang); // 近光灯按钮 | Near light button
         button2(433,290,533,360,"远光",&state->button_s.yuanguang); // 远光灯按钮 | Far light button
+        button5(603,600,633,630,&state->button_s.xxx); // 返回按钮 | Back button
+
 
         // 近光灯按钮 | Near light button
         if (mouse_press(433,190,533,260) == 1) {

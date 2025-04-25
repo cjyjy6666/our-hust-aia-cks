@@ -118,6 +118,9 @@ typedef struct ButtonS{
     int wancheng;
     int quxiao;
     int queding;
+    int zhuxiao;
+    int xx;
+    int xxx;
 } ButtonS;
 
 typedef struct car_chair

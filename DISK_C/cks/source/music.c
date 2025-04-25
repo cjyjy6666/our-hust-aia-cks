@@ -40,6 +40,8 @@ void music(CarStatus *state, int *puge)
         else {
             button2(433,290,533,360,"暂停",&state->button_s.zanting); // 暂停 | Pause
         }
+        button5(603,600,633,630,&state->button_s.xxx); // 返回按钮 | Back button
+
         // 返回按钮检测 | Back button detection
         if (mouse_press(603,600,633,630) == 1) {
             *puge = 8; // 返回媒体页面 | Return to media page
@@ -137,7 +139,7 @@ void music(CarStatus *state, int *puge)
                 
                 select = i; // 更新选中行 | Update selected line
                 display_music(mus, select); // 更新显示 | Update display
-                state->media_s.music = select; // 播放选中歌曲 | Play selected song
+                state->media_s.music = select+pos; // 播放选中歌曲 | Play selected song
                 
                 // 更新播放按钮显示 | Update play button display
                 if(state->media_s.music == -1) {

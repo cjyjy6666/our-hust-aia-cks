@@ -19,6 +19,7 @@ void ac(CarStatus *state,int *puge)
         button2(433,90,533,160,"循环",&state->button_s.xunhuan); // 循环模式按钮 | Circulation mode button
         button2(433,190,533,260,"通风",&state->button_s.tongfeng); // 新风模式按钮 | Fresh air mode button
         button2(433,290,533,360,"除雾",&state->button_s.chuwu); // 定温模式按钮 | Fixed temperature mode button
+        button5(603,600,633,630,&state->button_s.xxx); // 返回按钮 | Back button
         
         // 返回按钮检测 | Back button detection
         if (mouse_press(603,600,633,630) == 1)
@@ -116,6 +117,7 @@ void ac(CarStatus *state,int *puge)
 void draw_ac_page()
 {
     // 绘制返回按钮 | Draw back button
+    bar1(603,600,633,630,0x000000);
     Line2(603,600,633,600,0xFFFFFF);
 	Line2(603,600,603,630,0xFFFFFF);
 	Line2(603,600,633,630,0xFFFFFF);

@@ -188,7 +188,7 @@ void show_drive(CarStatus *state)
 // ÏÔÊ¾µç»°×´Ì¬ | Display phone status
 void show_phone(CarStatus *state)
 {
-    char call_str[10] = {'\0'};
+    char call_str[15] = {'\0'};
     if(state->media_s.on_call) {
         if(check_timer_expire(&(state->timer.call_time), CLOCKS_PER_SEC)) {
             state->media_s.call_second++;
@@ -221,7 +221,7 @@ void show_music(CarStatus *state)
     if(!file_init) {
         fp = fopen("data\\music.txt","r");
         if(fp == NULL) {
-            printf("open music.txt error\n");
+            fclose(fp);
             return;
         }
         file_init = 1;
@@ -231,7 +231,7 @@ void show_music(CarStatus *state)
     
     for(i = 0; i < state->media_s.music + 1; i++) {
         if(fgets(mus_name, sizeof(mus_name), fp) == NULL) {
-            printf("read music.txt error\n");
+            fclose(fp);
             return;
         }
     }

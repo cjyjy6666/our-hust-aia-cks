@@ -27,6 +27,8 @@ void contact(CarStatus *state, int *puge)
         else {
            button2(433,190,533,260,"拨打", &state->button_s.boda); // 拨打按钮 | Call button
         }
+        button5(603,600,633,630,&state->button_s.xxx); // 返回按钮 | Back button
+
         // 返回按钮检测 | Back button detection
         if (mouse_press(603,600,633,630) == 1) {
             *puge = 8;

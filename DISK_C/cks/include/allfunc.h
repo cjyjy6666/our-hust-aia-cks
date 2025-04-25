@@ -24,7 +24,7 @@
 #include"ac.h"
 #include"show.h"
 #include"car.h"
-#include"autoguide.h"
+#include"guide.h"
 #include"wiper.h"
 #include"drive.h"
 #include"media.h"

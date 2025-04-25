@@ -127,6 +127,25 @@ void autoguide(CarStatus *state,int *puge)
             puthz(452, 405, "确定", 48,55, 0x000000);
             mouse_on(mouse);
         }
+
+        if (mouse.x >= 965 && mouse.x <= 1024 && mouse.y >= 0 && mouse.y <= 53 && !state->button_s.xx) {
+            state->button_s.xx=1;
+            mouse_off(&mouse);
+            bar1(965,0,1024,53,0xF800);
+            Line_Thick(965,0,1024,53, 1,0x000000);
+            Line_Thick(965,53,1024,0, 1,0x000000);
+            mouse_on(mouse);
+        } else if (state->button_s.xx && (mouse.x < 965 || mouse.x > 1024 || mouse.y < 0 || mouse.y > 53)) {
+            state->button_s.xx = 0;
+            mouse_off(&mouse);
+            bar1(965,0,1024,53,0x340F);
+            Line_Thick(965,0,1024,53, 1,0x000000);
+            Line_Thick(965,53,1024,0, 1,0x000000);        
+            mouse_on(mouse);
+        }
+
+
+
 		
         if(mouse_press(965,0,1024,53) == 1)
         {
@@ -178,13 +197,6 @@ void autoguide(CarStatus *state,int *puge)
             draw_autoguide();
             mouse_on(mouse);	
         }
-
-	
-			
-		
-
-		
-		
 	}
     for (i = 0; i < Max; i++) {
         free(T[i]);
@@ -420,19 +432,10 @@ void draw_autoguide()
 	Line_Thick(0,768,46,730,1, 0x000000);
 	Line_Thick(1024,768,965,730,1, 0x000000);
 	Line_Thick(0,250,1024,250, 1,0x000000);
-	bar1(965,0,1024,53,0xF800);
+	bar1(965,0,1024,53,0x340F);
     Line_Thick(965,0,1024,53, 1,0x000000);
     Line_Thick(965,53,1024,0, 1,0x000000);
-
-
-
-
 }
-
-
-
-
-
 
 void InitializeTable(int start,TABLE T[])//初始化表格
 {
@@ -692,9 +695,6 @@ void handle_region_click_end(int *i1, ClickRegion endRegions[], int *numEndRegio
             mouse_on(mouse);
             break;
         }
-		
-
-	
     }
 }
 
@@ -762,7 +762,7 @@ void button1(int x1, int y1, int x2, int y2, char *s, int *i) {
     if (mouse.x >= x1 && mouse.x <= x2 && mouse.y >= y1 && mouse.y <= y2 && !*i) {
         *i=1;
         mouse_off(&mouse);
-        bar1(x1+4, y1+4, x2-4, y2-4, 0x8410);
+        bar1(x1, y1, x2, y2, 0x8410);
         puthz(x1 + 15, y1 + 8, s, 24, 26, 0X000000);
         mouse_on(mouse);
     } else if (*i && (mouse.x < x1 || mouse.x > x2 || mouse.y < y1 || mouse.y > y2)) {
@@ -781,7 +781,7 @@ void button2(int x1, int y1, int x2, int y2, char *s, int *i) {
     if (mouse.x >= x1 && mouse.x <= x2 && mouse.y >= y1 && mouse.y <= y2 && !*i) {
         *i=1;
         mouse_off(&mouse);
-        bar1(x1+4, y1+4, x2-4, y2-4, 0x8410);
+        bar1(x1, y1, x2, y2, 0x8410);
         puthz(x1 + 30, y1 + 25, s, 24, 30, 0X000000);
         mouse_on(mouse);
     } else if (*i && (mouse.x < x1 || mouse.x > x2 || mouse.y < y1 || mouse.y > y2)) {
@@ -800,7 +800,7 @@ void button3(int x1, int y1, int x2, int y2, char *s, int *i) {
     if (mouse.x >= x1 && mouse.x <= x2 && mouse.y >= y1 && mouse.y <= y2 && !*i) {
         *i=1;
         mouse_off(&mouse);
-        bar1(x1+4, y1+4, x2-4, y2-4, 0x8410);
+        bar1(x1, y1, x2, y2, 0x8410);
         puthz(x1 + 30, y1 + 25, s, 24, 30, 0xF800);
         mouse_on(mouse);
     } else if (*i && (mouse.x < x1 || mouse.x > x2 || mouse.y < y1 || mouse.y > y2)) {
@@ -828,6 +828,31 @@ void button4(int x1, int y1, int r, char s, int *i) {
         mouse_off(&mouse);
         Circlefill(x1,y1,r,0xC618);
 		Put_Asc16_Size(x1-10,y1-16,2,2,s,0x000000);
+        mouse_on(mouse);
+    }
+}
+
+void button5(int x1, int y1, int x2, int y2,  int *i) {
+    // 验证输入参数
+   
+
+    if (mouse.x >= x1 && mouse.x <= x2 && mouse.y >= y1 && mouse.y <= y2 && !*i) {
+        *i=1;
+        mouse_off(&mouse);
+        bar1(603,600,633,630,0xF800);
+        Line2(603,600,633,600,0xFFFFFF);
+        Line2(603,600,603,630,0xFFFFFF);
+        Line2(603,600,633,630,0xFFFFFF);
+        Line2(633,600,603,630,0xFFFFFF);
+        mouse_on(mouse);
+    } else if (*i && (mouse.x < x1 || mouse.x > x2 || mouse.y < y1 || mouse.y > y2)) {
+        *i = 0;
+        mouse_off(&mouse);
+        bar1(603,600,633,630,0x000000);
+        Line2(603,600,633,600,0xFFFFFF);
+        Line2(603,600,603,630,0xFFFFFF);
+        Line2(603,600,633,630,0xFFFFFF);
+        Line2(633,600,603,630,0xFFFFFF);
         mouse_on(mouse);
     }
 }

@@ -1,7 +1,7 @@
 #include"car.h"
 
-#ifndef __AUTOGUIDE_H__
-#define __AUTOGUIDE_H__
+#ifndef __GUIDE_H__
+#define __GUIDE_H__
 #define X 999
 #define Max 7
 #define Nopath -1
@@ -53,5 +53,6 @@ void button1(int x1, int y1, int x2, int y2, char *s, int *i) ;
 void button2(int x1, int y1, int x2, int y2, char *s, int *i);
 void button3(int x1, int y1, int x2, int y2, char *s, int *i);
 void button4(int x1, int y1, int r, char s, int *i);
+void button5(int x1, int y1, int x2, int y2,  int *i);
 
 #endif

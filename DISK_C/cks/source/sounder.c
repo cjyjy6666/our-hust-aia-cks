@@ -24,6 +24,8 @@ void sounder(CarStatus *state, int *puge)
         show_all(state); // 显示所有状态 | Display all status
         mouse_show(&mouse); // 显示鼠标 | Show mouse cursor
         
+        button5(603,600,633,630,&state->button_s.xxx); // 返回按钮 | Back button
+
         // 返回按钮检测 | Back button detection
         if (mouse_press(603,600,633,630) == 1) {
             state->media_s.initialized = 0; // 重置初始化状态 | Reset initialized state

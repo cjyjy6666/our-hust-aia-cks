@@ -19,6 +19,8 @@ void drive(CarStatus *state, int *puge)
         button2(433,90,533,160,"运动",&state->button_s.yundong); 
         button2(433,190,533,260,"舒适",&state->button_s.shushi); 
         button2(433,290,533,360,"观光",&state->button_s.guanguang); 
+        button5(603,600,633,630,&state->button_s.xxx); // 返回按钮 | Back button
+
         
         
         // 返回按钮检测 | Back button detection

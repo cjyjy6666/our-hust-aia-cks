@@ -16,6 +16,8 @@ void chair(CarStatus *state, int *puge) {
         button2(480,335,580,405,"ÓÒ",&state->button_s.you);
         button2(200,480,300,550,"Éý",&state->button_s.shang);
         button2(340,480,440,550,"½µ",&state->button_s.xia);
+        button5(603,600,633,630,&state->button_s.xxx); // ·µ»Ø°´Å¥ | Back button
+
         
         // ·µ»Ø°´Å¥¼ì²â | Back button detection
         if (mouse_press(603,600,633,630) == 1) {
