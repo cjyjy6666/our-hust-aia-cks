@@ -39,14 +39,14 @@ void ac(CarStatus *state,int *puge)
             if(state->ac_s.ac_state == 1)
             {
                 state->ac_s.ac_state = 0; // 关闭自动模式 | Turn off auto mode
-                bar1(521,668,590,705,0x0085);
-                puthz(521,668,"关闭",32,33,0xFFFFFF);
+                bar1(488,668,557,705,0x0085);
+                puthz(488,668,"关闭",32,33,0xFFFFFF);
             }
             else
             {
                 state->ac_s.ac_state = 1; // 开启自动模式 | Turn on auto mode
-                bar1(521,668,590,705,0x0085);
-                puthz(521,668,"自动",32,33,0xFFFFFF);
+                bar1(488,668,557,705,0x0085);
+                puthz(488,668,"自动",32,33,0xFFFFFF);
             }
         }
         
@@ -61,15 +61,15 @@ void ac(CarStatus *state,int *puge)
             if(state->ac_s.ac_state == 2)
             {
                 state->ac_s.ac_state = 0; // 关闭制冷模式 | Turn off cooling mode
-                bar1(521,668,590,705,0x0085);
-                puthz(521,668,"关闭",32,33,0xFFFFFF);
+                bar1(488,668,557,705,0x0085);
+                puthz(488,668,"关闭",32,33,0xFFFFFF);
             }
             else
             {
                 state->ac_s.ac_state = 2; // 开启制冷模式 | Turn on cooling mode
                 state->ac_s.target_temp = state->ac_s.current_temp-1; // 设置目标温度 | Set target temp
-                bar1(521,668,590,705,0x0085);
-                puthz(521,668,"制冷",32,33,0xFFFFFF);
+                bar1(488,668,557,705,0x0085);
+                puthz(488,668,"制冷",32,33,0xFFFFFF);
             }
         }
         
@@ -84,15 +84,15 @@ void ac(CarStatus *state,int *puge)
             if(state->ac_s.ac_state == 3)
             {
                 state->ac_s.ac_state = 0; // 关闭暖风模式 | Turn off heating mode
-                bar1(521,668,590,706,0x0085);
-                puthz(521,668,"关闭",32,33,0xFFFFFF);
+                bar1(488,668,557,706,0x0085);
+                puthz(488,668,"关闭",32,33,0xFFFFFF);
             }    
             else
             {
                 state->ac_s.ac_state = 3; // 开启暖风模式 | Turn on heating mode
                 state->ac_s.target_temp = state->ac_s.current_temp+1; // 设置目标温度 | Set target temp
-                bar1(521,668,590,706,0x0085);
-                puthz(521,668,"制热",32,33,0xFFFFFF);
+                bar1(488,668,557,706,0x0085);
+                puthz(488,668,"制热",32,33,0xFFFFFF);
             }
         }
         

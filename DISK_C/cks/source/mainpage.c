@@ -213,7 +213,7 @@ void draw_mainpage(CarStatus *state)
 
     //空调状态显示 | AC status display
     puthz(455,635,"空调状态",32,33,0x7FFF);
-    puthz(521,668,"关闭",32,33,0xFFFFFF);
+    puthz(488,668,"关闭",32,33,0xFFFFFF);
 }
 
 // 绘制按钮函数 | Draw button function
