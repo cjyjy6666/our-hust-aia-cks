@@ -210,6 +210,10 @@ void draw_mainpage(CarStatus *state)
         Line2(x1,y1,x,y,0xFFFFFF); // 刻度线 | Scale line
         put_asc16_number_size(x2,y2,1,1,(i-20)/10,0xFFFFFF); // 刻度值 | Scale value
     }
+
+    //空调状态显示 | AC status display
+    puthz(455,635,"车外天气",32,33,0x7FFF);
+    puthz(521,703,"关闭",32,33,0xFFFFFF);
 }
 
 // 绘制按钮函数 | Draw button function
