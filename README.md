@@ -17,5 +17,5 @@
 另外还有代代传承的汉字库和鼠标库等
 
 ******
-想必watch我们项目的都是hust aia freshman
+想必看到我们项目的都是hust aia freshman
 祝你们顺利完成课程设计！
